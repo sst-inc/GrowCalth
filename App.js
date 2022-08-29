@@ -1,7 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React, { useState } from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
 import Run from './screens/Run';
 // import Home from './screens/Home';
 import Challenges from './screens/Challenges';
@@ -11,6 +10,11 @@ import {Image} from 'react-native';
 import Insights from './screens/Insights';
 import Stacks from './screens/Home';
 import { Stackz } from './screens/Settings';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LoginScreen from './screens/LoginScreen'
+import Announcements from './screens/Announcements';
+import Forgot from './screens/AuthScreens/Forgot';
+import { app, storage} from "./firebase";
 
 function HomeScreen() {
   return(
@@ -37,42 +41,47 @@ function ChallengesScreen() {
     <Challenges />
   );
 }
+function AnnouncementsScreen() {
+  return (
+    <Announcements />
+  );
+}
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        {/* <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} /> */}
-        <Tab.Screen name="Home" component={HomeScreen}
+      <Stack.Navigator>
+        <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
+        <Stack.Screen options={{ headerShown: false }} name="Tab" component={Tabs} />
+        <Stack.Screen name="Forgot Password" component={Forgot} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+function Tabs() {
+  return (
+  <Tab.Navigator>
+    <Tab.Screen name="Home" component={HomeScreen}
           options={{
             headerShown: false,
             tabBarIcon: () => (<Image source={require("./assets/HomeIcon.png")} style={{ width: 30, height: 30 }} />)
           }} />
-        {/* <Tab.Screen
-          name="Workouts"
-          component={WorkoutsScreen}
+    <Tab.Screen
+          name="Announcements"
+          component={AnnouncementsScreen}
           options={{
             headerShown: false,
-            tabBarIcon: () => (<Image source={require("./assets/WorkoutsImage.jpeg")} style={{ width: 60, height: 60 }} />)
+            tabBarIcon: () => (<Image source={require("./assets/announcement-icon.png")} style={{ width: 29, height: 29 }} />)
           }}
-        /> */}
-        {/* <Tab.Screen
-          name="Run"
-          component={RunScreen}
-          options={{
-            headerShown: false,
-            // headerTitle: "Track your Run!",
-            tabBarIcon: () => (<Image source={require("./assets/RunIcon.png")} style={{ width: 32, height: 32 }} />)
-          }}
-        /> */}
-        <Tab.Screen
+        />
+    <Tab.Screen
           name="Challenges"
           component={ChallengesScreen}
           options={{
             headerShown: false,
-            tabBarIcon: () => (<Image source={require("./assets/ChallengeIcon.png")} style={{ width: 31, height: 31 }} />)
+            tabBarIcon: () => (<Image source={require("./assets/ChallengeIcon.png")} style={{ width: 29, height: 29 }} />)
           }}
         />
         <Tab.Screen
@@ -84,9 +93,5 @@ export default function App() {
           }}
         />
       </Tab.Navigator>
-      {/* <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
-      </Stack.Navigator> */}
-    </NavigationContainer>
-  );
+  )
 }
