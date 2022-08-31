@@ -1,4 +1,4 @@
-import { TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Text, View, Image, AppState, Dimensions, Alert } from 'react-native';
+import { TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Text, View, Image, AppState, Dimensions, Alert, Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect, useRef } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -16,7 +16,6 @@ function Homes() {
 
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
-
     const getQuote = () => {
         fetch("https://api.quotable.io/random").then(res => res.json()).then(result => {
         setQuote(result.content)
@@ -26,7 +25,6 @@ function Homes() {
     useEffect(() => {
         getQuote();
     }, []);
-  
   const [PedometerAvailability, setPedometerAvailability] = useState("")
   const [stepCount, updateStepCount] = useState(0)
   const calories = stepCount / 25
@@ -81,6 +79,8 @@ function Homes() {
       counter+= 1
     }
   }
+  var dist = stepCount / 1300
+  var distance = dist.toFixed(2)
   return (
     <SafeAreaView style={{backgroundColor: '#FFFFF'}}>
       <ScrollView>
@@ -97,7 +97,6 @@ function Homes() {
           </TouchableOpacity> */}
         <View style={{backgroundColor: '#F2F2F2'}}>
           <View style={{top: -10}}>
-            {/* Thank you lord for allowing me to have the wisdom to complete this app. I could not have done it without you lord! I pray for my eyesight lord I pray it will never go up and only go down. I will have perfect eyesight lord I pray for healing on my eyesight I pray that I will have 20/20 vision. Speaking of vision I pray that you give me the vision in my life. Lord I pray for a perfect eyesight lord */}
           <TouchableOpacity style={{width: windowWidth-233, height: 170, marginHorizontal: 220, borderRadius: 15, marginTop: 30, marginBottom: -170, 
             shadowColor: 'black', shadowColor: '#171717', backgroundColor: 'black',
             shadowOffset: {width: -2, height: 4},
@@ -145,7 +144,7 @@ function Homes() {
         <TouchableOpacity style={{paddingHorizontal: 20, paddingTop: 75,}}>
           <View style={styles.dailyQuotes}>
             {/* Calories */}
-            <Text style={{fontSize: 17.5,fontWeight: 'bold',color: 'black', marginTop: -4,}}>Calories Burnt</Text>
+            <Text style={{fontSize: 17.5,fontWeight: 'bold',color: 'black', marginTop: -4,}}>Distance Travelled</Text>
             <View style={{justifyContent: 'center', alignItems: 'center',width: 120,
               height: 120,
               borderRadius: 80,
@@ -155,8 +154,8 @@ function Homes() {
               borderColor: 'black',
               borderWidth: 7
               }}>
-            <Text style={{fontSize: 30, fontWeight: 'bold'}}>{caloriesB}</Text>
-            <Text>kcal</Text>
+            <Text style={{fontSize: 30, fontWeight: 'bold'}}>{distance}</Text>
+            <Text>km</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -182,6 +181,7 @@ function Homes() {
         <Text style={{paddingHorizontal: 10, top: -3, fontSize: 12, color: 'white', fontWeight: '500'}}>Goals are helpful</Text>
         <Text style={{fontSize: 110, left: -10, bottom: 10}}>🎯</Text>
         </TouchableOpacity>
+
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 20, paddingBottom: 10, }}>
           <Text style={{ fontSize: 10, color: '#C1CAD6' }}>Copyright GrowCalth © 2022 All rights Reserved </Text>
           <Text style={{ fontSize: 10, color: '#C1CAD6' }}>Singapore, Singapore City </Text>
