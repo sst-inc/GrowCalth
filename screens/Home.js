@@ -1,4 +1,4 @@
-import { TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Text, View, Image, AppState, Dimensions, Alert, Platform } from 'react-native';
+import { TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Text, View, Image, AppState, Dimensions} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect, useRef } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,7 +9,6 @@ import Progress from './Progress'
 import Quotes from './Quotes';
 import Goals from './Goals';
 import LeaderBoard from './LeaderBoard'
-import { auth } from '../firebase';
 
 
 function Homes() {
@@ -102,7 +101,7 @@ function Homes() {
             shadowOffset: {width: -2, height: 4},
             shadowOpacity: 1,
             shadowRadius: 3}}
-            onPress={() => navigation.navigate(LeaderBoard)}>
+            onPress={() => navigation.navigate("LeaderBoard")}>
               <Text style={{paddingHorizontal: 10, fontSize: 15, fontWeight: 'bold', paddingTop: 10,color: 'white'}}>LeaderBoards</Text>
               <View style={{justifyContent: 'center', alignItems: 'center', paddingTop: 15}}>
               <Image source={require('.././assets/LeaderBoard.png')} style={{height: 110, width: 110}}/> 
@@ -110,8 +109,9 @@ function Homes() {
           </TouchableOpacity>
           <TouchableOpacity
               style={styles.insightView}
-              onPress={() => navigation.navigate("Steps")}>
-          <Text style={styles.insights}>Steps</Text>
+              // onPress={() => navigation.navigate("Steps")}
+              >
+          <Text style={[styles.insights]}>Steps</Text>
               <View style={styles.circle}>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                   <Text style={{ fontSize: 30, fontWeight: 'bold' }}>{stepCount}</Text>
@@ -127,19 +127,19 @@ function Homes() {
           }}>
           </View>
           <StatusBar style="auto" />
-          <TouchableOpacity style={{paddingHorizontal: 218, marginTop: -80}}
-                onPress={() => navigation.navigate("Progress")}
+          <View style={{paddingHorizontal: 218, marginTop: -80}}
+
                 >
-            <View style={{width: windowWidth-233,height: 235,borderRadius: 15,borderColor: 'white', paddingHorizontal: 10, shadowColor: 'black', shadowColor: '#171717', backgroundColor: 'white', top: 4,
+            <TouchableOpacity style={{width: windowWidth-233,height: 235,borderRadius: 15,borderColor: 'white', paddingHorizontal: 10, shadowColor: 'black', shadowColor: '#171717', backgroundColor: 'white', top: 4,
     shadowOffset: {width: -2, height: 4},
     shadowOpacity: 1,
-    shadowRadius: 3}}>
+    shadowRadius: 3, backgroundColor: '#FFFFFF'}}                 onPress={() => navigation.navigate("Progress")}>
               {/* Progress */}
               <Text style={{fontSize: 19,fontWeight: 'bold', top: 10}}>Progress</Text>
               <Text style={{fontSize: 63,fontWeight: '900', textAlign: 'center', top: 32}}>{counter}</Text>
               <Text style={{textAlign: 'center', fontSize: 25, marginTop: 23}}>days in this app</Text>
-            </View>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          </View>
         <StatusBar style="auto" />
         <TouchableOpacity style={{paddingHorizontal: 20, paddingTop: 75,}}>
           <View style={styles.dailyQuotes}>
@@ -285,6 +285,7 @@ const styles = StyleSheet.create({
 });
 
 const Stack = createNativeStackNavigator();
+
 export default function Stacks() {
   return (
       <Stack.Navigator>
