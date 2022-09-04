@@ -1,8 +1,18 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Pressable, SafeAreaView, ScrollView, TouchableOpacity, TextInput } from 'react-native'
 import firebase from 'firebase'
+import { useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Info from './Info';
+import SearchBar from '../components/SearchBar';
+import List from '../components/List';
 
-const Announcements = () => {
+function Announcements() {
+    const navigation = useNavigation();
+    const [searchPhrase, setSearchPhrase] = useState("");
+    const [clicked, setClicked] = useState(false);
+    const [fakeData, setFakeData] = useState();
+
     const [users, setUsers] = useState([]);
     const todoRef = firebase.firestore().collection('todos');
 
@@ -24,47 +34,71 @@ const Announcements = () => {
         )
     }, [])
     return (
-        <View style={{ flex:1, marginTop: 100}}>
+        <SafeAreaView style={{backgroundColor: 'white'}}>
+            <Text style={{fontSize: 39, fontWeight: 'bold', padding: 10, marginTop: 5}}>Announcements</Text>
+            <SearchBar
+        searchPhrase={searchPhrase}
+        setSearchPhrase={setSearchPhrase}
+        clicked={clicked}
+        setClicked={setClicked}
+      />
+      <ScrollView>
             <FlatList 
                 style={{height:'100%'}}
                 data={users}
+                searchPhrase={searchPhrase}
+                setClicked={setClicked}
                 numColumns={1}
                 renderItem={({item}) => (
                     <Pressable
                         style={styles.container}
                     >
-                        <View style={styles.innerContainer}>
+                        <TouchableOpacity style={styles.innerContainer} onPress={() => navigation.navigate("Info")}>
                             <Text style={styles.itemHeading}>{item.heading}</Text>
                             <Text style={styles.itemText}>{item.text}</Text>
 
-                        </View>
+                        </TouchableOpacity>
                     </Pressable>
                 )}
             />
-        </View>
+         </ScrollView>
+        </SafeAreaView>
+              
     )
 }
 
-export default Announcements
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: 'white',
+        backgroundColor: '#486B02',
         padding:15,
         borderradius:15,
-        margin:5,
-        marginHorizontal:10,
-        borderRadius: 15
-
+        borderWidth: 0.5
     },
     innerContainer:{
-        alignItems:'center',
         flexDirection:'column',
+        borderRadius: 15
     },
     itemHeading:{
-        fontWeight:'bold'
+        fontWeight:'bold',
+        color: 'white',
+        fontSize: 20
     },
     itemText:{
         fontWeight:'300'
     }
 })
+const Stack = createNativeStackNavigator()
+
+export default function AnnouncementStack() {
+    return (
+         <Stack.Navigator>
+             <Stack.Screen
+          name="Announcements"
+          component={Announcements} options={{headerShown: false}}/>
+            <Stack.Screen
+          name="Info"
+          component={Info} options={{headerShown: true}}/>
+         </Stack.Navigator>
+    )
+}
