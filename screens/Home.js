@@ -5,10 +5,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Pedometer } from 'expo-sensors';
 import { useNavigation } from '@react-navigation/native';
 import Insights from './Insights';
-import Progress from './Progress'
+import Progresses from './Progress'
 import Quotes from './Quotes';
 import Goals from './Goals';
 import LeaderBoard from './LeaderBoard'
+import * as firebase from 'firebase'
+// import CircularProgress from 'react-native-circular-progress-indicator';
+import * as Progress from 'react-native-progress';
 
 
 function Homes() {
@@ -29,9 +32,7 @@ function Homes() {
   const calories = stepCount / 25
   const caloriesB = calories.toFixed(1)
 
-  useEffect(() => {
-    subscribe();
-  }, [])
+
 
   const subscribe = () => {
     const subscription = Pedometer.watchStepCount((result) => (
@@ -46,6 +47,9 @@ function Homes() {
       }
     )
   }
+  useEffect(() => {
+    subscribe()
+  }, [])
   const navigation = useNavigation();
   const [Quote, setQuote] = useState();
   const [Author, setAuthor] = useState();
@@ -96,7 +100,7 @@ function Homes() {
           </TouchableOpacity> */}
         <View style={{backgroundColor: '#F2F2F2'}}>
           <View style={{top: -10}}>
-          <TouchableOpacity style={{width: windowWidth-233, height: 170, marginHorizontal: 220, borderRadius: 15, marginTop: 30, marginBottom: -170, 
+          <TouchableOpacity style={{width: (windowWidth-50)/2, height: 170, borderRadius: 15, marginTop: 30, marginBottom: -170, marginLeft: (windowWidth+25)/2,
             shadowColor: 'black', shadowColor: '#171717', backgroundColor: 'black',
             shadowOffset: {width: -2, height: 4},
             shadowOpacity: 1,
@@ -109,15 +113,32 @@ function Homes() {
           </TouchableOpacity>
           <TouchableOpacity
               style={styles.insightView}
-              // onPress={() => navigation.navigate("Steps")}
               >
           <Text style={[styles.insights]}>Steps</Text>
+          <View style={{justifyContent: 'center', alignItems: 'center'}}>
               <View style={styles.circle}>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                   <Text style={{ fontSize: 30, fontWeight: 'bold' }}>{stepCount}</Text>
                   <Text>steps</Text>
                 </View>
               </View>
+            </View>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          {/* <Progress.Circle size={140} progress={20} maxValue/>      */}
+          </View>
+       {/* <CircularProgress 
+              value={stepCount}
+              maxValue={6500}
+              radius={80}
+              activeStrokeColor={"black"}
+              inActiveStrokeColor={"black"}
+              inActiveStrokeOpacity={0.5}
+              inActiveStrokeWidth={20}
+              activeStrokeWidth={20}
+              title={"steps"}
+              titleColor={"black"}
+              titleStyle={{ fontWeight: "bold" }}
+            /> */}
             </TouchableOpacity>
           </View>
             <View style={{paddingTop: -10}}>
@@ -127,13 +148,13 @@ function Homes() {
           }}>
           </View>
           <StatusBar style="auto" />
-          <View style={{paddingHorizontal: 218, marginTop: -80}}
+          <View style={{paddingHorizontal: (windowWidth-15)/2, marginTop: -80, marginLeft: 19}}
 
-                >
-            <TouchableOpacity style={{width: windowWidth-233,height: 235,borderRadius: 15,borderColor: 'white', paddingHorizontal: 10, shadowColor: 'black', shadowColor: '#171717', backgroundColor: 'white', top: 4,
+            >
+            <TouchableOpacity style={{width: (windowWidth-52)/2,height: 235,borderRadius: 15,borderColor: 'white', paddingHorizontal: 10, shadowColor: 'black', shadowColor: '#171717', backgroundColor: 'white', top: 4,
     shadowOffset: {width: -2, height: 4},
     shadowOpacity: 1,
-    shadowRadius: 3, backgroundColor: '#FFFFFF'}}                 onPress={() => navigation.navigate("Progress")}>
+    shadowRadius: 3, backgroundColor: '#FFFFFF', }}                 onPress={() => navigation.navigate("Progress")}>
               {/* Progress */}
               <Text style={{fontSize: 19,fontWeight: 'bold', top: 10}}>Progress</Text>
               <Text style={{fontSize: 63,fontWeight: '900', textAlign: 'center', top: 32}}>{counter}</Text>
@@ -143,19 +164,21 @@ function Homes() {
         <StatusBar style="auto" />
         <TouchableOpacity style={{paddingHorizontal: 20, paddingTop: 75,}}>
           <View style={styles.dailyQuotes}>
-            {/* Calories */}
-            <Text style={{fontSize: 17.5,fontWeight: 'bold',color: 'black', marginTop: -4,}}>Distance Travelled</Text>
+            {/* Distance */}
+            <Text style={{fontSize: 17.5,fontWeight: 'bold',color: 'black', marginTop: -4,}}>Distance</Text>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
             <View style={{justifyContent: 'center', alignItems: 'center',width: 120,
               height: 120,
               borderRadius: 80,
               backgroundColor: '#EFECE5',
-              marginHorizontal: 20,
+              marginHorizontal: 17,
               top: 10,
               borderColor: 'black',
               borderWidth: 7
               }}>
             <Text style={{fontSize: 30, fontWeight: 'bold'}}>{distance}</Text>
             <Text>km</Text>
+            </View>
             </View>
           </View>
         </TouchableOpacity>
@@ -192,7 +215,7 @@ function Homes() {
     </SafeAreaView>
   )
 }
-
+const windowWidth= Dimensions.get('window').width
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -217,7 +240,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   insightView: {
-    width: 179,
+    width: (windowWidth-50)/2,
     height: 220,
     borderRadius: 15,
     borderColor: 'white', borderWidth: 0, paddingHorizontal: 10, shadowColor: 'black', shadowColor: '#171717', backgroundColor: 'white',
@@ -227,7 +250,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20
   },
   dailyQuotes: {
-    width: 179,
+    width: (windowWidth-45)/2,
     height: 190,
     borderRadius: 15,
     paddingTop: 15,
@@ -265,7 +288,7 @@ const styles = StyleSheet.create({
     height: 130,
     borderRadius: 80,
     backgroundColor: '#EFECE5',
-    marginHorizontal: 15,
+    marginHorizontal: 10,
     marginTop: 20,
     borderColor: 'black',
     borderWidth: 7
@@ -299,7 +322,7 @@ export default function Stacks() {
           />
           <Stack.Screen
           name="Progress"
-          component={Progress} 
+          component={Progresses} 
           options={{headerBackTitle: "Home"}}
           />
           <Stack.Screen
