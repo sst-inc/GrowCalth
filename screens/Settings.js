@@ -53,6 +53,7 @@ const Settings = (props) => {
         <View style={{backgroundColor: 'white'}}>
         <ScrollView>
         <Text style={{marginHorizontal: 15, fontWeight: 'bold', fontSize: 40, top: 25, marginBottom: 20}}>Settings</Text>
+        <Text style={styles.subTitle}>Uncle Raymond Siollll</Text>
           <View style={{flex: 0.5, paddingHorizontal: 33}}>
 
           <View>
@@ -145,7 +146,7 @@ const Settings = (props) => {
     </View>
 
         {/* COPYRIGHTS */}      
-          <View style={{justifyContent: 'center', alignItems:'center', paddingTop: 100,paddingBottom: 100}}>
+          <View style={{justifyContent: 'center', alignItems:'center', paddingTop: 30,paddingBottom: 100}}>
           <Text style={{ fontSize: 10, color: '#C1CAD6' }}>Copyright GrowCalth © 2022 All rights Reserved </Text>
           <Text style={{ fontSize: 10, color: '#C1CAD6' }}>Singapore, Singapore City </Text>          
           </View>
@@ -195,11 +196,16 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: 20,
   },
   buttonText: {
     color: 'white',
     fontWeight: '700',
     fontSize: 22,
+  },
+  subTitle: {
+    color: '#C1CAD6',
+    marginTop: 6,
+    marginHorizontal: 14
   }
 })

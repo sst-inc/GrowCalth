@@ -2,9 +2,10 @@ import React, {useState} from 'react'
 import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import {Picker} from '@react-native-picker/picker';
 
+
 const Goals = (state) => {
-    const [selectedSteps, setSelectedSteps] = useState();
-    const [selectedDistance, setSelectedDistance] = useState();
+  const [selectedSteps, setSelectedSteps] = useState("0");
+  const [selectedDistance, setSelectedDistance] = useState("0 km");
     const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
     return (
@@ -21,19 +22,22 @@ const windowHeight = Dimensions.get('window').height;
                 onValueChange={(itemValue, itemIndex) =>
                 setSelectedSteps(itemValue)
              }>
-            <Picker.Item label="1,000" value="1,000" />
-            <Picker.Item label="2,000" value="2,000" />
-            <Picker.Item label="3,000" value="3,000" />
-            <Picker.Item label="4,000" value="4,000" />
-            <Picker.Item label="5,000" value="5,000" />
-            <Picker.Item label="6,000" value="6,000" />
-            <Picker.Item label="7,000" value="7,000" />
-            <Picker.Item label="8,000" value="8,000" />
-            <Picker.Item label="9,000" value="9,000" />
             <Picker.Item label="10,000" value="10,000" />
             <Picker.Item label="11,000" value="11,000" />
+            <Picker.Item label="`12,000" value="12,000" />
+            <Picker.Item label="13,000" value="13,000" />
+            <Picker.Item label="14,000" value="14,000" />
+            <Picker.Item label="15,000" value="15,000" />
+            <Picker.Item label="16,000" value="16,000" />
+            <Picker.Item label="17,000" value="17,000" />
+            <Picker.Item label="18,000" value="18,000" />
+            <Picker.Item label="19,000" value="19,000" />
+            <Picker.Item label="20,000" value="20,000" />
         </Picker>
-        <Text>{selectedSteps}</Text>
+        <View style={{backgroundColor: 'blue', borderRadius: 15, marginTop: 12}}>
+        <Text style={{fontSize: 30, fontWeight: 'bold', paddingHorizontal: 10, paddingVertical: 10}}>{selectedSteps} steps</Text>
+        </View>
+
         </View>
         <View style={{height: 30, backgroundColor: '#F7826F', justifyContent: 'center', alignItems: 'center', top: 20}}>
           <Text style={{fontSize: 18, textAlign: 'center'}}>D I S T A N C E</Text>
@@ -56,7 +60,10 @@ const windowHeight = Dimensions.get('window').height;
             <Picker.Item label="9km" value="9km" />
             <Picker.Item label="10km" value="10km" />
         </Picker>
-        <Text>{selectedDistance}</Text>
+        <View style={{backgroundColor: 'blue', borderRadius: 15, marginTop: 12}}>
+        <Text style={{fontSize: 30, fontWeight: 'bold', paddingHorizontal: 10, paddingVertical: 10}}>{selectedDistance}</Text>
+        </View>
+        
         </View>
       </View>
 
@@ -67,26 +74,4 @@ const windowHeight = Dimensions.get('window').height;
 export default Goals;
 
 const styles = StyleSheet.create({})
-{/* <Picker.Item label="1,000" value="1,000" />
-            <Picker.Item label="2,000" value="2,000" />
-            <Picker.Item label="3,000" value="3,000" />
-            <Picker.Item label="4,000" value="4,000" />
-            <Picker.Item label="5,000" value="5,000" />
-            <Picker.Item label="6,000" value="6,000" />
-            <Picker.Item label="7,000" value="7,000" />
-            <Picker.Item label="8,000" value="8,000" />
-            <Picker.Item label="9,000" value="9,000" />
-            <Picker.Item label="10,000" value="10,000" />
-            <Picker.Item label="11,000" value="11,000" /> */}
 
-
-            // <Picker.Item label="1km" value="1km" />
-            // <Picker.Item label="2km" value="2km" />
-            // <Picker.Item label="3km" value="3km" />
-            // <Picker.Item label="4km" value="4km" />
-            // <Picker.Item label="5km" value=" 5km" />
-            // <Picker.Item label="6km" value="6km" />
-            // <Picker.Item label="7km" value="7km" />
-            // <Picker.Item label="8km" value="8km" />
-            // <Picker.Item label="9km" value="9km" />
-            // <Picker.Item label="10km" value="10km" />

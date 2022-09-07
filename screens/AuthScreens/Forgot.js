@@ -1,12 +1,20 @@
 import React from 'react'
+import { useNavigation } from '@react-navigation/core'
+import { TouchableOpacity } from 'react-native'
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native'
 import { auth } from '../../firebase'
+import LoginScreen from './LoginScreen'
 
 const Forgot = () => {
+    const navigation = useNavigation()
+
     return (
-        <View style={{flex: 1,backgroundColor: 'white'}}>
+        <View style={{flex: 1,backgroundColor: 'white', alignItems: 'center'}}>
             <Text style={{top: 50, fontSize: 20, fontWeight: 'bold', textAlign: 'center'}}>Enter Email Address</Text>
-            <TextInput placeholder="Enter Email Here" />
+            {/* <TouchableOpacity onPress={navigation.navigate("Login")}>
+                <Text>Login</Text>
+            </TouchableOpacity> */}
+            <View></View>
         </View>
     )
 }

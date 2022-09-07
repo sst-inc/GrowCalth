@@ -5,8 +5,8 @@ import { Picker } from '@react-native-picker/picker';
 
 const House = () => {
     const windowWidth = Dimensions.get('window').width;
-
-    const [selectedLanguage, setSelectedLanguage] = useState();
+  
+    const [selectedLanguage, setSelectedLanguage] = useState("None selected");
     return (
       <View>
           <View style={{height: 30, backgroundColor: '#F7826F', justifyContent: 'center', alignItems: 'center', top: 20}}>
@@ -31,7 +31,7 @@ const House = () => {
           </View>
 
         <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 100}}>
-        <Text style={{ }}>{selectedLanguage}</Text>
+        <Text style={{fontSize: 40 }}>{selectedLanguage}</Text>
         </View>
       </View>
     )

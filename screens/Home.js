@@ -1,4 +1,4 @@
-import { TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Text, View, Image, AppState, Dimensions} from 'react-native';
+import { TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Text, View, Image, AppState, Dimensions, TouchableOpacityBase} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect, useRef } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,12 +9,14 @@ import Progresses from './Progress'
 import Quotes from './Quotes';
 import Goals from './Goals';
 import LeaderBoard from './LeaderBoard'
-import * as firebase from 'firebase'
+// import * as firebase from 'firebase'
 // import CircularProgress from 'react-native-circular-progress-indicator';
 import * as Progress from 'react-native-progress';
-
-
+import firebase from '../firebase';
+import { reflect } from 'async';
 function Homes() {
+
+
 
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
@@ -28,11 +30,17 @@ function Homes() {
         getQuote();
     }, []);
   const [PedometerAvailability, setPedometerAvailability] = useState("")
-  const [stepCount, updateStepCount] = useState(0)
+  let [stepCount, updateStepCount] = useState([0])
   const calories = stepCount / 25
   const caloriesB = calories.toFixed(1)
 
 
+  // useEffect(() => 
+  // firebase.listenToChanges(stepCount => updateStepCount(stepCount)),
+  //  [])
+  // useEffect(() => 
+  // firebase.publishChange(stepCount),
+  //  [stepCount])
 
   const subscribe = () => {
     const subscription = Pedometer.watchStepCount((result) => (
@@ -84,6 +92,8 @@ function Homes() {
   }
   var dist = stepCount / 1300
   var distance = dist.toFixed(2)
+
+  
   return (
     <SafeAreaView style={{backgroundColor: '#FFFFF'}}>
       <ScrollView>
@@ -93,7 +103,7 @@ function Homes() {
             <Text style={{ fontSize: 39, fontWeight: 'bold', color: 'black', textShadowColor: 'white', textShadowRadius: 2, textShadowOffset: { 
           width: 3,
           height: 3}}}>Home</Text>
-            <Text style={styles.subTitle}>Hi Honey! I'm Home</Text>
+            <Text style={styles.subTitle}>This is Home, truly</Text>
           </View>
           {/* <TouchableOpacity style={{borderWidth: 1.23, borderColor: 'black', width: 190, height: 170, marginHorizontal: 215, borderRadius: 15, marginTop: 50, marginBottom: -175, backgroundColor: 'white'}}>
             <Text>Progress</Text>

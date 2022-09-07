@@ -2,8 +2,6 @@ import React, {useState} from 'react'
 import { StyleSheet, Text, View, ScrollView ,Button, TextInput, TouchableOpacity, Dimensions} from 'react-native'
 import * as firebase from 'firebase'
 import { auth } from '../../firebase';
-import {Picker} from '@react-native-picker/picker';
-
 
 
 export default class AccountInfo extends React.Component {  
