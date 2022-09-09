@@ -11,11 +11,22 @@ import Insights from './screens/Insights';
 import Stacks from './screens/Home';
 import { Stackz } from './screens/Settings';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from './screens/LoginScreen'
+import LoginScreen from './screens/AuthScreens/LoginScreen'
 import Announcements from './screens/Announcements';
 import Forgot from './screens/AuthScreens/Forgot';
-import { app, storage} from "./firebase";
+// import { app, storage} from "./firebase";
+import Register from './screens/AuthScreens/Register';
+import Test from './screens/Test';
+import AnnouncementStack from './screens/Announcements';
 
+// export default function App() {
+//   const handleInput = (event) => {
+
+//   };
+//   return (
+//     onChange={event} => setData (event.target.files[])
+//   )
+// }
 function HomeScreen() {
   return(
     <Stacks />
@@ -54,8 +65,10 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
+        <Stack.Screen options={{ headerShown: false }} name="Sign Up" component={Register} />
         <Stack.Screen options={{ headerShown: false }} name="Tab" component={Tabs} />
         <Stack.Screen name="Forgot Password" component={Forgot} />
+        {/* <Stack.Screen name="Test" component={Test}/> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -70,7 +83,7 @@ function Tabs() {
           }} />
     <Tab.Screen
           name="Announcements"
-          component={AnnouncementsScreen}
+          component={AnnouncementStack}
           options={{
             headerShown: false,
             tabBarIcon: () => (<Image source={require("./assets/announcement-icon.png")} style={{ width: 29, height: 29 }} />)
