@@ -86,6 +86,8 @@ const completeTask = (index) => {
       subscribe()
     }
   }, [])
+  const points = stepCount/10000
+  const point = points.toFixed(0)
     
     return (
       <ScrollView>
@@ -157,10 +159,10 @@ const completeTask = (index) => {
           <Text style={{fontSize: 30, color: 'white'}}>days</Text>
         </View>
         <View style={{height: 150, width: 180, backgroundColor: '#FFEEEB', borderRadius: 23, left: 20, top: 20, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={{fontWeight: 'bold',fontSize: 50}}>0</Text>
+        <Text style={{fontWeight: 'bold',fontSize: 50}}>{point}</Text>
         <Text style={{fontSize: 20, color: 'black'}}>This Week</Text>
         </View>
-        <Text style={{marginHorizontal: -150,fontSize: 20, fontWeight: '800', textDecorationLine: 'underline', bottom: 10}}>Challenges</Text>
+        <Text style={{marginHorizontal: -150,fontSize: 20, fontWeight: '800', textDecorationLine: 'underline', bottom: 10}}>House Points</Text>
 </View>
         </View>
         {/* Tasks */}
