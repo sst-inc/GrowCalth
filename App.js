@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Run from './screens/Run';
 // import Home from './screens/Home';
 import Challenges from './screens/Challenges';
@@ -18,6 +18,8 @@ import Forgot from './screens/AuthScreens/Forgot';
 import Register from './screens/AuthScreens/Register';
 import Test from './screens/Test';
 import AnnouncementStack from './screens/Announcements';
+import OnboardingScreen from './screens/OnboardingScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // export default function App() {
 //   const handleInput = (event) => {
@@ -57,22 +59,12 @@ function AnnouncementsScreen() {
     <Announcements />
   );
 }
-const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
-
-export default function App() {
+function OnboaringS() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
-        <Stack.Screen options={{ headerShown: false }} name="Sign Up" component={Register} />
-        <Stack.Screen options={{ headerShown: false }} name="Tab" component={Tabs} />
-        <Stack.Screen name="Forgot Password" component={Forgot} />
-        {/* <Stack.Screen name="Test" component={Test}/> */}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+    <OnboardingScreen />
+  )
 }
+const Tab = createBottomTabNavigator();
 function Tabs() {
   return (
   <Tab.Navigator>
@@ -107,4 +99,21 @@ function Tabs() {
         />
       </Tab.Navigator>
   )
+}
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+    return (
+    <NavigationContainer>
+      <Stack.Navigator>
+      <Stack.Screen options={{ headerShown: false }} name="Onboarding" component={OnboardingScreen} />
+     <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
+         <Stack.Screen options={{ headerShown: false }} name="Sign Up" component={Register} />
+        <Stack.Screen options={{ headerShown: false }} name="Tab" component={Tabs} />
+        <Stack.Screen name="Forgot Password" component={Forgot} />
+        {/* <Stack.Screen name="Test" component={Test}/> */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
