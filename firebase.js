@@ -1,9 +1,11 @@
-import * as firebase from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import * as firebase from 'firebase'
+import 'firebase/firestore'
+import 'firebase/auth'
+import { getStorage } from 'firebase/storage';
+import { getDatabase } from "firebase/database";
+import { getFirestore } from 'firebase/firestore'
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const firebaseConfig = {
   apiKey: "AIzaSyCm7lTJ7MMKR1jJVRbkq_tRo7Ms9ZY1r9U",
   authDomain: "growcalth-ios.firebaseapp.com",
@@ -14,16 +16,17 @@ const firebaseConfig = {
   measurementId: "G-8FFPP4MF8V"
 };
 
-// Initialize Firebase
 let app;
-
 if (firebase.apps.length === 0) {
-  app = firebase.initializeApp(firebaseConfig)
+  app = firebase.initializeApp(firebaseConfig) 
 } else {
   app = firebase.app();
-}
+} 
 
 const db = app.firestore();
 const auth = firebase.auth();
 
-export { db, auth };
+
+export {db, auth};
+
+// export const database  = getFirestore(app);
