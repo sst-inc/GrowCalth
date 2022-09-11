@@ -15,7 +15,7 @@ const AboutUs = () => {
             shadowOffset: {width: -2, height: 4},
             shadowOpacity: 1,
             shadowRadius: 3}}>
-                <Text style={{fontSize: 23, fontWeight: '500', fontStyle: 'italic', top: 10, marginHorizontal: 10, marginBottom: 23}}>We are a group of students from School of Science and Technology Singapore and we built this app together with a team of 5. We did this with the aim of wanting to benefit the community through fitness. We hope that you have enojoyed our app while you used it and if you have any enquiries or feeback, please email us at growcalth.main@gmail.com</Text>
+                <Text style={{fontSize: 23, fontWeight: '500', fontStyle: 'italic', top: 10, marginHorizontal: 10, marginBottom: 23}}>We are a group of students from School of Science and Technology Singapore and we built this app together with a team of 5. We did this with the aim of wanting to benefit the community through fitness. We had done this project for project serve 2022 and we hope that you have enojoyed our app while you used it. Should you have any enquiries or feeback, please email us at growcalth.main@gmail.com</Text>
             </View>
             <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 30, marginBottom: 10}}>
             <Image source={require('../../assets/GrowCalthIcon.jpeg')} style={{width: windowWidth - 100, height: windowHeight - 600,borderRadius: 10, margin: 0, left: 0, top: -10, }} /> 
