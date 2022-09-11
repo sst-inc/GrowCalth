@@ -34,7 +34,7 @@ const windowHeight = Dimensions.get('window').height;
             <Picker.Item label="19,000" value="19,000" />
             <Picker.Item label="20,000" value="20,000" />
         </Picker>
-        <View style={{backgroundColor: 'blue', borderRadius: 15, marginTop: 12}}>
+        <View style={{backgroundColor: '#7EB2DD', borderRadius: 15, marginTop: 12}}>
         <Text style={{fontSize: 30, fontWeight: 'bold', paddingHorizontal: 10, paddingVertical: 10}}>{selectedSteps} steps</Text>
         </View>
 
@@ -60,7 +60,7 @@ const windowHeight = Dimensions.get('window').height;
             <Picker.Item label="9km" value="9km" />
             <Picker.Item label="10km" value="10km" />
         </Picker>
-        <View style={{backgroundColor: 'blue', borderRadius: 15, marginTop: 12}}>
+        <View style={{backgroundColor: '#7EB2DD', borderRadius: 15, marginTop: 12}}>
         <Text style={{fontSize: 30, fontWeight: 'bold', paddingHorizontal: 10, paddingVertical: 10}}>{selectedDistance}</Text>
         </View>
         
