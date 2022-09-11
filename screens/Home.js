@@ -12,11 +12,58 @@ import LeaderBoard from './LeaderBoard'
 // import * as firebase from 'firebase'
 // import CircularProgress from 'react-native-circular-progress-indicator';
 import * as Progress from 'react-native-progress';
-import firebase from '../firebase';
-import { reflect } from 'async';
+import firebase from 'firebase'
+import { db } from '../firebase';
+import {collection, addDoc, getDocs, doc, updateDoc  } from 'firebase/firestore'
+
+
+// const collectionRef = collection(db, 'steps');
+
+ 
+// const handleStepsInput = () => {
+//   let newInput = { [event.target.name]: event.target.value};
+
+//   setData({ ...data, ...newInput });
+// }
+
+
+// const handleStepsSubmit = () => {
+//   addDoc(collectionRef, {
+//     steps: data.steps
+//   })
+//   .then(() => {
+//     alert('Data Added')
+//   })
+//   .catch((err) => {
+//     alert(err.message);
+//   })
+// }
+
+
+// const getSteps = () => {
+//   getDocs(collectionRef).then((response)=> {
+//     console.log(
+//       response.docs.map((item)=> {
+//         return {...item.data(), id: item.id};
+//       })
+//     );
+//   });
+// };
+
+
+// const updateStepsVFB = () => {
+//  const docToUpdate = doc(database, "steps", item.id);
+//  updateDoc(docToUpdate, {
+//    steps: "stepCount"
+//  })
+//  .then(() => {
+//   alert('Data Added')
+//  })
+//  .catch((err) =>  {
+//   alert(err.message)
+//  })
+// }
 function Homes() {
-
-
 
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
@@ -92,7 +139,7 @@ function Homes() {
   }
   var dist = stepCount / 1300
   var distance = dist.toFixed(2)
-
+  
   
   return (
     <SafeAreaView style={{backgroundColor: '#FFFFF'}}>
@@ -116,7 +163,7 @@ function Homes() {
             shadowOpacity: 1,
             shadowRadius: 3}}
             onPress={() => navigation.navigate("LeaderBoard")}>
-              <Text style={{paddingHorizontal: 10, fontSize: 15, fontWeight: 'bold', paddingTop: 10,color: 'white'}}>LeaderBoards</Text>
+              <Text style={{paddingHorizontal: 10, fontSize: 15, fontWeight: 'bold', paddingTop: 10,color: 'white'}}>Leaderboards</Text>
               <View style={{justifyContent: 'center', alignItems: 'center', paddingTop: 15}}>
               <Image source={require('.././assets/LeaderBoard.png')} style={{height: 110, width: 110}}/> 
               </View>
