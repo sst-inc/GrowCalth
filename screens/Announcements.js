@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, Text, View, FlatList, Pressable, SafeAreaView, ScrollView, TouchableOpacity, Button, TouchableOpacityBase } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Pressable, SafeAreaView, ScrollView, TouchableOpacity, Button, TouchableOpacityBase, VirtualizedList } from 'react-native'
 import firebase from 'firebase'
 import { useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Info from './Info';
 import SearchBar from '../components/SearchBar';
 import List from '../components/List';
-import ShowMore from 'react-native-show-more-button';
-
+import ShowMore from '../components/ShowMore'
+import Leaders from '../components/Leaders'
+import PageControl from 'react-native-page-control';
 function Announcements(props) {
     const navigation = useNavigation();
     const [searchPhrase, setSearchPhrase] = useState("");
@@ -16,23 +17,8 @@ function Announcements(props) {
     const [users, setUsers] = useState([]);
     const todoRef = firebase.firestore().collection('todos');
 
-    const [search, setSearch] = useState('')
-    const searchFilter = (text) => {
-        if (text) {
-            const newData = masterData.filter((item) => {
-                const itemData = item.heading ? item.heading.toUpperCase() : ''.toUpperCase();
-                const textData = text.toUpperCase();
-                return itemData.indexOf(textData) > -1
-            });
-            setUsers(newData)
-            setSearch(text)
-        } 
-        else {
-            setUsers(masterData);
-            setSearch(text)
-        }
-    }
-    useEffect(() => {
+    
+    const announcements = () => {
         todoRef
         .onSnapshot(
             querySnapshot => {
@@ -48,44 +34,35 @@ function Announcements(props) {
                 setUsers(users)
             }
         )
+    }
+    useEffect(() => {
+        announcements()
     }, [])
-    const postsPerPage = 3;
-    let arrayForHoldingPosts = [];
-    const [postsToShow, setPostsToShow] = useState([]);
-    const [next, setNext] = useState(3);
-  
-    // const loopWithSlice = (start, end) => {
-    //   const slicedPosts = items.heading.slice(start, end);
-    //   arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
-    //   setPostsToShow(arrayForHoldingPosts);
-    // };
-  
-    // useEffect(() => {
-    //   loopWithSlice(0, postsPerPage);
-    // }, []);
-  
-    // const handleShowMorePosts = () => {
-    //   loopWithSlice(next, next + postsPerPage);
-    //   setNext(next + postsPerPage);
-    // };
-    const DATA = [
-        {
-            title: 'House Announcements'
-        },
-        {
-            title: 'House Events'
-        },
-        {
-            title: 'House Activites'
-        }
-    ]
-
-    const renderList = ({ item }) => {
-        return (
-          <View style={{flexDirection: 'row'}}>
-            <Text style={styles.listItemText}>{item.title}</Text>
-          </View>
-        );
+    const eventRef = firebase.firestore().collection('houseevents');
+    const [event, setevent] = useState([])
+    const eventz = () => {
+        eventRef
+        .onSnapshot(
+            querySnapshot => {
+                const event = []
+                querySnapshot.forEach((doc) => {
+                    const { header, venue } = doc.data()
+                    event.push({
+                        id: doc.id,
+                        header,
+                        venue,
+                    })
+                })
+                setevent(event)
+            }
+        )
+    }
+    useEffect(() => {
+        eventz()
+    }, [])
+    const onViewableItemsChanged = ({ viewableItems, changed }) => {
+        console.log(viewableItems);
+        console.log(changed);
       };
     return (
         <SafeAreaView style={{backgroundColor: 'white',  flex: 1}}>
@@ -96,62 +73,55 @@ function Announcements(props) {
        clicked={clicked}
        setClicked={setClicked}
        /> 
-       {/* <ScrollView horizontal style={{marginBottom: -10}}>
-        <TouchableOpacity>
-            <Text>House Announcements</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-            <Text>House Events</Text>
-        </TouchableOpacity>
-          </ScrollView> */}
+       {/* <Leaders /> */}
       <ScrollView style={{paddingBottom: 10, flex: 1}}>
-          {/* <View style={{flexDirection: 'row'}}>
-              <TouchableOpacity>
-              <Text>House Announcements</Text>
-              </TouchableOpacity>
-              <TouchableOpacity>
-              <Text>House Events</Text>
-              </TouchableOpacity>
-          </View> */}
           <View style={{ flexDirection: "row", alignSelf: "center" }}>
 
     </View>
-      <Text style={{fontSize: 30, marginLeft: 10, fontWeight: 'bold'}}>House Announcements</Text>
+    <PageControl
+  style={{position:'absolute', left:0, right:0, bottom:10}}
+  numberOfPages={3}
+  currentPage={1}
+  hidesForSinglePage
+  pageIndicatorTintColor='gray'
+  currentPageIndicatorTintColor='white'
+  indicatorStyle={{borderRadius: 5}}
+  currentIndicatorStyle={{borderRadius: 5}}
+  indicatorSize={{width:8, height:8}}
+//   onPageIndicatorPress={this.onItemTap}
+/>
+
+      <Text style={{fontSize: 30, marginLeft: 10, fontWeight: 'bold', marginBottom: 10}}>House Announcements</Text>
       <ShowMore  style={{flex: 1}}>
             <FlatList 
                 style={{height:'100%'}}
                 data={users}
-                searchPhrase={searchPhrase}
-                setClicked={setClicked}
                 numColumns={1}
                 renderItem={({item}) => (
                     <Pressable
                         style={styles.container}
                     >
                         <TouchableOpacity style={styles.innerContainer} onPress={() => navigation.navigate("Info")}>
-                            <Text style={styles.itemHeading}>{item.heading}</Text>
+                            <Text style={[styles.itemHeading, {paddingBottom: 7}]}>{item.heading}</Text>
                             <Text style={styles.itemText}>{item.text}</Text>
-
                         </TouchableOpacity>
                     </Pressable>
                 )}
             />
             </ShowMore>
-            <Text style={{fontSize: 30, marginLeft: 10, fontWeight: 'bold'}}>House Events</Text> 
+            <Text style={{fontSize: 30, marginLeft: 10, fontWeight: 'bold', marginBottom: 8}}>House Events</Text> 
             <ShowMore  style={{flex: 1}}>
             <FlatList 
                 style={{height:'100%'}}
-                data={users}
-                searchPhrase={searchPhrase}
-                setClicked={setClicked}
+                data={event}
                 numColumns={1}
                 renderItem={({item}) => (
                     <Pressable
                         style={styles.container}
                     >
                         <TouchableOpacity style={styles.innerContainer} onPress={() => navigation.navigate("Info")}>
-                            <Text style={styles.itemHeading}>{item.heading}</Text>
-                            <Text style={styles.itemText}>{item.text}</Text>
+                            <Text style={[styles.itemHeading, {paddingBottom: 8}]}>{item.header}</Text>
+                            <Text style={styles.itemText}>Venue: {item.venue}</Text>
                         </TouchableOpacity>
                     </Pressable>
                 )}
@@ -183,7 +153,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     itemText:{
-        fontWeight:'300'
+        fontWeight:'300',
+        fontSize: 17
     },
     textInputStyle: {
         height: 40, 
