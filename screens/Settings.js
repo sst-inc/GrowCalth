@@ -68,7 +68,7 @@ const Settings = (props) => {
           >
             Settings
           </Text>
-          <Text style={styles.subTitle}>Uncle Raymond Siollll</Text>
+          <Text style={styles.subTitle}>Setting the scene...</Text>
           <View style={{ flex: 0.5, paddingHorizontal: 33 }}>
             <View>
               <View
@@ -413,7 +413,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 5,
   },
   buttonText: {
     color: "white",
