@@ -160,7 +160,7 @@ function Homes() {
           <TouchableOpacity style={{width: (windowWidth-50)/2, height: 170, borderRadius: 15, marginTop: 30, marginBottom: -170, marginLeft: (windowWidth+25)/2,
             shadowColor: 'black', shadowColor: '#171717', backgroundColor: 'black',
             shadowOffset: {width: -2, height: 4},
-            shadowOpacity: 1,
+            shadowOpacity: 0.9,
             shadowRadius: 3}}
             onPress={() => navigation.navigate("LeaderBoard")}>
               <Text style={{paddingHorizontal: 10, fontSize: 15, fontWeight: 'bold', paddingTop: 10,color: 'white'}}>Leaderboards</Text>
@@ -210,7 +210,7 @@ function Homes() {
             >
             <TouchableOpacity style={{width: (windowWidth-52)/2,height: 235,borderRadius: 15,borderColor: 'white', paddingHorizontal: 10, shadowColor: 'black', shadowColor: '#171717', backgroundColor: 'white', top: 4,
     shadowOffset: {width: -2, height: 4},
-    shadowOpacity: 1,
+    shadowOpacity: 0.9,
     shadowRadius: 3, backgroundColor: '#FFFFFF', }}                 onPress={() => navigation.navigate("Progress")}>
               {/* Progress */}
               <Text style={{fontSize: 19,fontWeight: 'bold', top: 10}}>Progress</Text>
@@ -242,7 +242,7 @@ function Homes() {
         <TouchableOpacity style={{height: 130, width: windowWidth-35, borderRadius: 10, borderWidth: 0, marginLeft: 20, bottom: 240, 
       shadowColor: 'black', shadowColor: '#171717', backgroundColor: '#B7CADB',
       shadowOffset: {width: -2, height: 4},
-      shadowOpacity: 1,
+      shadowOpacity: 0.9,
       shadowRadius: 3}}
       onPress={() => navigation.navigate("Quotes")}
       >
@@ -252,7 +252,7 @@ function Homes() {
         <TouchableOpacity style={{height: 165, width: windowWidth-34, borderRadius: 15, backgroundColor: '#754F5B', marginHorizontal: 20, marginTop: -220,
       shadowColor: 'black', shadowColor: '#171717',
       shadowOffset: {width: -2, height: 4},
-      shadowOpacity: 1,
+      shadowOpacity: 0.9,
       shadowRadius: 3}
       }
       onPress={() => navigation.navigate("Goals")}
@@ -302,7 +302,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     borderColor: 'white', borderWidth: 0, paddingHorizontal: 10, shadowColor: 'black', shadowColor: '#171717', backgroundColor: 'white',
     shadowOffset: {width: -2, height: 4},
-    shadowOpacity: 1,
+    shadowOpacity: 0.9,
     shadowRadius: 3,
     marginHorizontal: 20
   },
@@ -315,7 +315,7 @@ const styles = StyleSheet.create({
     top: -260,
     shadowColor: 'black', shadowColor: '#171717', backgroundColor: 'white',
     shadowOffset: {width: -2, height: 4},
-    shadowOpacity: 1,
+    shadowOpacity: 0.9,
     shadowRadius: 3
   },
   middle: {

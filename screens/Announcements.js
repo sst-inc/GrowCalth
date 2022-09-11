@@ -75,10 +75,8 @@ function Announcements(props) {
        /> 
        {/* <Leaders /> */}
       <ScrollView style={{paddingBottom: 10, flex: 1}}>
-          <View style={{ flexDirection: "row", alignSelf: "center" }}>
-
-    </View>
-    <PageControl
+          <View style={{ flexDirection: "row", alignSelf: "center" , marginTop: 20}}>
+          {/* <PageControl
   style={{position:'absolute', left:0, right:0, bottom:10}}
   numberOfPages={3}
   currentPage={1}
@@ -89,7 +87,8 @@ function Announcements(props) {
   currentIndicatorStyle={{borderRadius: 5}}
   indicatorSize={{width:8, height:8}}
 //   onPageIndicatorPress={this.onItemTap}
-/>
+/> */}
+    </View>
 
       <Text style={{fontSize: 30, marginLeft: 10, fontWeight: 'bold', marginBottom: 10}}>House Announcements</Text>
       <ShowMore  style={{flex: 1}}>
@@ -136,12 +135,12 @@ function Announcements(props) {
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: '#FEFBF6',
+        backgroundColor: 'white',
         padding:15,
         marginHorizontal: 10, 
         borderRadius: 10,
         marginBottom: 10,
-        borderWidth: 0.5
+        borderTopWidth: 0.5
 
     },
     innerContainer:{

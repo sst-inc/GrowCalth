@@ -11,7 +11,7 @@ const Register = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        navigation.replace("Tab")
+        navigation.replace("Onboarding")
       }
     })
 
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonOutline: {
-    backgroundColor: 'white',
+    backgroundColor: '#DB5461',
     marginTop: 5,
     borderColor: '#DB5461',
     borderWidth: 2,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: '#DB5461',
+    color: '#FFFFFF',
     fontWeight: '700',
     fontSize: 16,
   },

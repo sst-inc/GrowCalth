@@ -89,6 +89,7 @@ const completeTask = (index) => {
   const points = stepCount/10000
   const point = points.toFixed(0)
     
+  
     return (
       <ScrollView>
         <View style={{paddingHorizontal: 30, paddingTop: 15}}>
@@ -165,6 +166,7 @@ const completeTask = (index) => {
         <Text style={{marginHorizontal: -150,fontSize: 20, fontWeight: '800', textDecorationLine: 'underline', bottom: 10}}>House Points</Text>
 </View>
         </View>
+
         {/* Tasks */}
         <View style={styles.container}>
           <View style={styles.taskWrapper}>
