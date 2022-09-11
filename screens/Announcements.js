@@ -9,6 +9,9 @@ import List from '../components/List';
 import ShowMore from '../components/ShowMore'
 import Leaders from '../components/Leaders'
 import PageControl from 'react-native-page-control';
+
+
+
 function Announcements(props) {
     const navigation = useNavigation();
     const [searchPhrase, setSearchPhrase] = useState("");
@@ -67,27 +70,16 @@ function Announcements(props) {
     return (
         <SafeAreaView style={{backgroundColor: 'white',  flex: 1}}>
             <Text style={{fontSize: 39, fontWeight: 'bold', padding: 10, marginTop: 5}}>Announcements</Text>
+            <Text style={styles.subTitle}>SNW PLS</Text>
       <SearchBar 
        searchPhrase={searchPhrase}
        setSearchPhrase={setSearchPhrase}
        clicked={clicked}
        setClicked={setClicked}
        /> 
-       {/* <Leaders /> */}
       <ScrollView style={{paddingBottom: 10, flex: 1}}>
           <View style={{ flexDirection: "row", alignSelf: "center" , marginTop: 20}}>
-          {/* <PageControl
-  style={{position:'absolute', left:0, right:0, bottom:10}}
-  numberOfPages={3}
-  currentPage={1}
-  hidesForSinglePage
-  pageIndicatorTintColor='gray'
-  currentPageIndicatorTintColor='white'
-  indicatorStyle={{borderRadius: 5}}
-  currentIndicatorStyle={{borderRadius: 5}}
-  indicatorSize={{width:8, height:8}}
-//   onPageIndicatorPress={this.onItemTap}
-/> */}
+
     </View>
 
       <Text style={{fontSize: 30, marginLeft: 10, fontWeight: 'bold', marginBottom: 10}}>House Announcements</Text>
@@ -126,7 +118,19 @@ function Announcements(props) {
                 )}
             />
             </ShowMore>
-            </ScrollView>
+            </ScrollView>         
+             {/* <PageControl
+  style={{position:'absolute', left:0, right:0, bottom:10}}
+  numberOfPages={3}
+  currentPage={1}
+  hidesForSinglePage
+  pageIndicatorTintColor='gray'
+  currentPageIndicatorTintColor='white'
+  indicatorStyle={{borderRadius: 5}}
+  currentIndicatorStyle={{borderRadius: 5}}
+  indicatorSize={{width:8, height:8}}
+//   onPageIndicatorPress={this.onItemTap}
+/> */}
         </SafeAreaView>
               
     )
@@ -135,13 +139,13 @@ function Announcements(props) {
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: 'white',
+        backgroundColor: '#FEFBF6',
+        // backgroundColor: 'white',
         padding:15,
         marginHorizontal: 10, 
         borderRadius: 10,
         marginBottom: 10,
-        borderTopWidth: 0.5
-
+        borderWidth: 0.5
     },
     innerContainer:{
         flexDirection:'column',
@@ -161,7 +165,12 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         margin: 5,
         borderColor: 'black'
-    }
+    },
+    subTitle: {
+        color: "#C1CAD6",
+        marginTop: -5,
+        marginHorizontal: 14,
+      },
 })
 const Stack = createNativeStackNavigator()
 
