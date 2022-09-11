@@ -1,5 +1,5 @@
 import React,{useState, useEffect,useRef, useMemo} from 'react'
-import { SafeAreaView, StatusBar, ScrollView, StyleSheet, Text, View, FlatList, Pressable,Dimensions, TouchableOpacity, Image, SectionList, Animated, } from 'react-native'
+import { SafeAreaView, StatusBar, ScrollView, StyleSheet, Text, View, FlatList, Pressable,Dimensions, TouchableOpacity, Image, SectionList, Animated, Alert, } from 'react-native'
 import * as Progress from 'react-native-progress';
 import * as firebase from 'firebase'
 import { useNavigation } from '@react-navigation/native';
@@ -14,6 +14,22 @@ const windowHeight = Dimensions.get('window').height;const Item = ({ title }) =>
   </View>
   </View>
 );
+const AddAlert = () => {
+  Alert.alert(
+    "Are you sure you want to take up this challenge",
+    "WOOOOO",
+    [
+      
+      { text: "YES, BRING IT ON", onPress: () => console.log("OK Pressed")
+    ,style: 'cancel' },
+    {
+      text: "No I want my mommy",
+      onPress: () => console.log("Cancel Pressed"),
+      style: "cancel"
+    },
+    ]
+  );
+}
 const Challenges = () => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
@@ -113,7 +129,7 @@ const navigation = useNavigation();
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
     <View style={{flexDirection: 'row', marginTop: 20}}>
     <View style={{backgroundColor: 'black', height: 200, borderRadius: 15, width: windowWidth-50, marginRight: 10, justifyContent: 'center', alignItems: 'center'}}>
-    <FlatList 
+    {/* <FlatList 
                 style={{height:'100%'}}
                 data={users}
                 searchPhrase={searchPhrase}
@@ -125,7 +141,7 @@ const navigation = useNavigation();
                     >
                       <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
                         <View style={[styles.innerContainer, { paddingHorizontal: 10, width: windowWidth-130, height: 80, borderRadius: 15, marginLeft: 10, justifyContent: 'center'}]} onPress={() => navigation.navigate("Hi")}>
-                            <Text style={[styles.itemHeading, {padding: 5, color: '#252C45'}]}>{item.heading}</Text>
+                            <Text style={[styles.itemHeading, {padding: 5, color: 'white'}]}>{item.heading}</Text>
                         </View>
                         </View>
                         <View style={{justifyContent: 'center', alignItems: 'center', width: 70}}>
@@ -133,21 +149,56 @@ const navigation = useNavigation();
                       </View>
                     </Pressable>
                 )}
-            />
-    <View style={styles.progressBar}>
-  <Animated.View style={[StyleSheet.absoluteFill], {backgroundColor: "#8BED4F", }}/>
-  </View>
-    </View>
+            /> */}
+    {/* <View style={[styles.progressBar, {marginBottom: 10}]}>
+  <Animated.View style={{backgroundColor: "#8BED4F" }}/>
+  </View> */}
+ <View style={{backgroundColor: 'black', height: 200, borderRadius: 15, width: windowWidth-50,justifyContent: 'center', alignItems: 'center'}}>
+ <Text style={{color: 'white', padding :5, fontWeight: 'bold', fontSize: 30, marginBottom: -10 }}>10,000 steps Challenge</Text>
+    <Progress.Bar progress={0.2} width={200} style={{marginTop: 100}} />
+    </View>   
+     </View>
     <View style={{backgroundColor: 'black', height: 200, borderRadius: 15, width: windowWidth-50,justifyContent: 'center', alignItems: 'center'}}>
-    <Progress.Bar progress={stepCount} width={200} style={{marginTop: 160}} />
+    <Text style={{color: 'white', padding :5, fontWeight: 'bold', fontSize: 30, marginBottom: -10 }}>Daily Challenge</Text>
+    <Text style={{color: 'white', padding :5, fontWeight: 'bold', fontSize: 15, marginBottom: -30 ,marginTop: 10}}>Walk a minimum of 15,000 steps today!</Text>
+    <Progress.Bar progress={0.4} width={200} style={{marginTop: 100}} />
     </View>
     </View>
     </ScrollView>
+    </View>
+    <View>
+      
     </View>
     <View style={{padding: 10, marginTop: 5 }}>
       <Text style={{fontSize: 30, fontWeight: 'bold'}}>For you</Text>
     </View>
     <View>
+    <TouchableOpacity style={{backgroundColor: '#E9ECF1', flexDirection: 'row', marginBottom: 15, borderRadius: 17, marginHorizontal: 20}} onPress={AddAlert}>
+                      <View style={{backgroundColor: '#FFFF82', width: 35, height: 35, borderRadius: 10, alignSelf: 'center', marginHorizontal: 15}}>
+                        </View>
+                      <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+                        <View style={[styles.innerContainer, { paddingHorizontal: 10, width: windowWidth-130, height: 80, borderRadius: 15, marginLeft: 10, justifyContent: 'center'}]} onPress={() => navigation.navigate("Hi")}>
+                            <Text style={[styles.itemHeading, {padding: 5, color: '#252C45'}]}>10,000 steps Challenge</Text>
+                            <Text style={[styles.itemText, {paddingHorizontal: 5, color: '#252C45'}]}>✨For house points✨</Text>
+                        </View>
+                        </View>
+                        <View style={{justifyContent: 'center', alignItems: 'center', width: 70}}>
+                        <Text style={{fontSize: 28, marginRight: 10, marginLeft: 10, fontWeight: '800'}}>2</Text>
+                      </View>
+                      </TouchableOpacity>
+                      <TouchableOpacity style={{backgroundColor: '#E9ECF1', flexDirection: 'row', marginBottom: 15, borderRadius: 17, marginHorizontal: 20}} onPress={AddAlert}>
+                      <View style={{backgroundColor: '#B5D99C', width: 35, height: 35, borderRadius: 10, alignSelf: 'center', marginHorizontal: 15}}>
+                        </View>
+                      <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+                        <View style={[styles.innerContainer, { paddingHorizontal: 10, width: windowWidth-130, height: 80, borderRadius: 15, marginLeft: 10, justifyContent: 'center'}]} onPress={() => navigation.navigate("Hi")}>
+                            <Text style={[styles.itemHeading, {padding: 5, color: '#252C45'}]}>20,000 steps Challenge</Text>
+                            <Text style={[styles.itemText, {paddingHorizontal: 5, color: '#252C45'}]}>✨For even morehouse points✨</Text>
+                        </View>
+                        </View>
+                        <View style={{justifyContent: 'center', alignItems: 'center', width: 70}}>
+                        <Text style={{fontSize: 28, marginRight: 10, marginLeft: 10, fontWeight: '800'}}>5</Text>
+                      </View>
+                      </TouchableOpacity>
     <FlatList 
                 style={{height:'100%'}}
                 data={users}
@@ -158,7 +209,7 @@ const navigation = useNavigation();
                     <Pressable
                         style={[styles.containers]}
                     >
-                      <TouchableOpacity style={{backgroundColor: '#E9ECF1', flexDirection: 'row', marginBottom: 15, borderRadius: 17, marginHorizontal: 20}}>
+                      <TouchableOpacity style={{backgroundColor: '#E9ECF1', flexDirection: 'row', marginBottom: 15, borderRadius: 17, marginHorizontal: 20}} onPress={AddAlert}>
                       <View style={{backgroundColor: '#89B3DD', width: 35, height: 35, borderRadius: 10, alignSelf: 'center', marginHorizontal: 15}}>
                         </View>
                       <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
