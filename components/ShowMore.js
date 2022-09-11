@@ -62,7 +62,7 @@ export default class ShowMore extends React.Component {
 				<TouchableOpacity style={{ height: 30, width: Dimensions.get('window').width * 2, top: 2, left: 10 }}
 					onPress={() => { this.state.showMoreBoxIsOpened ? this.onPressShowLess() : this.onPressShowMore(); }}>
 					<View>
-						<Text style={{ color: this.props.buttonColor != null ? this.props.buttonColor : "#AAAAFF" }}>{this.state.showMoreButtonText}</Text>
+						<Text style={{ color: this.props.buttonColor != null ? this.props.buttonColor : "#AAAAFF",textDecorationLine: 'underline' }}>{this.state.showMoreButtonText}</Text>
 					</View>
 				</TouchableOpacity>
 
