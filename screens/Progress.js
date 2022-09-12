@@ -88,11 +88,13 @@ const completeTask = (index) => {
   }, [])
   const points = stepCount/10000
   const point = points.toFixed(0)
-    
+  
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
   
     return (
       <ScrollView>
-        <View style={{paddingHorizontal: 30, paddingTop: 15}}>
+        <View style={{paddingHorizontal: 30, paddingTop: 15, flex: 1}}>
             <Text style={{fontSize: 35, fontWeight: 'bold', marginHorizontal: -20}}>This week</Text>
             <View style={{width: 80, height: 80, borderRadius: 40, backgroundColor: 'white', marginHorizontal: 260}}>
                 {/* Distance */}
@@ -155,11 +157,11 @@ const completeTask = (index) => {
         </View>
         <Text style={{fontSize: 20, fontWeight: '800', textDecorationLine: 'underline', marginTop: 10, marginBottom: 10}}>Days Active</Text>
         <View style={{flexDirection: 'row'}}>
-        <View style={{height: 150, width: 180, backgroundColor: '#251F1D', borderRadius: 23, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{height: 150, width: (windowWidth-30)/2, backgroundColor: '#251F1D', borderRadius: 23, justifyContent: 'center', alignItems: 'center', marginRight: -20, marginLeft: -20}}>
           <Text style={{fontWeight: 'bold',fontSize: 50, color: 'white'}}>{counter}</Text>
           <Text style={{fontSize: 30, color: 'white'}}>days</Text>
         </View>
-        <View style={{height: 150, width: 180, backgroundColor: '#FFEEEB', borderRadius: 23, left: 20, top: 20, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{height: 150, width: (windowWidth-30)/2, backgroundColor: '#FCE2DB', borderRadius: 23, left: 20, top: 20, justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>
         <Text style={{fontWeight: 'bold',fontSize: 50}}>{point}</Text>
         <Text style={{fontSize: 20, color: 'black'}}>This Week</Text>
         </View>
