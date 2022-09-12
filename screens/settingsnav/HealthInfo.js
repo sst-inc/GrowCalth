@@ -30,7 +30,7 @@ export default function HealthInfo() {
 
       {/* Today's Tasks */}
       <View style={styles.tasksWrapper}>
-        <Text style={styles.sectionTitle}>Recent Surgeries</Text>
+        <Text style={styles.sectionTitle}>Health Info (Notes)</Text>
         <Text style={{color: 'gray'}}>To keep track!</Text>
         <View style={styles.items}>
           {/* This is where the tasks will go! */}
