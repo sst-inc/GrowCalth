@@ -19,7 +19,7 @@ const OnboardingScreen = () => {
             {
             backgroundColor: '#fff',
             image: <Image source={{uri: 'https://i.pinimg.com/originals/f4/b4/2f/f4b42fd35e95c9880e01cd98bd49b9fb.gif'}} style={{width: windowWidth-20, height: windowHeight-520, borderRadius: 15}} />,
-            title: 'Track you activity!',
+            title: 'Track your activity!',
             titleStyles: {fontWeight:'bold'},
             subTitleStyles: {color: 'black'},
             subtitle: 'With our in built pedometer, you can track your steps, calories and distance travelled! All in 1 app!',
