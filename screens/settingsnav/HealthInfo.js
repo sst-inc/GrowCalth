@@ -19,7 +19,7 @@ export default function HealthInfo() {
   }
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       {/* Added this scroll view to enable scrolling when list gets longer than the page */}
       <ScrollView
         contentContainerStyle={{
@@ -30,7 +30,7 @@ export default function HealthInfo() {
 
       {/* Today's Tasks */}
       <View style={styles.tasksWrapper}>
-        <Text style={styles.sectionTitle}>Health Info</Text>
+        <Text style={styles.sectionTitle}>Recent Surgeries</Text>
         <Text style={{color: 'gray'}}>To keep track!</Text>
         <View style={styles.items}>
           {/* This is where the tasks will go! */}
@@ -62,7 +62,7 @@ export default function HealthInfo() {
         </TouchableOpacity>
       </KeyboardAvoidingView>
       
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
