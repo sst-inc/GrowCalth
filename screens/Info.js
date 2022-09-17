@@ -2,9 +2,11 @@ import React, {useState, useEffect} from 'react'
 import firebase from 'firebase'
 import { StyleSheet, Text, View, FlatList, Pressable, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native'
 
-const Info = () => {
+const Info = ({route}) => {
     const [users, setUsers] = useState([]);
     const todoRef = firebase.firestore().collection('todos');
+    const params = route.params
+    const itemHeading = params.itemHeading
 
     useEffect(() => {
         todoRef
@@ -24,6 +26,7 @@ const Info = () => {
     }, [])
     return (
         <SafeAreaView style={{backgroundColor: 'white'}}>
+        <Text style={styles.itemHeading}>{`No way the item heading is \"${itemHeading}\"!!! Just use params.something`}</Text>
         <ScrollView>
             <View style={{ flex:1, marginTop: 0}}>
             <FlatList 
@@ -61,7 +64,7 @@ const styles = StyleSheet.create({
     },
     itemHeading:{
         fontWeight:'bold',
-        color: 'white',
+        color: 'black', // Changed to black: cant see anything
         fontSize: 20
     },
     itemText:{

@@ -12,7 +12,7 @@ import PageControl from 'react-native-page-control';
 
 
 
-function Announcements(props) {
+function Announcements() {
     const navigation = useNavigation();
     const [searchPhrase, setSearchPhrase] = useState("");
     const [clicked, setClicked] = useState(false);
@@ -92,7 +92,7 @@ function Announcements(props) {
                     <Pressable
                         style={styles.container}
                     >
-                        <TouchableOpacity style={styles.innerContainer} onPress={() => navigation.navigate("Info")}>
+                        <TouchableOpacity style={styles.innerContainer} onPress={() => navigation.navigate("Info", {itemHeading: item.heading})}>
                             <Text style={[styles.itemHeading, {paddingBottom: 7}]}>{item.heading}</Text>
                             <Text style={styles.itemText}>{item.text}</Text>
                         </TouchableOpacity>
@@ -110,7 +110,7 @@ function Announcements(props) {
                     <Pressable
                         style={styles.container}
                     >
-                        <TouchableOpacity style={styles.innerContainer} onPress={() => navigation.navigate("Info")}>
+                        <TouchableOpacity style={styles.innerContainer} onPress={() => navigation.navigate("Info", {itemHeading: item.heading})}>
                             <Text style={[styles.itemHeading, {paddingBottom: 8}]}>{item.header}</Text>
                             <Text style={styles.itemText}>Venue: {item.venue}</Text>
                         </TouchableOpacity>
