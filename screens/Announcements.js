@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import firebase from "firebase";
-import { useNavigation } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Info from "./Info";
 import SearchBar from "../components/SearchBar";
@@ -63,61 +63,50 @@ function events() {
     eventz();
   }, []);
   return (
-    <SafeAreaView>
-      <Text
-        style={{
-          fontSize: 30,
-          marginLeft: 10,
-          fontWeight: "bold",
-          marginBottom: 8,
-        }}
-      >
-        House Events
-      </Text>
-      <ScrollView>
-        <FlatList
-          style={{ height: "100%" }}
-          data={event}
-          numColumns={1}
-          renderItem={({ item }) => (
-            <Pressable style={styles.container}>
-              <TouchableOpacity
-                style={[styles.innerContainer]}
-                onPress={() =>
-                  navigation.navigate("Info1", {
-                    itemHeading: item.header,
-                    itemText: item.venue,
-                    itemDate: item.date,
-                  })
-                }
-              >
-                <Text style={[styles.itemHeading, { paddingBottom: 8 }]}>
-                  {item.header}
+    <View style={{ backgroundColor: "white", flex: 1 }}>
+      <View style={{ height: 20 }}></View>
+      <FlatList
+        style={{ height: "100%" }}
+        data={event}
+        numColumns={1}
+        renderItem={({ item }) => (
+          <Pressable style={styles.container}>
+            <TouchableOpacity
+              style={[styles.innerContainer]}
+              onPress={() =>
+                navigation.navigate("Info1", {
+                  itemHeading: item.header,
+                  itemText: item.venue,
+                  itemDate: item.date,
+                })
+              }
+            >
+              <Text style={[styles.itemHeading, { paddingBottom: 8 }]}>
+                {item.header}
+              </Text>
+              <Text style={styles.itemText}>Venue: {item.venue}</Text>
+              <View style={{ flexDirection: "row" }}>
+                <Text style={[styles.itemText, { paddingTop: 7 }]}>
+                  Date:
                 </Text>
-                <Text style={styles.itemText}>Venue: {item.venue}</Text>
-                <View style={{ flexDirection: "row" }}>
-                  <Text style={[styles.itemText, { paddingTop: 7 }]}>
-                    Date:
-                  </Text>
-                  <Text
-                    style={[
-                      styles.itemText,
-                      {
-                        paddingTop: 7,
-                        textDecorationLine: "underline",
-                        left: 4,
-                      },
-                    ]}
-                  >
-                    {item.date}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </Pressable>
-          )}
-        />
-      </ScrollView>
-    </SafeAreaView>
+                <Text
+                  style={[
+                    styles.itemText,
+                    {
+                      paddingTop: 7,
+                      textDecorationLine: "underline",
+                      left: 4,
+                    },
+                  ]}
+                >
+                  {item.date}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </Pressable>
+        )}
+      />
+    </View>
   );
 }
 function Announcements() {
@@ -166,63 +155,36 @@ function Announcements() {
     eventz();
   }, []);
   return (
-    <View style={{ backgroundColor: "white", flex: 1 }}>
-      <SafeAreaView>
-        <Text
-          style={{
-            fontSize: 39,
-            fontWeight: "bold",
-            padding: 10,
-            marginTop: 5,
-          }}
-        >
-          Announcements
-        </Text>
-        <Text style={styles.subTitle}>SNW PLS</Text>
-        <SearchBar
-          searchPhrase={searchPhrase}
-          setSearchPhrase={setSearchPhrase}
-          clicked={clicked}
-          setClicked={setClicked}
-        />
-      </SafeAreaView>
-      <ScrollView
-        style={{ paddingBottom: 10, flex: 1 }}
-        showsVerticalScrollIndicator={false}
-      >
-        <Text
-          style={{
-            fontSize: 30,
-            marginLeft: 10,
-            fontWeight: "bold",
-            marginBottom: 10,
-          }}
-        >
-          House Announcements
-        </Text>
-        <FlatList
-          data={users}
-          numColumns={1}
-          renderItem={({ item }) => (
-            <Pressable style={styles.container}>
-              <TouchableOpacity
-                style={[styles.innerContainer]}
-                onPress={() =>
-                  navigation.navigate("Info", {
-                    itemHeading: item.heading,
-                    itemText: item.text,
-                  })
-                }
-              >
-                <Text style={[styles.itemHeading, { paddingBottom: 7 }]}>
-                  {item.heading}
-                </Text>
-                <Text style={styles.itemText}>{item.text}</Text>
-              </TouchableOpacity>
-            </Pressable>
-          )}
-        />
-      </ScrollView>
+    <ScrollView style={{ backgroundColor: "white", flex: 1 }}>
+      <SearchBar
+        searchPhrase={searchPhrase}
+        setSearchPhrase={setSearchPhrase}
+        clicked={clicked}
+        setClicked={setClicked}
+      />
+      <FlatList
+        scrollEnabled={false}
+        data={users}
+        numColumns={1}
+        renderItem={({ item }) => (
+          <Pressable style={styles.container}>
+            <TouchableOpacity
+              style={[styles.innerContainer]}
+              onPress={() =>
+                navigation.navigate("Info", {
+                  itemHeading: item.heading,
+                  itemText: item.text,
+                })
+              }
+            >
+              <Text style={[styles.itemHeading, { paddingBottom: 7 }]}>
+                {item.heading}
+              </Text>
+              <Text style={styles.itemText}>{item.text}</Text>
+            </TouchableOpacity>
+          </Pressable>
+        )}
+      />
       {/* <PageControl
   style={{position:'absolute', left:0, right:0, bottom:10}}
   numberOfPages={3}
@@ -235,7 +197,7 @@ function Announcements() {
   indicatorSize={{width:8, height:8}}
 //   onPageIndicatorPress={this.onItemTap}
 /> */}
-    </View>
+    </ScrollView>
   );
 }
 
@@ -300,7 +262,7 @@ function AnnouncementStack() {
 const Tab = createMaterialTopTabNavigator();
 export default function MyTabs() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <Tab.Navigator>
         <Tab.Screen name="Announcement" component={AnnouncementStack} />
         <Tab.Screen name="Events" component={events} />
