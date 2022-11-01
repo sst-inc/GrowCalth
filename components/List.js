@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, Text, View, FlatList, SafeAreaView } from "react-native";
 
 // definition of the Item, which will be rendered in the FlatList
 const Item = ({ name, details }) => (
@@ -23,11 +17,19 @@ const List = (props) => {
       return <Item name={item.name} details={item.details} />;
     }
     // filter of the name
-    if (item.name.toUpperCase().includes(props.searchPhrase.toUpperCase().trim().replace(/\s/g, ""))) {
+    if (
+      item.name
+        .toUpperCase()
+        .includes(props.searchPhrase.toUpperCase().trim().replace(/\s/g, ""))
+    ) {
       return <Item name={item.name} details={item.details} />;
     }
     // filter of the description
-    if (item.details.toUpperCase().includes(props.searchPhrase.toUpperCase().trim().replace(/\s/g, ""))) {
+    if (
+      item.details
+        .toUpperCase()
+        .includes(props.searchPhrase.toUpperCase().trim().replace(/\s/g, ""))
+    ) {
       return <Item name={item.name} details={item.details} />;
     }
   };
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
   item: {
     margin: 30,
     borderBottomWidth: 2,
-    borderBottomColor: "lightgrey"
+    borderBottomColor: "lightgrey",
   },
   title: {
     fontSize: 20,

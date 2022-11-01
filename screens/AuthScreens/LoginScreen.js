@@ -1,84 +1,113 @@
-import { useNavigation } from '@react-navigation/core'
-import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Button, Dimensions } from 'react-native'
-import { auth } from '../../firebase'
-import Forgot from './Forgot'
+import { useNavigation } from "@react-navigation/core";
+import React, { useEffect, useState } from "react";
+import {
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  Button,
+  Dimensions,
+} from "react-native";
+import { auth } from "../../firebase";
+import Forgot from "./Forgot";
 
 const LoginScreen = () => {
+  const windowWidth = Dimensions.get("window").width;
 
-  const windowWidth = Dimensions.get('window').width;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigation.replace("Tab")
+        navigation.replace("Tab");
       }
-    })
+    });
 
-    return unsubscribe
-  }, [])
+    return unsubscribe;
+  }, []);
 
   const handleSignUp = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
-      .then(userCredentials => {
+      .then((userCredentials) => {
         const user = userCredentials.user;
-        console.log('Registered with:', user.email);
+        console.log("Registered with:", user.email);
       })
-      .catch(error => alert(error.message))
-  }
+      .catch((error) => alert(error.message));
+  };
 
   const handleLogin = () => {
     auth
       .signInWithEmailAndPassword(email, password)
-      .then(userCredentials => {
+      .then((userCredentials) => {
         const user = userCredentials.user;
-        console.log('Logged in with:', user.email);
+        console.log("Logged in with:", user.email);
       })
-      .catch(error => alert(error.message))
-  }
+      .catch((error) => alert(error.message));
+  };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior="padding"
-    >
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email (Use your school email)"
           value={email}
-          onChangeText={text => setEmail(text)}
-          autoCapitalize="none" 
+          onChangeText={(text) => setEmail(text)}
+          autoCapitalize="none"
           style={styles.input}
         />
         <TextInput
           placeholder="Password (Not your Gmail Password)"
           value={password}
-          onChangeText={text => setPassword(text)}
+          onChangeText={(text) => setPassword(text)}
           style={styles.input}
           secureTextEntry
         />
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate("Forgot Password")} style={{justifyContent: 'center', alignItems: 'center'}} >
-          <Text style={{color: '#C1CAD6', left: 5, top: 10, textDecorationLine: 'underline', fontSize: 16}}>Forgot Password?</Text>
-        </TouchableOpacity>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={handleLogin}
-          style={styles.button}
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Forgot Password")}
+        style={{ justifyContent: "center", alignItems: "center" }}
+      >
+        <Text
+          style={{
+            color: "#C1CAD6",
+            left: 5,
+            top: 10,
+            textDecorationLine: "underline",
+            fontSize: 16,
+          }}
         >
+          Forgot Password?
+        </Text>
+      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={handleLogin} style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-        <View style={{flexDirection: 'row'}}>
-        <Text style={{top: 10}}>Don't have an account yet?</Text>
-        <TouchableOpacity onPress={() => navigation.replace("Sign Up")} style={{justifyContent: 'center', alignItems: 'center'}} >
-        <Text style={{color: '#DB5461', left: 5, top: 10, textDecorationLine: 'underline', marginBottom: 15, fontWeight: '600'}}>Sign Up</Text>
-        </TouchableOpacity>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={{ top: 10 }}>Don't have an account yet?</Text>
+          <TouchableOpacity
+            onPress={() => navigation.replace("Sign Up")}
+            style={{ justifyContent: "center", alignItems: "center" }}
+          >
+            <Text
+              style={{
+                color: "#DB5461",
+                left: 5,
+                top: 10,
+                textDecorationLine: "underline",
+                marginBottom: 15,
+                fontWeight: "600",
+              }}
+            >
+              Sign Up
+            </Text>
+          </TouchableOpacity>
         </View>
         {/* <TouchableOpacity
           onPress={handleSignUp}
@@ -88,54 +117,54 @@ const LoginScreen = () => {
         </TouchableOpacity> */}
       </View>
     </KeyboardAvoidingView>
-  )
-}
+  );
+};
 
-export default LoginScreen
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   inputContainer: {
-    width: '80%'
+    width: "80%",
   },
   input: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
     marginTop: 5,
   },
   buttonContainer: {
-    width: '60%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "60%",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 22,
   },
   button: {
-    backgroundColor: '#DB5461',
-    width: '100%',
+    backgroundColor: "#DB5461",
+    width: "100%",
     padding: 15,
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
   buttonOutline: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     marginTop: 5,
-    borderColor: '#DB5461',
+    borderColor: "#DB5461",
     borderWidth: 2,
   },
   buttonText: {
-    color: 'white',
-    fontWeight: '700',
+    color: "white",
+    fontWeight: "700",
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: '#DB5461',
-    fontWeight: '700',
+    color: "#DB5461",
+    fontWeight: "700",
     fontSize: 16,
   },
-})
+});

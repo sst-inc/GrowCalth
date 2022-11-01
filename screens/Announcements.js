@@ -17,10 +17,8 @@ import SearchBar from "../components/SearchBar";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Info1 from "./Info1";
 
-function events() {
+function Events() {
   const navigation = useNavigation();
-  const [searchPhrase, setSearchPhrase] = useState("");
-  const [clicked, setClicked] = useState(false);
   const [masterData, setMasterData] = useState([]);
   const [users, setUsers] = useState([]);
   const todoRef = firebase.firestore().collection("todos");
@@ -64,7 +62,17 @@ function events() {
   }, []);
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>
-      <View style={{ height: 20 }}></View>
+      <Text
+        style={{
+          fontSize: 30,
+          marginLeft: 10,
+          marginTop: 10,
+          fontWeight: "bold",
+          marginBottom: 10,
+        }}
+      >
+        House Events
+      </Text>
       <FlatList
         style={{ height: "100%" }}
         data={event}
@@ -86,9 +94,7 @@ function events() {
               </Text>
               <Text style={styles.itemText}>Venue: {item.venue}</Text>
               <View style={{ flexDirection: "row" }}>
-                <Text style={[styles.itemText, { paddingTop: 7 }]}>
-                  Date:
-                </Text>
+                <Text style={[styles.itemText, { paddingTop: 7 }]}>Date:</Text>
                 <Text
                   style={[
                     styles.itemText,
@@ -155,13 +161,18 @@ function Announcements() {
     eventz();
   }, []);
   return (
-    <ScrollView style={{ backgroundColor: "white", flex: 1 }}>
-      <SearchBar
-        searchPhrase={searchPhrase}
-        setSearchPhrase={setSearchPhrase}
-        clicked={clicked}
-        setClicked={setClicked}
-      />
+    <ScrollView style={{ backgroundColor: "white", flex: 1, marginTop: 0 }}>
+      <Text
+        style={{
+          fontSize: 30,
+          marginLeft: 10,
+          marginTop: 10,
+          fontWeight: "bold",
+          marginBottom: 10,
+        }}
+      >
+        House Announcements
+      </Text>
       <FlatList
         scrollEnabled={false}
         data={users}
@@ -251,21 +262,51 @@ function AnnouncementStack() {
         component={Info}
         options={{ headerShown: true }}
       />
+    </Stack.Navigator>
+  );
+}
+function EventsStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Events"
+        component={Events}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Info1"
         component={Info1}
-        options={{ headerShown: true }}
+        // options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
 }
 const Tab = createMaterialTopTabNavigator();
 export default function MyTabs() {
+  const [searchPhrase, setSearchPhrase] = useState("");
+  const [clicked, setClicked] = useState(false);
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+      <Text
+        style={{
+          fontSize: 39,
+          fontWeight: "bold",
+          padding: 10,
+          marginTop: 5,
+        }}
+      >
+        Announcements
+      </Text>
+      <Text style={styles.subTitle}>SNW PLS</Text>
+      <SearchBar
+        searchPhrase={searchPhrase}
+        setSearchPhrase={setSearchPhrase}
+        clicked={clicked}
+        setClicked={setClicked}
+      />
       <Tab.Navigator>
-        <Tab.Screen name="Announcement" component={AnnouncementStack} />
-        <Tab.Screen name="Events" component={events} />
+        <Tab.Screen name="ANNOUNCEMENTS" component={AnnouncementStack} />
+        <Tab.Screen name="EVENTS" component={EventsStack} />
       </Tab.Navigator>
     </SafeAreaView>
   );

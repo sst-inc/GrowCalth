@@ -2,12 +2,13 @@ import React, {useState, useEffect} from 'react'
 import firebase from 'firebase'
 import { StyleSheet, Text, View, FlatList, Pressable, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native'
 
-const Info = ({route}) => {
+const Info1 = ({route}) => {
     const [users, setUsers] = useState([]);
     const todoRef = firebase.firestore().collection('todos');
     const params = route.params
     const itemHeading = params.itemHeading
     const itemText = params.itemText
+    const itemDate = params.itemDate
 
     return (
         <SafeAreaView style={{backgroundColor: 'white', flex: 1}}>
@@ -15,13 +16,19 @@ const Info = ({route}) => {
             <Text style={styles.itemHeading}>{itemHeading}</Text>       
             </SafeAreaView>
         <ScrollView style={{flex: 1}}>
-        <Text style={styles.itemText}>{itemText}</Text>
+            <View style={{justifyContent: 'center', alignItems: 'center', alignSelf: 'center'}}>
+                <Text style={styles.itemText}>{itemText}</Text>
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={[styles.itemText, {paddingTop: 7}]}>Date:</Text>
+                    <Text style={[styles.itemText, {paddingTop: 7, textDecorationLine: 'underline', left: 4}]}>{itemDate}</Text>
+                </View>          
+            </View>
         </ScrollView>
         </SafeAreaView>
     )
 }
 
-export default Info
+export default Info1
 
 const styles = StyleSheet.create({
     container:{

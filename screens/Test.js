@@ -1,10 +1,10 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Pedometer } from 'expo-sensors';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { Pedometer } from "expo-sensors";
 
 export default class Test extends React.Component {
   state = {
-    isPedometerAvailable: 'checking',
+    isPedometerAvailable: "checking",
     pastStepCount: 0,
     currentStepCount: 0,
   };
@@ -18,21 +18,21 @@ export default class Test extends React.Component {
   }
 
   _subscribe = () => {
-    this._subscription = Pedometer.watchStepCount(result => {
+    this._subscription = Pedometer.watchStepCount((result) => {
       this.setState({
         currentStepCount: result.steps,
       });
     });
 
     Pedometer.isAvailableAsync().then(
-      result => {
+      (result) => {
         this.setState({
           isPedometerAvailable: String(result),
         });
       },
-      error => {
+      (error) => {
         this.setState({
-          isPedometerAvailable: 'Could not get isPedometerAvailable: ' + error,
+          isPedometerAvailable: "Could not get isPedometerAvailable: " + error,
         });
       }
     );
@@ -41,12 +41,12 @@ export default class Test extends React.Component {
     const start = new Date();
     start.setDate(end.getDate() - 1);
     Pedometer.getStepCountAsync(start, end).then(
-      result => {
+      (result) => {
         this.setState({ pastStepCount: result.steps });
       },
-      error => {
+      (error) => {
         this.setState({
-          pastStepCount: 'Could not get stepCount: ' + error,
+          pastStepCount: "Could not get stepCount: " + error,
         });
       }
     );
@@ -60,13 +60,15 @@ export default class Test extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Pedometer.isAvailableAsync(): {this.state.isPedometerAvailable}</Text>
-        <Text>Steps taken in the last 24 hours: {this.state.pastStepCount}</Text>
+        <Text>
+          Pedometer.isAvailableAsync(): {this.state.isPedometerAvailable}
+        </Text>
+        <Text>
+          Steps taken in the last 24 hours: {this.state.pastStepCount}
+        </Text>
         <Text>Walk! And watch this go up: {this.state.currentStepCount}</Text>
       </View>
     );
   }
 }
-const styles = StyleSheet.create({
-    
-}); 
+const styles = StyleSheet.create({});
