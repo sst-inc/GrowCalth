@@ -86,7 +86,6 @@ const Challenges = () => {
     };
   }, [stepCount]);
   const countInterval = useRef(null);
-
   useEffect(() => {
     countInterval.current = setInterval(
       () => updateStepCount((old) => old + 5),
@@ -99,6 +98,16 @@ const Challenges = () => {
 
   const navigation = useNavigation();
   const [selectedChallenge, setSelectedChallenge] = useState("");
+
+  const challengeList = [
+    { text: "Walk a minimum of 15,000 steps today", target: "15,000" },
+    { text: "Walk at least 10km today", target: "10km" },
+    { text: "Burn off 150 calories", target: "150 calories" },
+    {
+      text: "Get at least 10,000 steps or 5 km in total!",
+      target: "10,000 steps or 5km",
+    },
+  ];
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
@@ -442,16 +451,7 @@ const Challenges = () => {
               </Pressable>
             )}
           />
-
-          <View></View>
-          {/* <SwipeListView
-  data={this.state.persons}
-  renderItem={({item}) => this.renderPerson(item)}
-  renderHiddenItem={({item}) => this.renderHiddenItem(item)}
-  rightOpenValue={-75}
-/> */}
         </View>
-        <View></View>
       </ScrollView>
     </SafeAreaView>
   );

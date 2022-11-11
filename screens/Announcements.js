@@ -6,7 +6,6 @@ import {
   FlatList,
   Pressable,
   SafeAreaView,
-  ScrollView,
   TouchableOpacity,
 } from "react-native";
 import firebase from "firebase";
@@ -16,6 +15,7 @@ import Info from "./Info";
 import SearchBar from "../components/SearchBar";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Info1 from "./Info1";
+import { ScrollView } from "react-native-gesture-handler";
 
 function Events() {
   const navigation = useNavigation();
@@ -46,12 +46,13 @@ function Events() {
     eventRef.onSnapshot((querySnapshot) => {
       const event = [];
       querySnapshot.forEach((doc) => {
-        const { header, venue, date } = doc.data();
+        const { header, venue, date, desc } = doc.data();
         event.push({
           id: doc.id,
           header,
           venue,
           date,
+          desc,
         });
       });
       setevent(event);
@@ -61,7 +62,7 @@ function Events() {
     eventz();
   }, []);
   return (
-    <View style={{ backgroundColor: "white", flex: 1 }}>
+    <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
       <Text
         style={{
           fontSize: 30,
@@ -82,19 +83,37 @@ function Events() {
             <TouchableOpacity
               style={[styles.innerContainer]}
               onPress={() =>
-                navigation.navigate("Info1", {
+                navigation.navigate("Event", {
                   itemHeading: item.header,
                   itemText: item.venue,
                   itemDate: item.date,
+                  itemDesc: item.desc,
                 })
               }
             >
               <Text style={[styles.itemHeading, { paddingBottom: 8 }]}>
                 {item.header}
               </Text>
-              <Text style={styles.itemText}>Venue: {item.venue}</Text>
               <View style={{ flexDirection: "row" }}>
-                <Text style={[styles.itemText, { paddingTop: 7 }]}>Date:</Text>
+                <Text style={[styles.itemText, { fontWeight: "600" }]}>
+                  Venue:{" "}
+                </Text>
+                <Text
+                  style={[styles.itemText, { textDecorationLine: "underline" }]}
+                >
+                  {item.venue}
+                </Text>
+              </View>
+
+              <View style={{ flexDirection: "row" }}>
+                <Text
+                  style={[
+                    styles.itemText,
+                    { paddingTop: 7, fontWeight: "600" },
+                  ]}
+                >
+                  Date:
+                </Text>
                 <Text
                   style={[
                     styles.itemText,
@@ -112,7 +131,7 @@ function Events() {
           </Pressable>
         )}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 function Announcements() {
@@ -140,28 +159,9 @@ function Announcements() {
   useEffect(() => {
     announcements();
   }, []);
-  const eventRef = firebase.firestore().collection("houseevents");
-  const [event, setevent] = useState([]);
-  const eventz = () => {
-    eventRef.onSnapshot((querySnapshot) => {
-      const event = [];
-      querySnapshot.forEach((doc) => {
-        const { header, venue, date } = doc.data();
-        event.push({
-          id: doc.id,
-          header,
-          venue,
-          date,
-        });
-      });
-      setevent(event);
-    });
-  };
-  useEffect(() => {
-    eventz();
-  }, []);
+
   return (
-    <ScrollView style={{ backgroundColor: "white", flex: 1, marginTop: 0 }}>
+    <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
       <Text
         style={{
           fontSize: 30,
@@ -174,7 +174,7 @@ function Announcements() {
         House Announcements
       </Text>
       <FlatList
-        scrollEnabled={false}
+        style={{ height: "100%" }}
         data={users}
         numColumns={1}
         renderItem={({ item }) => (
@@ -182,7 +182,7 @@ function Announcements() {
             <TouchableOpacity
               style={[styles.innerContainer]}
               onPress={() =>
-                navigation.navigate("Info", {
+                navigation.navigate("Announcement", {
                   itemHeading: item.heading,
                   itemText: item.text,
                 })
@@ -196,26 +196,13 @@ function Announcements() {
           </Pressable>
         )}
       />
-      {/* <PageControl
-  style={{position:'absolute', left:0, right:0, bottom:10}}
-  numberOfPages={3}
-  currentPage={1}
-  hidesForSinglePage
-  pageIndicatorTintColor='gray'
-  currentPageIndicatorTintColor='white'
-  indicatorStyle={{borderRadius: 5}}
-  currentIndicatorStyle={{borderRadius: 5}}
-  indicatorSize={{width:8, height:8}}
-//   onPageIndicatorPress={this.onItemTap}
-/> */}
-    </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FEFBF6",
-    // backgroundColor: 'white',
     padding: 15,
     marginHorizontal: 10,
     borderRadius: 10,
@@ -227,7 +214,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   itemHeading: {
-    fontWeight: "bold",
+    fontWeight: "700",
     fontSize: 20,
   },
   itemText: {
@@ -258,7 +245,7 @@ function AnnouncementStack() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Info"
+        name="Announcement"
         component={Info}
         options={{ headerShown: true }}
       />
@@ -273,11 +260,7 @@ function EventsStack() {
         component={Events}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="Info1"
-        component={Info1}
-        // options={{ headerShown: false }}
-      />
+      <Stack.Screen name="Event" component={Info1} />
     </Stack.Navigator>
   );
 }
