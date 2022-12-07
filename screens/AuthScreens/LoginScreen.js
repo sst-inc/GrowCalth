@@ -55,14 +55,14 @@ const LoginScreen = () => {
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <View style={styles.inputContainer}>
         <TextInput
-          placeholder="Email (Use your school email)"
+          placeholder="Email Address"
           value={email}
           onChangeText={(text) => setEmail(text)}
           autoCapitalize="none"
           style={styles.input}
         />
         <TextInput
-          placeholder="Password (Not your Gmail Password)"
+          placeholder="Password"
           value={password}
           onChangeText={(text) => setPassword(text)}
           style={styles.input}

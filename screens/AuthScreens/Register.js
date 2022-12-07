@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/core";
+import { AntDesign } from "@expo/vector-icons";
 import {
   StyleSheet,
   Text,
@@ -7,11 +8,13 @@ import {
   TouchableOpacity,
   TextInput,
   KeyboardAvoidingView,
+  Dimensions,
 } from "react-native";
 import { auth } from "../../firebase";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const windowWidth = Dimensions.get("window").width;
 
   const navigation = useNavigation();
 
@@ -36,16 +39,26 @@ const Register = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <Text
+        style={{
+          fontSize: 50,
+          fontWeight: "bold",
+          bottom: 80,
+          marginHorizontal: 30,
+        }}
+      >
+        Join The House Today.
+      </Text>
       <View style={styles.inputContainer}>
         <TextInput
-          placeholder="Email (Use your school email)"
+          placeholder="Email Address"
           value={email}
           onChangeText={(text) => setEmail(text)}
           autoCapitalize="none"
           style={styles.input}
         />
         <TextInput
-          placeholder="Password (Not your Gmail Password)"
+          placeholder="Password"
           value={password}
           onChangeText={(text) => setPassword(text)}
           style={styles.input}
@@ -63,31 +76,107 @@ const Register = () => {
             <Text style={styles.buttonOutlineText}>Sign Up</Text>
           </TouchableOpacity>
         </View>
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "row",
-          }}
-        >
-          <Text style={{ top: 4 }}>Already have an account?</Text>
-          <TouchableOpacity
-            onPress={() => navigation.replace("Login")}
-            style={{ justifyContent: "center", alignItems: "center" }}
-          >
+        <View>
+          <View>
             <Text
               style={{
-                color: "#DB5461",
-                left: 5,
-                top: 10,
-                textDecorationLine: "underline",
-                marginBottom: 15,
-                fontWeight: "600",
+                textAlign: "center",
+                color: "#C1CAD6",
+                fontSize: 15,
+                top: 4,
               }}
             >
-              Log In
+              -or-
             </Text>
-          </TouchableOpacity>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              {/* Google View */}
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#C1CAD6",
+                  borderRadius: 8,
+                  alignSelf: "center",
+                  width: windowWidth - 290,
+                  top: 10,
+                  left: -9,
+                }}
+              >
+                <AntDesign
+                  name="google"
+                  style={{
+                    paddingVertical: 15,
+                    alignSelf: "center",
+                  }}
+                  size={25}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#C1CAD6",
+                  borderRadius: 8,
+                  alignSelf: "center",
+                  width: windowWidth - 290,
+                  top: 10,
+                }}
+              >
+                <AntDesign
+                  name="google"
+                  style={{
+                    paddingVertical: 15,
+                    alignSelf: "center",
+                  }}
+                  size={25}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#C1CAD6",
+                  borderRadius: 8,
+                  alignSelf: "center",
+                  width: windowWidth - 290,
+                  top: 10,
+                  left: 10,
+                }}
+              >
+                <AntDesign
+                  name="google"
+                  style={{
+                    paddingVertical: 15,
+                    alignSelf: "center",
+                  }}
+                  size={25}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "row",
+              top: 15,
+            }}
+          >
+            <Text style={{ top: 2 }}>Already have an account?</Text>
+            <TouchableOpacity
+              onPress={() => navigation.replace("Login")}
+              style={{ justifyContent: "center", alignItems: "center" }}
+            >
+              <Text
+                style={{
+                  color: "#DB5461",
+                  left: 5,
+                  top: 9,
+                  textDecorationLine: "underline",
+                  marginBottom: 15,
+                  fontWeight: "600",
+                }}
+              >
+                Log In
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -101,12 +190,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
   },
   inputContainer: {
     width: "80%",
+    top: -50,
   },
   input: {
-    backgroundColor: "white",
+    backgroundColor: "#F0F0F0",
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,

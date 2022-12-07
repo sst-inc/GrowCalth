@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   SafeAreaView,
   StatusBar,
@@ -20,26 +20,6 @@ import ChallengesItem from "../components/ChallengesItem";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
-const Item = ({ title }) => (
-  <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
-    </View>
-  </View>
-);
-const AddAlert = () => {
-  Alert.alert(`Are you sure you want to take on this challenge?`, "WOOOOO", [
-    {
-      text: "YES, BRING IT ON",
-      style: "cancel",
-    },
-    {
-      text: "No I want my mommy",
-      onPress: () => console.log("Cancel Pressed"),
-      style: "cancel",
-    },
-  ]);
-};
 const Challenges = () => {
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
@@ -108,6 +88,20 @@ const Challenges = () => {
       target: "10,000 steps or 5km",
     },
   ];
+  const [text, setText] = useState("");
+  const AddAlert = () => {
+    Alert.alert(`Are you sure you want to take on this challenge?`, "WOOOOO", [
+      {
+        text: "YES, BRING IT ON",
+        style: "cancel",
+      },
+      {
+        text: "No I want my mommy",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel",
+      },
+    ]);
+  };
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
@@ -156,13 +150,13 @@ const Challenges = () => {
                       padding: 5,
                       fontWeight: "bold",
                       fontSize: 30,
-                      marginBottom: -10,
+                      marginBottom: -30,
                     }}
                   >
-                    {selectedChallenge}
+                    10,000 steps Challenge
                   </Text>
                   <Progress.Bar
-                    progress={0.2}
+                    progress={0}
                     width={200}
                     style={{ marginTop: 100 }}
                   />
@@ -202,7 +196,7 @@ const Challenges = () => {
                   Walk a minimum of 15,000 steps today!
                 </Text>
                 <Progress.Bar
-                  progress={0.4}
+                  progress={0.01}
                   width={200}
                   style={{ marginTop: 100 }}
                 />
