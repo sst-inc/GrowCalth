@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/core";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import {
   StyleSheet,
   Text,
@@ -41,8 +41,19 @@ const Register = () => {
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Text
         style={{
+          bottom: 100,
+          left: -110,
+          fontStyle: "italic",
+          fontWeight: "500",
+          fontSize: 20,
+        }}
+      >
+        GrowCalth
+      </Text>
+      <Text
+        style={{
           fontSize: 50,
-          fontWeight: "bold",
+          fontWeight: "800",
           bottom: 80,
           marginHorizontal: 30,
         }}
@@ -81,8 +92,8 @@ const Register = () => {
             <Text
               style={{
                 textAlign: "center",
-                color: "#C1CAD6",
-                fontSize: 15,
+                color: "#B2B2B2",
+                fontSize: 17,
                 top: 4,
               }}
             >
@@ -94,7 +105,7 @@ const Register = () => {
               {/* Google View */}
               <TouchableOpacity
                 style={{
-                  backgroundColor: "#C1CAD6",
+                  backgroundColor: "#4267B2",
                   borderRadius: 8,
                   alignSelf: "center",
                   width: windowWidth - 290,
@@ -102,11 +113,12 @@ const Register = () => {
                   left: -9,
                 }}
               >
-                <AntDesign
-                  name="google"
+                <FontAwesome
+                  name="facebook"
                   style={{
                     paddingVertical: 15,
                     alignSelf: "center",
+                    color: "white",
                   }}
                   size={25}
                 />
@@ -131,7 +143,7 @@ const Register = () => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
-                  backgroundColor: "#C1CAD6",
+                  backgroundColor: "black",
                   borderRadius: 8,
                   alignSelf: "center",
                   width: windowWidth - 290,
@@ -139,13 +151,14 @@ const Register = () => {
                   left: 10,
                 }}
               >
-                <AntDesign
-                  name="google"
+                <FontAwesome
+                  name="apple"
                   style={{
-                    paddingVertical: 15,
+                    paddingVertical: 17,
+                    color: "white",
                     alignSelf: "center",
                   }}
-                  size={25}
+                  size={23}
                 />
               </TouchableOpacity>
             </View>
