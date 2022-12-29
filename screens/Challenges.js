@@ -88,11 +88,13 @@ const Challenges = () => {
       target: "10,000 steps or 5km",
     },
   ];
+  const challengeAccept = () => {};
   const [text, setText] = useState("");
   const AddAlert = () => {
     Alert.alert(`Are you sure you want to take on this challenge?`, "WOOOOO", [
       {
         text: "YES, BRING IT ON",
+        onPress: () => console.log(item.heading),
         style: "cancel",
       },
       {
@@ -209,7 +211,7 @@ const Challenges = () => {
           <Text style={{ fontSize: 30, fontWeight: "bold" }}>For you</Text>
         </View>
         <View>
-          <TouchableOpacity
+          {/*    <TouchableOpacity
             style={{
               backgroundColor: "#E9ECF1",
               flexDirection: "row",
@@ -228,7 +230,7 @@ const Challenges = () => {
                 marginHorizontal: 15,
               }}
             ></View>
-            <View
+             <View
               style={{
                 justifyContent: "center",
                 alignItems: "center",
@@ -336,7 +338,7 @@ const Challenges = () => {
                 >
                   ✨For even more house points✨
                 </Text>
-              </View>
+              </View> 
             </View>
             <View
               style={{
@@ -356,7 +358,7 @@ const Challenges = () => {
                 5
               </Text>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity>*/}
           <FlatList
             style={{ height: "100%" }}
             data={users}
