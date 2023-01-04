@@ -76,9 +76,6 @@ const Challenges = () => {
     };
   }, []);
 
-  const navigation = useNavigation();
-  const [selectedChallenge, setSelectedChallenge] = useState("");
-
   const challengeList = [
     { text: "Walk a minimum of 15,000 steps today", target: "15,000" },
     { text: "Walk at least 10km today", target: "10km" },
@@ -88,13 +85,13 @@ const Challenges = () => {
       target: "10,000 steps or 5km",
     },
   ];
-  const challengeAccept = () => {};
-  const [text, setText] = useState("");
+  const [challenge, setChallenge] = useState([]);
+  console.log(challenge.heading);
   const AddAlert = () => {
     Alert.alert(`Are you sure you want to take on this challenge?`, "WOOOOO", [
       {
         text: "YES, BRING IT ON",
-        onPress: () => console.log(item.heading),
+        onPress: () => setChallenge(challenge),
         style: "cancel",
       },
       {
@@ -146,17 +143,23 @@ const Challenges = () => {
                     alignItems: "center",
                   }}
                 >
-                  <Text
-                    style={{
-                      color: "white",
-                      padding: 5,
-                      fontWeight: "bold",
-                      fontSize: 30,
-                      marginBottom: -30,
-                    }}
-                  >
-                    10,000 steps Challenge
-                  </Text>
+                  <>
+                    {challenge.map((item) => (
+                      <View>
+                        <Text
+                          style={{
+                            color: "white",
+                            padding: 5,
+                            fontWeight: "bold",
+                            fontSize: 30,
+                            marginBottom: -30,
+                          }}
+                        >
+                          {item.heading}
+                        </Text>
+                      </View>
+                    ))}
+                  </>
                   <Progress.Bar
                     progress={0}
                     width={200}
@@ -211,154 +214,10 @@ const Challenges = () => {
           <Text style={{ fontSize: 30, fontWeight: "bold" }}>For you</Text>
         </View>
         <View>
-          {/*    <TouchableOpacity
-            style={{
-              backgroundColor: "#E9ECF1",
-              flexDirection: "row",
-              marginBottom: 15,
-              borderRadius: 17,
-              marginHorizontal: 20,
-            }}
-          >
-            <View
-              style={{
+          {/*
                 backgroundColor: "#FFFF82",
-                width: 35,
-                height: 35,
-                borderRadius: 10,
-                alignSelf: "center",
-                marginHorizontal: 15,
-              }}
-            ></View>
-             <View
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-                flex: 1,
-              }}
-            >
-              <View
-                style={[
-                  styles.innerContainer,
-                  {
-                    paddingHorizontal: 10,
-                    width: windowWidth - 130,
-                    height: 80,
-                    borderRadius: 15,
-                    marginLeft: 10,
-                    justifyContent: "center",
-                  },
-                ]}
-                onPress={() => navigation.navigate("Hi")}
-              >
-                <Text
-                  style={[styles.itemHeading, { padding: 5, color: "#252C45" }]}
-                >
-                  10,000 steps Challenge
-                </Text>
-                <Text
-                  style={[
-                    styles.itemText,
-                    { paddingHorizontal: 5, color: "#252C45" },
-                  ]}
-                >
-                  ✨For house points✨
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-                width: 70,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 28,
-                  marginRight: 10,
-                  marginLeft: 10,
-                  fontWeight: "800",
-                }}
-              >
-                2
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#E9ECF1",
-              flexDirection: "row",
-              marginBottom: 15,
-              borderRadius: 17,
-              marginHorizontal: 20,
-            }}
-          >
-            <View
-              style={{
                 backgroundColor: "#B5D99C",
-                width: 35,
-                height: 35,
-                borderRadius: 10,
-                alignSelf: "center",
-                marginHorizontal: 15,
-              }}
-            ></View>
-            <View
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-                flex: 1,
-              }}
-            >
-              <View
-                style={[
-                  styles.innerContainer,
-                  {
-                    paddingHorizontal: 10,
-                    width: windowWidth - 130,
-                    height: 80,
-                    borderRadius: 15,
-                    marginLeft: 10,
-                    justifyContent: "center",
-                  },
-                ]}
-                onPress={() => navigation.navigate("Hi")}
-              >
-                <Text
-                  style={[styles.itemHeading, { padding: 5, color: "#252C45" }]}
-                >
-                  20,000 steps Challenge
-                </Text>
-                <Text
-                  style={[
-                    styles.itemText,
-                    { paddingHorizontal: 5, color: "#252C45" },
-                  ]}
-                >
-                  ✨For even more house points✨
-                </Text>
-              </View> 
-            </View>
-            <View
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-                width: 70,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 28,
-                  marginRight: 10,
-                  marginLeft: 10,
-                  fontWeight: "800",
-                }}
-              >
-                5
-              </Text>
-            </View>
-          </TouchableOpacity>*/}
+           */}
           <FlatList
             style={{ height: "100%" }}
             data={users}
@@ -375,7 +234,7 @@ const Challenges = () => {
                     borderRadius: 17,
                     marginHorizontal: 20,
                   }}
-                  onPress={AddAlert}
+                  onPress={() => [setChallenge([...challenge, item])]}
                 >
                   <View
                     style={{

@@ -39,9 +39,20 @@ const Register = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
+      {/* <Text
+        style={{
+          bottom: 100,
+          left: -110,
+          fontStyle: "italic",
+          fontWeight: "500",
+          fontSize: 20,
+        }}
+      >
+        GrowCalth
+      </Text> */}
       <Text
         style={{
-          fontSize: 45,
+          fontSize: 50,
           fontWeight: "800",
           bottom: 80,
           marginHorizontal: 30,

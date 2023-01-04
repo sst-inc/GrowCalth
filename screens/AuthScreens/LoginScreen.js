@@ -53,6 +53,15 @@ const LoginScreen = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <Text
+        style={{
+          fontSize: 55,
+          fontWeight: "800",
+          bottom: 80,
+        }}
+      >
+        The House You Need.
+      </Text>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email Address"
@@ -71,11 +80,11 @@ const LoginScreen = () => {
       </View>
       <TouchableOpacity
         onPress={() => navigation.navigate("Forgot Password")}
-        style={{ justifyContent: "center", alignItems: "center" }}
+        style={{ justifyContent: "center", alignItems: "center", top: -50 }}
       >
         <Text
           style={{
-            color: "#C1CAD6",
+            color: "#B2B2B2",
             left: 5,
             top: 10,
             textDecorationLine: "underline",
@@ -90,7 +99,16 @@ const LoginScreen = () => {
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <View style={{ flexDirection: "row" }}>
-          <Text style={{ top: 10 }}>Don't have an account yet?</Text>
+          <Text
+            style={{
+              top: 10,
+              fontSize: 15,
+              fontStyle: "italic",
+              fontWeight: "500",
+            }}
+          >
+            Don't have an account yet?
+          </Text>
           <TouchableOpacity
             onPress={() => navigation.replace("Sign Up")}
             style={{ justifyContent: "center", alignItems: "center" }}
@@ -109,12 +127,9 @@ const LoginScreen = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        {/* <TouchableOpacity
-          onPress={handleSignUp}
-          style={[styles.button, styles.buttonOutline]}
-        >
-          <Text style={styles.buttonOutlineText}>Sign Up</Text>
-        </TouchableOpacity> */}
+        <Text style={{ fontSize: 15, fontWeight: "500" }}>
+          Your house is waiting for ya!
+        </Text>
       </View>
     </KeyboardAvoidingView>
   );
@@ -127,12 +142,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
   },
   inputContainer: {
     width: "80%",
+    top: -50,
   },
   input: {
-    backgroundColor: "white",
+    backgroundColor: "#F0F0F0",
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
@@ -143,6 +160,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
+    top: -50,
   },
   button: {
     backgroundColor: "#DB5461",

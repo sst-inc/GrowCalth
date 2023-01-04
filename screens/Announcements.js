@@ -281,13 +281,13 @@ export default function MyTabs() {
         Announcements
       </Text>
       <Text style={styles.subTitle}>SNW PLS</Text>
-      <SearchBar
+      {/* <SearchBar
         searchPhrase={searchPhrase}
         setSearchPhrase={setSearchPhrase}
         clicked={clicked}
         setClicked={setClicked}
-      />
-      <Tab.Navigator>
+      /> */}
+      <Tab.Navigator style={{ top: 30 }}>
         <Tab.Screen name="ANNOUNCEMENTS" component={AnnouncementStack} />
         <Tab.Screen name="EVENTS" component={EventsStack} />
       </Tab.Navigator>

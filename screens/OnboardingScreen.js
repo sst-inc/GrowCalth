@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
+import { StyleSheet, Text, View, Image, Dimensions, Alert } from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
 import LoginScreen from "./AuthScreens/LoginScreen";
 import { Picker } from "@react-native-picker/picker";
@@ -9,6 +9,22 @@ const OnboardingScreen = () => {
   const navigation = useNavigation();
   const windowWidth = Dimensions.get("window").width;
   const [selectedLanguage, setSelectedLanguage] = useState("None selected");
+  // const auth = () => {
+  //   if (selectedLanguage) === "None Selected" {
+  //     Alert.alert(
+  //       "Alert Title",
+  //       "My Alert Msg",
+  //       [
+  //         {
+  //           text: "Cancel",
+  //           onPress: () => console.log("Cancel Pressed"),
+  //           style: "cancel"
+  //         },
+  //         { text: "OK", onPress: () => console.log("OK Pressed") }
+  //       ]
+  //     );
+  //   }
+  // }
 
   const windowHeight = Dimensions.get("window").height;
   return (
@@ -84,6 +100,7 @@ const OnboardingScreen = () => {
                 setSelectedLanguage(itemValue)
               }
             >
+              <Picker.Item label="None Selected" value="None Selected" />
               <Picker.Item label="Blue" value="Blue" />
               <Picker.Item label="Black" value="Black" />
               <Picker.Item label="Yellow" value="Yellow" />
