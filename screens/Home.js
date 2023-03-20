@@ -20,61 +20,8 @@ import Progresses from "./Progress";
 import Quotes from "./Quotes";
 import Goals from "./Goals";
 import LeaderBoard from "./LeaderBoard";
-// import * as firebase from 'firebase'
-// import CircularProgress from 'react-native-circular-progress-indicator';
-import * as Progress from "react-native-progress";
-import firebase from "firebase";
-import { db } from "../firebase";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// const collectionRef = collection(db, 'steps');
-
-// const handleStepsInput = () => {
-//   let newInput = { [event.target.name]: event.target.value};
-
-//   setData({ ...data, ...newInput });
-// }
-
-// const handleStepsSubmit = () => {
-//   addDoc(collectionRef, {
-//     steps: data.steps
-//   })
-//   .then(() => {
-//     alert('Data Added')
-//   })
-//   .catch((err) => {
-//     alert(err.message);
-//   })
-// }
-
-// const getSteps = () => {
-//   getDocs(collectionRef).then((response)=> {
-//     console.log(
-//       response.docs.map((item)=> {
-//         return {...item.data(), id: item.id};
-//       })
-//     );
-//   });
-// };
-
-// const updateStepsVFB = () => {
-//  const docToUpdate = doc(database, "steps", item.id);
-//  updateDoc(docToUpdate, {
-//    steps: "stepCount"
-//  })
-//  .then(() => {
-//   alert('Data Added')
-//  })
-//  .catch((err) =>  {
-//   alert(err.message)
-//  })
-// }
 function Homes() {
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
@@ -93,13 +40,6 @@ function Homes() {
   let [stepCount, updateStepCount] = useState([0]);
   const calories = stepCount / 25;
   const caloriesB = calories.toFixed(1);
-
-  // useEffect(() =>
-  // firebase.listenToChanges(stepCount => updateStepCount(stepCount)),
-  //  [])
-  // useEffect(() =>
-  // firebase.publishChange(stepCount),
-  //  [stepCount])
 
   const subscribe = () => {
     const subscription = Pedometer.watchStepCount((result) =>
@@ -143,15 +83,52 @@ function Homes() {
       subscription.remove();
     };
   }, []);
-  var counter = 1;
-  function streaks() {
-    if (nextAppState === "active") {
-      counter += 1;
-    }
-  }
+
   var dist = stepCount / 1300;
   var distance = dist.toFixed(2);
 
+  const [streak, setStreak] = useState(1);
+  useEffect(() => {
+    // Load the last opened date from AsyncStorage
+    AsyncStorage.getItem("lastOpenedDate").then((dateString) => {
+      const lastOpenedDate = dateString ? new Date(dateString) : null;
+
+      if (lastOpenedDate && isYesterday(lastOpenedDate)) {
+        // If the app was opened yesterday, increment the streak
+        setStreak((prevStreak) => prevStreak + 1);
+      } else if (!lastOpenedDate || isOlderThanYesterday(lastOpenedDate)) {
+        // If the app was not opened yesterday or there is no stored date, reset the streak
+        setStreak(1);
+      }
+
+      // Save the current date to AsyncStorage
+      AsyncStorage.setItem("lastOpenedDate", new Date().toISOString());
+    });
+  }, []);
+
+  function isYesterday(date) {
+    const today = new Date();
+    const yesterday = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() - 1
+    );
+    return (
+      date.getFullYear() === yesterday.getFullYear() &&
+      date.getMonth() === yesterday.getMonth() &&
+      date.getDate() === yesterday.getDate()
+    );
+  }
+
+  function isOlderThanYesterday(date) {
+    const today = new Date();
+    const yesterday = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() - 1
+    );
+    return date < yesterday;
+  }
   return (
     <SafeAreaView style={{ backgroundColor: "#FFFFF" }}>
       <ScrollView>
@@ -301,7 +278,7 @@ function Homes() {
                     top: 32,
                   }}
                 >
-                  {counter}
+                  {streak}
                 </Text>
                 <Text
                   style={{ textAlign: "center", fontSize: 25, marginTop: 23 }}
