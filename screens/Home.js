@@ -62,28 +62,6 @@ function Homes() {
   const [Author, setAuthor] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
-  const appState = useRef(AppState.currentState);
-  const [appStateVisible, setAppStateVisible] = useState(appState.current);
-
-  useEffect(() => {
-    const subscription = AppState.addEventListener("change", (nextAppState) => {
-      if (
-        appState.current.match(/inactive|background/) &&
-        nextAppState === "active"
-      ) {
-        console.log("App has come to the foreground!");
-      }
-
-      appState.current = nextAppState;
-      setAppStateVisible(appState.current);
-      console.log("AppState", appState.current);
-    });
-
-    return () => {
-      subscription.remove();
-    };
-  }, []);
-
   var dist = stepCount / 1300;
   var distance = dist.toFixed(2);
 
@@ -129,6 +107,30 @@ function Homes() {
     );
     return date < yesterday;
   }
+  const resetVariable = () => {
+    updateStepCount(0);
+  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const midnight = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() + 1, // set the date to tomorrow
+        0, // set hours to midnight
+        0, // set minutes to 0
+        0 // set seconds to 0
+      );
+      const timeUntilMidnight = midnight - now;
+  
+      setTimeout(() => {
+        resetVariable();
+      }, timeUntilMidnight);
+    }, 86400000); // repeat every 24 hours
+  
+    return () => clearInterval(interval);
+  }, []);
+    
   return (
     <SafeAreaView style={{ backgroundColor: "#FFFFF" }}>
       <ScrollView>
