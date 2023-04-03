@@ -76,15 +76,31 @@ const Challenges = () => {
     };
   }, []);
 
-  const challengeList = [
-    { text: "Walk a minimum of 15,000 steps today", target: "15,000" },
-    { text: "Walk at least 10km today", target: "10km" },
-    { text: "Burn off 150 calories", target: "150 calories" },
+  const stringsArray = [
+    { text: "Walk a minimum of 15,000 steps today", target: 15000 },
+    { text: "Walk at least 5km today", target: 10000 },
+    { text: "Burn off 150 calories", target: 150000 },
     {
       text: "Get at least 10,000 steps or 5 km in total!",
-      target: "10,000 steps or 5km",
+      target: 10000,
     },
   ];
+
+// Get the current day of the year (1 to 365)
+// const today = new Date();
+// const startOfYear = new Date(today.getFullYear(), 0, 0);
+// const diff = today - startOfYear;
+// const dayOfYear = Math.floor(diff / 86400000); // milliseconds in a day
+
+// // Use the day of the year as the seed for the random number generator
+// Math.seedrandom(dayOfYear);
+
+// // Shuffle the array using the Fisher-Yates algorithm
+// for (let i = stringsArray.length - 1; i > 0; i--) {
+//   const j = Math.floor(Math.random() * (i + 1));
+//   [stringsArray[i], stringsArray[j]] = [stringsArray[j], stringsArray[i]];
+// }
+
   const [challenge, setChallenge] = useState([]);
   console.log(challenge.heading);
   const AddAlert = () => {
@@ -120,9 +136,8 @@ const Challenges = () => {
         </View>
         <View style={{ padding: 10, marginTop: 5 }}>
           <Text style={{ fontSize: 30, fontWeight: "bold" }}>In Progress</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View style={{ flexDirection: "row", marginTop: 20 }}>
-              <View
+          {/* <ScrollView horizontal showsHorizontalScrollIndicator={false}> */}
+              {/* <View
                 style={{
                   backgroundColor: "black",
                   height: 200,
@@ -166,9 +181,11 @@ const Challenges = () => {
                     style={{ marginTop: 100 }}
                   />
                 </View>
-              </View>
+              </View> */}
+              <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
               <View
                 style={{
+                  top: 10,
                   backgroundColor: "black",
                   height: 200,
                   borderRadius: 15,
@@ -207,9 +224,8 @@ const Challenges = () => {
                 />
               </View>
             </View>
-          </ScrollView>
+          {/* </ScrollView> */}
         </View>
-        <View></View>
         <View style={{ padding: 10, marginTop: 5 }}>
           <Text style={{ fontSize: 30, fontWeight: "bold" }}>For you</Text>
         </View>
