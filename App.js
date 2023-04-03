@@ -22,6 +22,7 @@ import OnboardingScreen from "./screens/OnboardingScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ChallengesStack from "./screens/Challenges";
 import MyTabs from "./screens/Announcements";
+import Admin from './screens/AuthScreens/Admin'
 
 // export default function App() {
 //   const handleInput = (event) => {
@@ -51,6 +52,9 @@ function AnnouncementsScreen() {
 }
 function OnboaringS() {
   return <OnboardingScreen />;
+}
+function AdminS() {
+  return <Admin />;
 }
 const Tab = createBottomTabNavigator();
 function Tabs() {
@@ -112,6 +116,7 @@ function Tabs() {
   );
 }
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -137,6 +142,11 @@ export default function App() {
           options={{ headerShown: false }}
           name="Tab"
           component={Tabs}
+        />
+         <Stack.Screen
+          options={{ headerShown: false }}
+          name="Admin"
+          component={Admin}
         />
         <Stack.Screen name="Forgot Password" component={Forgot} />
         {/* <Stack.Screen name="Test" component={Test}/> */}
