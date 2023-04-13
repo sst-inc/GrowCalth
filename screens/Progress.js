@@ -21,7 +21,9 @@ import {
   ContributionGraph,
   StackedBarChart,
 } from "react-native-chart-kit";
+import {stepCount, updateStepCount} from './Home'
 import Task from "../components/Task";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Progress = () => {
   const handleAddTask = () => {
@@ -65,33 +67,51 @@ const Progress = () => {
   var caloriesB = distance * 60;
   var caloriesBurnt = caloriesB.toFixed(2);
 
-  const appState = useRef(AppState.currentState);
-  const [appStateVisible, setAppStateVisible] = useState(appState.current);
-
+  const [streak, setStreak] = useState(1);
   useEffect(() => {
-    const subscription = AppState.addEventListener("change", (nextAppState) => {
-      if (
-        appState.current.match(/inactive|background/) &&
-        nextAppState === "active"
-      ) {
-        console.log("App has come to the foreground!");
+    // Load the last opened date from AsyncStorage
+    AsyncStorage.getItem("lastOpenedDate").then((dateString) => {
+      const lastOpenedDate = dateString ? new Date(dateString) : null;
+
+      if (lastOpenedDate && isYesterday(lastOpenedDate)) {
+        // If the app was opened yesterday, increment the streak
+        setStreak((prevStreak) => prevStreak + 1);
+      } else if (!lastOpenedDate || isOlderThanYesterday(lastOpenedDate)) {
+        // If the app was not opened yesterday or there is no stored date, reset the streak
+        setStreak(1);
       }
 
-      appState.current = nextAppState;
-      setAppStateVisible(appState.current);
-      console.log("AppState", appState.current);
+      // Save the current date to AsyncStorage
+      AsyncStorage.setItem("lastOpenedDate", new Date().toISOString());
     });
-
-    return () => {
-      subscription.remove();
-    };
   }, []);
-  var counter = 1;
-  function streaks() {
-    if (nextAppState === "active") {
-      counter += 1;
-    }
+
+  function isYesterday(date) {
+    const today = new Date();
+    const yesterday = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() - 1
+    );
+    return (
+      date.getFullYear() === yesterday.getFullYear() &&
+      date.getMonth() === yesterday.getMonth() &&
+      date.getDate() === yesterday.getDate()
+    );
   }
+
+  function isOlderThanYesterday(date) {
+    const today = new Date();
+    const yesterday = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() - 1
+    );
+    return date < yesterday;
+  }
+
+  
+  
   useEffect(() => {
     return () => {
       subscribe();
@@ -102,6 +122,9 @@ const Progress = () => {
 
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
+
+  
+
 
   return (
     <ScrollView>
@@ -234,7 +257,7 @@ const Progress = () => {
             }}
           >
             <Text style={{ fontWeight: "bold", fontSize: 50, color: "white" }}>
-              {counter}
+              {streak}
             </Text>
             <Text style={{ fontSize: 30, color: "white" }}>days</Text>
           </View>
@@ -268,41 +291,6 @@ const Progress = () => {
         </View>
       </View>
 
-      {/* Tasks */}
-      <View style={styles.container}>
-        <View style={styles.taskWrapper}>
-          <Text style={styles.sectionTitle}>Today's Tasks</Text>
-          <View style={styles.items}>
-            {/* This is where the tasks will go */}
-            {taskItems.map((items, index) => {
-              return (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => completeTask(index)}
-                >
-                  <Task text={items} />
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-        </View>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.writeTaskWrapper}
-        >
-          <TextInput
-            style={styles.input}
-            placeholder={"Write a task"}
-            value={task}
-            onChangeText={(text) => setTask(text)}
-          />
-          <TouchableOpacity onPress={() => handleAddTask()}>
-            <View style={styles.addWrapper}>
-              <Text style={styles.addText}>+</Text>
-            </View>
-          </TouchableOpacity>
-        </KeyboardAvoidingView>
-      </View>
     </ScrollView>
   );
 };

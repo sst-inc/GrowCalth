@@ -24,7 +24,7 @@ const LoginScreen = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        if (user.email === "calebhan08js@gmail.com") {
+        if (user.email === "calebhan08js@gmail.com" | "admin@growcalthadmin.com") {
           navigation.replace("Admin");
         } else {
           navigation.replace("Tab");

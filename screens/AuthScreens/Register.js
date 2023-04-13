@@ -87,7 +87,7 @@ const Register = () => {
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <TouchableOpacity
             onPress={() => {
-              handledomain();
+              // handledomain();
               handleSignUp();
             }}
             style={[

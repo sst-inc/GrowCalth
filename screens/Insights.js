@@ -11,11 +11,11 @@ import {
   StackedBarChart,
 } from 'react-native-chart-kit';
 import { SafeAreaViewBase } from 'react-native';
+import stepCount from'./Home'
 
 const Insights = () => {
     const [PedometerAvailability, setPedometerAvailability] = useState("")
-    const [stepCount, updateStepCount] = useState(0)
-    const [isOver, setIsOver] = useState(false)
+    // const [stepCount, updateStepCount] = useState(0)
 
   useEffect(() => {
     subscribe();
@@ -35,11 +35,7 @@ const Insights = () => {
     )
   }
   
-  const motivation = () => {
-    if ({stepCount} > 1000 ) {
-      setIsOver(true)
-    }
-  }
+  
     return (
       <SafeAreaView>
         <ScrollView style={{backgroundColor: 'white'}}>

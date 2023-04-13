@@ -7,6 +7,7 @@ import {
   Pressable,
   SafeAreaView,
   TouchableOpacity,
+  RefreshControl
 } from "react-native";
 import firebase from "firebase";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
@@ -21,25 +22,6 @@ function Events() {
   const navigation = useNavigation();
   const [masterData, setMasterData] = useState([]);
   const [users, setUsers] = useState([]);
-  const todoRef = firebase.firestore().collection("todos");
-
-  const announcements = () => {
-    todoRef.onSnapshot((querySnapshot) => {
-      const users = [];
-      querySnapshot.forEach((doc) => {
-        const { heading, text } = doc.data();
-        users.push({
-          id: doc.id,
-          heading,
-          text,
-        });
-      });
-      setUsers(users);
-    });
-  };
-  useEffect(() => {
-    announcements();
-  }, []);
   const eventRef = firebase.firestore().collection("houseevents");
   const [event, setevent] = useState([]);
   const eventz = () => {
@@ -61,6 +43,15 @@ function Events() {
   useEffect(() => {
     eventz();
   }, []);
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 500);
+  }, []);
+
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
       <Text
@@ -78,6 +69,9 @@ function Events() {
         style={{ height: "100%" }}
         data={event}
         numColumns={1}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         renderItem={({ item }) => (
           <Pressable style={styles.container}>
             <TouchableOpacity
@@ -136,20 +130,17 @@ function Events() {
 }
 function Announcements() {
   const navigation = useNavigation();
-  const [searchPhrase, setSearchPhrase] = useState("");
-  const [clicked, setClicked] = useState(false);
-  const [masterData, setMasterData] = useState([]);
   const [users, setUsers] = useState([]);
-  const todoRef = firebase.firestore().collection("todos");
+  const announcementsref = firebase.firestore().collection("Announcements");
 
   const announcements = () => {
-    todoRef.onSnapshot((querySnapshot) => {
+    announcementsref.onSnapshot((querySnapshot) => {
       const users = [];
       querySnapshot.forEach((doc) => {
-        const { heading, text } = doc.data();
+        const { header, text } = doc.data();
         users.push({
           id: doc.id,
-          heading,
+          header,
           text,
         });
       });
@@ -159,7 +150,14 @@ function Announcements() {
   useEffect(() => {
     announcements();
   }, []);
+  const [refreshing, setRefreshing] = React.useState(false);
 
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 500);
+  }, []);
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
       <Text
@@ -174,22 +172,25 @@ function Announcements() {
         House Announcements
       </Text>
       <FlatList
-        style={{ height: "100%" }}
+        style={{  }}
         data={users}
         numColumns={1}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         renderItem={({ item }) => (
           <Pressable style={styles.container}>
             <TouchableOpacity
-              style={[styles.innerContainer]}
+              style={[styles.innerContainer, {maxHeight: 100}]}
               onPress={() =>
                 navigation.navigate("Announcement", {
-                  itemHeading: item.heading,
+                  itemHeading: item.header,
                   itemText: item.text,
                 })
               }
             >
               <Text style={[styles.itemHeading, { paddingBottom: 7 }]}>
-                {item.heading}
+                {item.header}
               </Text>
               <Text style={styles.itemText}>{item.text}</Text>
             </TouchableOpacity>
