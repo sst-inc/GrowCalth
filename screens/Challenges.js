@@ -45,8 +45,7 @@ const Challenges = () => {
       setUsers(users);
     });
   }, []);
-  const [PedometerAvailability, setPedometerAvailability] = useState("");
-  const [stepCount, updateStepCount] = useState(0);
+  let [stepCount, updateStepCount] = useState([0]);
   const subscribe = () => {
     const subscription = Pedometer.watchStepCount((result) =>
       updateStepCount(result.steps)
@@ -61,30 +60,30 @@ const Challenges = () => {
     );
   };
   useEffect(() => {
-    return () => {
-      subscribe();
-    };
-  }, [stepCount]);
-  const countInterval = useRef(null);
-  useEffect(() => {
-    countInterval.current = setInterval(
-      () => updateStepCount((old) => old + 5),
-      1000
-    );
-    return () => {
-      clearInterval(countInterval); //when user exits, clear this interval.
-    };
+    subscribe();
   }, []);
 
-  const stringsArray = [
+  const [items, setItems] = useState([
     { text: "Walk a minimum of 15,000 steps today", target: 15000 },
     { text: "Walk at least 5km today", target: 10000 },
     { text: "Burn off 150 calories", target: 150000 },
-    {
-      text: "Get at least 10,000 steps or 5 km in total!",
-      target: 10000,
-    },
-  ];
+    { text: "Get at least 10,000 steps", target: 10000 },
+  ]);
+  const [lastRefreshTime, setLastRefreshTime] = useState(null);
+  const [currentItem, setCurrentItem] = useState(null);
+
+  useEffect(() => {
+    // Check if more than 24 hours have passed since last refresh
+    const now = Date.now();
+    if (!lastRefreshTime || now - lastRefreshTime > 24 * 60 * 60 * 1000) {
+      // Set the last refresh time
+      setLastRefreshTime(now);
+
+      // Set the current item
+      const randomIndex = Math.floor(Math.random() * items.length);
+      setCurrentItem(items[randomIndex]);
+    }
+  }, [lastRefreshTime]);
 
 // Get the current day of the year (1 to 365)
 // const today = new Date();
@@ -102,7 +101,6 @@ const Challenges = () => {
 // }
 
   const [challenge, setChallenge] = useState([]);
-  console.log(challenge.heading);
   const AddAlert = () => {
     Alert.alert(`Are you sure you want to take on this challenge?`, "WOOOOO", [
       {
@@ -215,10 +213,11 @@ const Challenges = () => {
                     marginTop: 10,
                   }}
                 >
-                  Walk a minimum of 15,000 steps today!
+                  {currentItem && <Text>{currentItem.text}</Text>}
+                  
                 </Text>
                 <Progress.Bar
-                  progress={0.01}
+                  progress={stepCount/currentItem?.target}
                   width={200}
                   style={{ marginTop: 100 }}
                 />
