@@ -12,49 +12,28 @@ import {
 } from "react-native";
 import { auth } from "../../firebase";
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const windowWidth = Dimensions.get("window").width;
+  const allowedEmailDomains = ["s2020.ssts.edu.sg", "s2021.ssts.edu.sg", "s2022.ssts.edu.sg", "s2023.ssts.edu.sg"];
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const windowWidth = Dimensions.get("window").width;
+const navigation = useNavigation();
+const [error, setError] = useState("");
 
-  const navigation = useNavigation();
+const handleSignUp = () => {
+  const emailDomain = email.split("@")[1];
+  if (!allowedEmailDomains.includes(emailDomain)) {
+    alert("This domain is not allowed. Please enter your SST school email account")
+    return;
+  }
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigation.replace("Onboarding");
-      }
-    });
-
-    return unsubscribe;
-  }, []);
-  const [error, setError] = useState("");
-  const handleSignUp = () => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log("Registered with:", user.email);
-      })
-      .catch((error) => alert(error.message));
-  };
-
-  // const handledomain = () => {
-  //   const [email, setEmail] = useState("");
-  //   const [error, setError] = useState("");
-
-  //   const handlingdomain = (text) => {
-  //     const [error, setError] = useState("");
-  //     setEmail(text);
-  //     const pattern =
-  //       /^[^\s@]+@(s2021|s2022|s2023|s2024|s2025|s2026|s2027|s2028|s2029|s2030|s2031|s2032|s2033|s2034|s2035)\.ssts\.edu\.sg|sst\.edu\.sg$/;
-  //     if (!pattern.test(text)) {
-  //       setError("Invalid email address");
-  //     } else {
-  //       setError("");
-  //     }
-  //   };
-  // };
-  
+  auth
+    .createUserWithEmailAndPassword(email, password)
+    .then((userCredentials) => {
+      const user = userCredentials.user;
+      console.log("Registered with:", user.email);
+    })
+    // .catch((error) => alert(error.message));
+};
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
