@@ -131,7 +131,7 @@ const PointsScreen = () => {
       };
       const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <View style={[styles.containerpoints]}>
       <Text style={styles.title}>Points</Text>
       <Button title="Logout" onPress={handleLogout} />
     </View>
@@ -145,6 +145,14 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         backgroundColor: "#fff",
         padding: 20,
+      },
+      containerpoints: {
+        flex: 1,
+        alignItems: "flex-start",
+        justifyContent: "flex-start",
+        backgroundColor: "#fff",
+        padding: 20,
+        paddingTop: 100
       },
       title: {
         fontSize: 35,
