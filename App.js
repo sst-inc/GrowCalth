@@ -88,7 +88,7 @@ function Tabs() {
       />
       <Tab.Screen
         name="Challenges"
-        component={ChallengesStack}
+        component={Challenges}
         options={{
           headerShown: false,
           tabBarIcon: () => (
