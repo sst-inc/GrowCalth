@@ -39,7 +39,7 @@ const AboutUs = () => {
               }}
             >
               We are a group of students from School of Science and Technology
-              Singapore and we built this app together with a team of 5. We did
+              Singapore and we built this app together with a team of 4. We did
               this with the aim of wanting to benefit the community through
               fitness. We hope that you have enojoyed our app while you used it
               and if you have any enquiries or feeback, please email us at
