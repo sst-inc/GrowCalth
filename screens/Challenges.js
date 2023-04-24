@@ -16,10 +16,10 @@ import * as Progress from "react-native-progress";
 import * as firebase from "firebase";
 import { useNavigation } from "@react-navigation/native";
 import { Pedometer } from "expo-sensors";
-import ChallengesItem from "../components/ChallengesItem";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
+
 const Challenges = () => {
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
@@ -324,25 +324,10 @@ const Challenges = () => {
         </View>
       </ScrollView>
     </SafeAreaView>
-  );
-};
-const Stack = createNativeStackNavigator();
-export default function ChallengesStack() {
-  return (
-    <Stack.Navigator initialRouteName="Challenges">
-      <Stack.Screen
-        name="Challenges"
-        component={Challenges}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="SecondPage"
-        component={ChallengesItem}
-        options={{ headerShown: true }}
-      />
-    </Stack.Navigator>
-  );
+  )
 }
+
+export default Challenges
 const styles = StyleSheet.create({
   container: {
     flex: 1,
