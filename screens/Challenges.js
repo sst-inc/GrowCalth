@@ -14,19 +14,19 @@ import {
 } from "react-native";
 import * as Progress from "react-native-progress";
 import * as firebase from "firebase";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 import { Pedometer } from "expo-sensors";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+// import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+// const windowHeight = Dimensions.get("window").height;
 
 const Challenges = () => {
   const windowWidth = Dimensions.get("window").width;
-  const windowHeight = Dimensions.get("window").height;
+  // const windowHeight = Dimensions.get("window").height;
 
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
-  const [masterData, setMasterData] = useState([]);
+  // const [masterData, setMasterData] = useState([]);
   const [users, setUsers] = useState([]);
   const challengesRef = firebase.firestore().collection("challenges");
 
@@ -52,17 +52,16 @@ const Challenges = () => {
     );
     Pedometer.isAvailableAsync().then(
       (result) => {
-        setPedometerAvailability(String(result));
+        // setPedometerAvailability(String(result));
       },
       (error) => {
-        setPedometerAvailability(error);
+        // setPedometerAvailability(error);
       }
     );
   };
   useEffect(() => {
     subscribe();
   }, []);
-
   const [items, setItems] = useState([
     { text: "Walk a minimum of 15,000 steps today", target: 15000 },
     { text: "Walk at least 5km today", target: 10000 },
@@ -84,8 +83,7 @@ const Challenges = () => {
       setCurrentItem(items[randomIndex]);
     }
   }, [lastRefreshTime]);
-
-// Get the current day of the year (1 to 365)
+  // Get the current day of the year (1 to 365)
 // const today = new Date();
 // const startOfYear = new Date(today.getFullYear(), 0, 0);
 // const diff = today - startOfYear;
@@ -100,90 +98,55 @@ const Challenges = () => {
 //   [stringsArray[i], stringsArray[j]] = [stringsArray[j], stringsArray[i]];
 // }
 
-  const [challenge, setChallenge] = useState([]);
-  const AddAlert = () => {
-    Alert.alert(`Are you sure you want to take on this challenge?`, "WOOOOO", [
-      {
-        text: "YES, BRING IT ON",
-        onPress: () => setChallenge(challenge),
-        style: "cancel",
-      },
-      {
-        text: "No I want my mommy",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel",
-      },
-    ]);
-  };
+const [challenge, setChallenge] = useState([]);
+const AddAlert = () => {
+  Alert.alert(`Are you sure you want to take on this challenge?`, "WOOOOO", [
+    {
+      text: "YES, BRING IT ON",
+      onPress: () => setChallenge(challenge),
+      style: "cancel",
+    },
+    {
+      text: "No I want my mommy",
+      onPress: () => console.log("Cancel Pressed"),
+      style: "cancel",
+    },
+  ]);
+};
+ var progress = stepCount/currentItem?.target
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
-      <ScrollView style={{ flex: 1 }}>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            padding: 10,
-            marginTop: 5,
-            backgroundColor: "white",
-          }}
-        >
-          <Text style={{ fontWeight: "bold", fontSize: 38 }}>Challenges</Text>
-          <Text style={{ color: "#C1CAD6" }}>
-            Whatever it is don't give up!
-          </Text>
-        </View>
-        <View style={{ padding: 10, marginTop: 5 }}>
-          <Text style={{ fontSize: 30, fontWeight: "bold" }}>In Progress</Text>
-          {/* <ScrollView horizontal showsHorizontalScrollIndicator={false}> */}
-              {/* <View
-                style={{
-                  backgroundColor: "black",
-                  height: 200,
-                  borderRadius: 15,
-                  width: windowWidth - 50,
-                  marginRight: 10,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <View
-                  style={{
-                    backgroundColor: "black",
-                    height: 200,
-                    borderRadius: 15,
-                    width: windowWidth - 50,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <>
-                    {challenge.map((item) => (
-                      <View>
-                        <Text
-                          style={{
-                            color: "white",
-                            padding: 5,
-                            fontWeight: "bold",
-                            fontSize: 30,
-                            marginBottom: -30,
-                          }}
-                        >
-                          {item.heading}
-                        </Text>
-                      </View>
-                    ))}
-                  </>
-                  <Progress.Bar
-                    progress={0}
-                    width={200}
-                    style={{ marginTop: 100 }}
-                  />
-                </View>
-              </View> */}
-              <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <ScrollView style={{ flex: 1 }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          padding: 10,
+          marginTop: 5,
+          backgroundColor: "white",
+        }}
+      >
+        <Text style={{ fontWeight: "bold", fontSize: 38 }}>Challenges</Text>
+        <Text style={{ color: "#C1CAD6" }}>
+          Whatever it is don't give up!
+        </Text>
+      </View>
+      <View style={{ padding: 10, marginTop: 5 }}>
+        <Text style={{ fontSize: 30, fontWeight: "bold" }}>In Progress</Text>
+        {/* <ScrollView horizontal showsHorizontalScrollIndicator={false}> */}
+            {/* <View
+              style={{
+                backgroundColor: "black",
+                height: 200,
+                borderRadius: 15,
+                width: windowWidth - 50,
+                marginRight: 10,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <View
                 style={{
-                  top: 10,
                   backgroundColor: "black",
                   height: 200,
                   borderRadius: 15,
@@ -192,142 +155,179 @@ const Challenges = () => {
                   alignItems: "center",
                 }}
               >
-                <Text
-                  style={{
-                    color: "white",
-                    padding: 5,
-                    fontWeight: "bold",
-                    fontSize: 30,
-                    marginBottom: -10,
-                  }}
-                >
-                  Daily Challenge
-                </Text>
-                <Text
-                  style={{
-                    color: "white",
-                    padding: 5,
-                    fontWeight: "bold",
-                    fontSize: 15,
-                    marginBottom: -30,
-                    marginTop: 10,
-                  }}
-                >
-                  {currentItem && <Text>{currentItem.text}</Text>}
-                  
-                </Text>
+                <>
+                  {challenge.map((item) => (
+                    <View>
+                      <Text
+                        style={{
+                          color: "white",
+                          padding: 5,
+                          fontWeight: "bold",
+                          fontSize: 30,
+                          marginBottom: -30,
+                        }}
+                      >
+                        {item.heading}
+                      </Text>
+                    </View>
+                  ))}
+                </>
                 <Progress.Bar
-                  progress={stepCount/currentItem?.target}
+                  progress={0}
                   width={200}
                   style={{ marginTop: 100 }}
                 />
               </View>
+            </View> */}
+            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+            <View
+              style={{
+                top: 10,
+                backgroundColor: "black",
+                height: 200,
+                borderRadius: 15,
+                width: windowWidth - 50,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  color: "white",
+                  padding: 5,
+                  fontWeight: "bold",
+                  fontSize: 30,
+                  marginBottom: -10,
+                }}
+              >
+                Daily Challenge
+              </Text>
+              <Text
+                style={{
+                  color: "white",
+                  padding: 5,
+                  fontWeight: "bold",
+                  fontSize: 15,
+                  marginBottom: -30,
+                  marginTop: 10,
+                }}
+              >
+                {currentItem && <Text>{currentItem.text}</Text>}
+              </Text>
+              <Progress.Bar
+                progress={0}
+                width={200}
+                style={{ marginTop: 100 }}
+              />
+              <Text style={{color: 'white'}}>Current Step Count: {stepCount}</Text>
             </View>
-          {/* </ScrollView> */}
-        </View>
-        <View style={{ padding: 10, marginTop: 5 }}>
-          <Text style={{ fontSize: 30, fontWeight: "bold" }}>For you</Text>
-        </View>
-        <View>
-          {/*
-                backgroundColor: "#FFFF82",
-                backgroundColor: "#B5D99C",
-           */}
-          <FlatList
-            style={{ height: "100%" }}
-            data={users}
-            searchPhrase={searchPhrase}
-            setClicked={setClicked}
-            numColumns={1}
-            renderItem={({ item }) => (
-              <Pressable style={[styles.containers]}>
-                <TouchableOpacity
+          </View>
+        {/* </ScrollView> */}
+      </View>
+      <View style={{ padding: 10, marginTop: 5 }}>
+        <Text style={{ fontSize: 30, fontWeight: "bold" }}>For you</Text>
+      </View>
+      <View>
+        {/*
+              backgroundColor: "#FFFF82",
+              backgroundColor: "#B5D99C",
+         */}
+        <FlatList
+          style={{ height: "100%" }}
+          data={users}
+          searchPhrase={searchPhrase}
+          setClicked={setClicked}
+          numColumns={1}
+          renderItem={({ item }) => (
+            <Pressable style={[styles.containers]}>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#E9ECF1",
+                  flexDirection: "row",
+                  marginBottom: 15,
+                  borderRadius: 17,
+                  marginHorizontal: 20,
+                }}
+                onPress={() => [setChallenge([...challenge, item])]}
+              >
+                <View
                   style={{
-                    backgroundColor: "#E9ECF1",
-                    flexDirection: "row",
-                    marginBottom: 15,
-                    borderRadius: 17,
-                    marginHorizontal: 20,
+                    backgroundColor: "#89B3DD",
+                    width: 35,
+                    height: 35,
+                    borderRadius: 10,
+                    alignSelf: "center",
+                    marginHorizontal: 15,
                   }}
-                  onPress={() => [setChallenge([...challenge, item])]}
+                ></View>
+                <View
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flex: 1,
+                  }}
                 >
                   <View
-                    style={{
-                      backgroundColor: "#89B3DD",
-                      width: 35,
-                      height: 35,
-                      borderRadius: 10,
-                      alignSelf: "center",
-                      marginHorizontal: 15,
-                    }}
-                  ></View>
-                  <View
-                    style={{
-                      justifyContent: "center",
-                      alignItems: "center",
-                      flex: 1,
-                    }}
-                  >
-                    <View
-                      style={[
-                        styles.innerContainer,
-                        {
-                          paddingHorizontal: 10,
-                          width: windowWidth - 130,
-                          height: 80,
-                          borderRadius: 15,
-                          marginLeft: 10,
-                          justifyContent: "center",
-                        },
-                      ]}
-                    >
-                      <Text
-                        style={[
-                          styles.itemHeading,
-                          { padding: 5, color: "#252C45" },
-                        ]}
-                      >
-                        {item.heading}
-                      </Text>
-                      <Text
-                        style={[
-                          styles.itemText,
-                          { paddingHorizontal: 5, color: "#252C45" },
-                        ]}
-                      >
-                        ✨{item.text}✨
-                      </Text>
-                    </View>
-                  </View>
-                  <View
-                    style={{
-                      justifyContent: "center",
-                      alignItems: "center",
-                      width: 70,
-                    }}
+                    style={[
+                      styles.innerContainer,
+                      {
+                        paddingHorizontal: 10,
+                        width: windowWidth - 130,
+                        height: 80,
+                        borderRadius: 15,
+                        marginLeft: 10,
+                        justifyContent: "center",
+                      },
+                    ]}
                   >
                     <Text
-                      style={{
-                        fontSize: 28,
-                        marginRight: 10,
-                        marginLeft: 10,
-                        fontWeight: "800",
-                      }}
+                      style={[
+                        styles.itemHeading,
+                        { padding: 5, color: "#252C45" },
+                      ]}
                     >
-                      {item.points}
+                      {item.heading}
+                    </Text>
+                    <Text
+                      style={[
+                        styles.itemText,
+                        { paddingHorizontal: 5, color: "#252C45" },
+                      ]}
+                    >
+                      ✨{item.text}✨
                     </Text>
                   </View>
-                </TouchableOpacity>
-              </Pressable>
-            )}
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+                </View>
+                <View
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: 70,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 28,
+                      marginRight: 10,
+                      marginLeft: 10,
+                      fontWeight: "800",
+                    }}
+                  >
+                    {item.points}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </Pressable>
+          )}
+        />
+      </View>
+    </ScrollView>
+  </SafeAreaView>
   )
 }
 
 export default Challenges
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
