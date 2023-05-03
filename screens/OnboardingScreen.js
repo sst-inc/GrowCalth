@@ -9,27 +9,11 @@ const OnboardingScreen = () => {
   const navigation = useNavigation();
   const windowWidth = Dimensions.get("window").width;
   const [selectedLanguage, setSelectedLanguage] = useState("None selected");
-  // const auth = () => {
-  //   if (selectedLanguage) === "None Selected" {
-  //     Alert.alert(
-  //       "Alert Title",
-  //       "My Alert Msg",
-  //       [
-  //         {
-  //           text: "Cancel",
-  //           onPress: () => console.log("Cancel Pressed"),
-  //           style: "cancel"
-  //         },
-  //         { text: "OK", onPress: () => console.log("OK Pressed") }
-  //       ]
-  //     );
-  //   }
-  // }
 
   const windowHeight = Dimensions.get("window").height;
   return (
     <Onboarding
-      onSkip={() => navigation.replace("Tab")}
+      // onSkip={() => navigation.replace("Tab")}
       onDone={() =>
         navigation.replace("Tab", { selectedHouse: selectedLanguage })
       }
@@ -83,35 +67,6 @@ const OnboardingScreen = () => {
           title: "Compete with others!",
           subtitle:
             "Take part in challenges to gain house points for your respective houses!",
-        },
-        {
-          backgroundColor: "#fff",
-          image: (
-            <Picker
-              style={{
-                marginTop: 20,
-                backgroundColor: "#C7CCDB",
-                width: windowWidth - 50,
-                borderRadius: 20,
-              }}
-              houses={selectedLanguage}
-              selectedValue={selectedLanguage}
-              onValueChange={(itemValue, itemIndex) =>
-                setSelectedLanguage(itemValue)
-              }
-            >
-              <Picker.Item label="None Selected" value="None Selected" />
-              <Picker.Item label="Blue" value="Blue" />
-              <Picker.Item label="Black" value="Black" />
-              <Picker.Item label="Yellow" value="Yellow" />
-              <Picker.Item label="Red" value="Red" />
-              <Picker.Item label="Green" value="Green" />
-            </Picker>
-          ),
-          title: `Select your House! \nSelected House: ${selectedLanguage}`,
-          titleStyles: { fontWeight: "bold" },
-          subTitleStyles: { color: "black" },
-          subtitle: `When you complete challenges, you get to add house points to your respective house! \n Selected House: ${selectedLanguage}`,
         },
       ]}
     />
