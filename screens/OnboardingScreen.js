@@ -13,7 +13,7 @@ const OnboardingScreen = () => {
   const windowHeight = Dimensions.get("window").height;
   return (
     <Onboarding
-      // onSkip={() => navigation.replace("Tab")}
+      onSkip={() => navigation.replace("Tab")}
       onDone={() =>
         navigation.replace("Tab", { selectedHouse: selectedLanguage })
       }
