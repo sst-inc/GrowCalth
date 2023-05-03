@@ -11,29 +11,50 @@ import {
   Dimensions,
 } from "react-native";
 import { auth } from "../../firebase";
+import DropDownPicker from "react-native-dropdown-picker";
+
 const Register = () => {
-  const allowedEmailDomains = ["s2020.ssts.edu.sg", "s2021.ssts.edu.sg", "s2022.ssts.edu.sg", "s2023.ssts.edu.sg"];
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const windowWidth = Dimensions.get("window").width;
-const navigation = useNavigation();
-const [error, setError] = useState("");
+  const allowedEmailDomains = [
+    "s2020.ssts.edu.sg",
+    "s2021.ssts.edu.sg",
+    "s2022.ssts.edu.sg",
+    "s2023.ssts.edu.sg",
+    "s2024.ssts.edu.sg",
+    "s2025.ssts.edu.sg",
+  ];
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const windowWidth = Dimensions.get("window").width;
+  const navigation = useNavigation();
+  const [error, setError] = useState("");
 
-const handleSignUp = () => {
-  const emailDomain = email.split("@")[1];
-  if (!allowedEmailDomains.includes(emailDomain)) {
-    alert("This domain is not allowed. Please enter your SST school email account")
-    return;
-  }
+  const handleSignUp = () => {
+    const emailDomain = email.split("@")[1];
+    if (!allowedEmailDomains.includes(emailDomain)) {
+      alert(
+        "This domain is not allowed. Please enter your SST school email account"
+      );
+      return;
+    }
 
-  auth
-    .createUserWithEmailAndPassword(email, password)
-    .then((userCredentials) => {
-      const user = userCredentials.user;
-      console.log("Registered with:", user.email);
-    })
-    // .catch((error) => alert(error.message));
-};
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        navigation.replace("Onboarding");
+      })
+      .catch((error) => alert(error.message));
+  };
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    { label: "Blue", value: "Blue" },
+    { label: "Black", value: "Black" },
+    { label: "Yellow", value: "Yellow" },
+    { label: "Green", value: "Green" },
+    { label: "Red", value: "Red" },
+  ]);
+  const [house, setHouse] = useState(null);
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -62,6 +83,20 @@ const handleSignUp = () => {
           onChangeText={(text) => setPassword(text)}
           style={styles.input}
           secureTextEntry
+        />
+        <DropDownPicker
+          placeholder="Select your house"
+          placeholderStyle={{
+            color: "grey",
+            fontWeight: "bold",
+          }}
+          style={{ top: 10 }}
+          open={open}
+          value={house}
+          items={items}
+          setOpen={setOpen}
+          setValue={setHouse}
+          setItems={setItems}
         />
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <TouchableOpacity
