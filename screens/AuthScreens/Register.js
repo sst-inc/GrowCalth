@@ -12,6 +12,9 @@ import {
 } from "react-native";
 import { auth } from "../../firebase";
 import DropDownPicker from "react-native-dropdown-picker";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
 
 const Register = () => {
   const allowedEmailDomains = [
@@ -21,12 +24,37 @@ const Register = () => {
     "s2023.ssts.edu.sg",
     "s2024.ssts.edu.sg",
     "s2025.ssts.edu.sg",
+    "s2026.ssts.edu.sg",
+    "sst.edu.sg",
   ];
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const windowWidth = Dimensions.get("window").width;
   const navigation = useNavigation();
   const [error, setError] = useState("");
+  const [house, setHouse] = useState("");
+
+  const database = firebase.database().ref();
+  // const db = firebase.firestore();
+
+  // const query = db.collectionGroup("");
+  const addEmailToDatabase = (email) => {
+    // Generate a unique key for the email
+    const emailKey = database.child("emails").push().key;
+
+    // Create an object to store the email data
+    const emailData = {
+      email_address: email,
+      timestamp: new Date().toISOString(),
+    };
+
+    // Add the email data to the Realtime Database
+    database
+      .child(`emails/${emailKey}`)
+      .set(emailData)
+      .then(() => console.log("Email added to database"))
+      .catch((error) => console.error(error));
+  };
 
   const handleSignUp = () => {
     const emailDomain = email.split("@")[1];
@@ -36,12 +64,33 @@ const Register = () => {
       );
       return;
     }
-
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
-        navigation.replace("Onboarding");
+
+        // Create an object to store user data
+        const userData = {
+          email: user.email,
+          password: password,
+          house: house,
+        };
+
+        // Save the user data to Firebase Firestore or Realtime Database
+        // Example using Firestore
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(user.uid)
+          .set(userData)
+          .then(() => {
+            console.log("User data added to Firestore");
+            navigation.replace("Onboarding");
+          })
+          .catch((error) => {
+            console.error("Error adding user data to Firestore:", error);
+            alert(error.message);
+          });
       })
       .catch((error) => alert(error.message));
   };
@@ -54,7 +103,6 @@ const Register = () => {
     { label: "Green", value: "Green" },
     { label: "Red", value: "Red" },
   ]);
-  const [house, setHouse] = useState(null);
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -98,6 +146,7 @@ const Register = () => {
           setValue={setHouse}
           setItems={setItems}
         />
+
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <TouchableOpacity
             onPress={() => {
