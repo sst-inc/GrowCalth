@@ -22,7 +22,7 @@ import OnboardingScreen from "./screens/OnboardingScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ChallengesStack from "./screens/Challenges";
 import MyTabs from "./screens/Announcements";
-import Admin from './screens/AuthScreens/Admin'
+import Admin from "./screens/AuthScreens/Admin";
 
 // export default function App() {
 //   const handleInput = (event) => {
@@ -57,12 +57,14 @@ function AdminS() {
   return <Admin />;
 }
 const Tab = createBottomTabNavigator();
-function Tabs() {
+function Tabs({ route }) {
+  // const houses = route.params.house;
   return (
     <Tab.Navigator>
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={Stacks}
+        // initialParams={{ house: house }}
         options={{
           headerShown: false,
           tabBarIcon: () => (
@@ -116,7 +118,6 @@ function Tabs() {
   );
 }
 
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -140,10 +141,10 @@ export default function App() {
         />
         <Stack.Screen
           options={{ headerShown: false }}
-          name="Tab"
+          name="Tabs"
           component={Tabs}
         />
-         <Stack.Screen
+        <Stack.Screen
           options={{ headerShown: false }}
           name="Admin"
           component={Admin}
