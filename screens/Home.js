@@ -9,6 +9,9 @@ import {
   AppState,
   Dimensions,
   TouchableOpacityBase,
+  PermissionsAndroid,
+  Alert,
+  Platform,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect, useRef } from "react";
@@ -21,8 +24,13 @@ import Quotes from "./Quotes";
 import Goals from "./Goals";
 import LeaderBoard from "./LeaderBoard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import firebase from "firebase/app";
+import { auth } from "../firebase";
 
-function Homes() {
+const Homes = ({ route }) => {
+  // const param = route.params.house;
+  // const selectedHouse = param.house;
+
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
   const getQuote = () => {
@@ -37,7 +45,7 @@ function Homes() {
     getQuote();
   }, []);
   const [PedometerAvailability, setPedometerAvailability] = useState("");
-  let [stepCount, updateStepCount] = useState([0]);
+  let [stepCount, updateStepCount] = useState(0);
   const calories = stepCount / 25;
   const caloriesB = calories.toFixed(1);
 
@@ -57,6 +65,41 @@ function Homes() {
   useEffect(() => {
     subscribe();
   }, []);
+
+  async function UpdatePoints() {
+    const user = await firebase
+      .firestore()
+      .collection("users")
+      .doc(auth.currentUser.uid);
+
+    const data = (await user.get()).data();
+
+    const newPoints = Math.floor((data.steps + 1) / 1000);
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", newPoints);
+
+    await user.update({ steps: data.steps + 1, points: newPoints });
+    if (newPoints > data.points) {
+      const house = await firebase
+        .firestore()
+        .collection("HousePoints")
+        .doc(data.house);
+
+      house.update({ points: (await house.get()).data().points + 1 });
+    }
+  }
+
+  // useEffect(() => {
+  //   const interval = setInterval(
+  //     () => updateStepCount((state) => state + 1),
+  //     10
+  //   );
+  //   return () => clearInterval(interval);
+  // }, []);
+  // to increase stepcount every 100 milliseconds
+  useEffect(() => {
+    UpdatePoints();
+  }, [stepCount]);
+
   const navigation = useNavigation();
   const [Quote, setQuote] = useState();
   const [Author, setAuthor] = useState();
@@ -122,15 +165,15 @@ function Homes() {
         0 // set seconds to 0
       );
       const timeUntilMidnight = midnight - now;
-  
+
       setTimeout(() => {
         resetVariable();
       }, timeUntilMidnight);
     }, 86400000); // repeat every 24 hours
-  
+
     return () => clearInterval(interval);
   }, []);
-    
+
   return (
     <SafeAreaView style={{ backgroundColor: "#FFFFF" }}>
       <ScrollView>
@@ -434,7 +477,7 @@ function Homes() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 const windowWidth = Dimensions.get("window").width;
 const styles = StyleSheet.create({
   container: {
