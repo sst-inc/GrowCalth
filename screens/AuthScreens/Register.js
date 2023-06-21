@@ -74,6 +74,8 @@ const Register = () => {
           email: user.email,
           password: password,
           house: house,
+          points: 0,
+          steps: 0,
         };
 
         // Save the user data to Firebase Firestore or Realtime Database
