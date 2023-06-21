@@ -16,6 +16,8 @@ import * as Progress from "react-native-progress";
 import * as firebase from "firebase";
 // import { useNavigation } from "@react-navigation/native";
 import { Pedometer } from "expo-sensors";
+// import firebase from "firebase/app";
+import { auth } from "../firebase";
 // import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const windowWidth = Dimensions.get("window").width;
 // const windowHeight = Dimensions.get("window").height;
@@ -45,7 +47,7 @@ const Challenges = () => {
       setUsers(users);
     });
   }, []);
-  let [stepCount, updateStepCount] = useState([0]);
+  let [stepCount, updateStepCount] = useState(0);
   const subscribe = () => {
     const subscription = Pedometer.watchStepCount((result) =>
       updateStepCount(result.steps)
@@ -64,8 +66,8 @@ const Challenges = () => {
   }, []);
   const [items, setItems] = useState([
     { text: "Walk a minimum of 15,000 steps today", target: 15000 },
-    { text: "Walk at least 5km today", target: 10000 },
-    { text: "Burn off 150 calories", target: 150000 },
+    // { text: "Walk at least 5km today", target: 10000 },
+    // { text: "Burn off 150 calories", target: 150000 },
     { text: "Get at least 10,000 steps", target: 10000 },
   ]);
   const [lastRefreshTime, setLastRefreshTime] = useState(null);
@@ -84,42 +86,64 @@ const Challenges = () => {
     }
   }, [lastRefreshTime]);
   // Get the current day of the year (1 to 365)
-// const today = new Date();
-// const startOfYear = new Date(today.getFullYear(), 0, 0);
-// const diff = today - startOfYear;
-// const dayOfYear = Math.floor(diff / 86400000); // milliseconds in a day
+  // const today = new Date();
+  // const startOfYear = new Date(today.getFullYear(), 0, 0);
+  // const diff = today - startOfYear;
+  // const dayOfYear = Math.floor(diff / 86400000); // milliseconds in a day
 
-// // Use the day of the year as the seed for the random number generator
-// Math.seedrandom(dayOfYear);
+  // // Use the day of the year as the seed for the random number generator
+  // Math.seedrandom(dayOfYear);
 
-// // Shuffle the array using the Fisher-Yates algorithm
-// for (let i = stringsArray.length - 1; i > 0; i--) {
-//   const j = Math.floor(Math.random() * (i + 1));
-//   [stringsArray[i], stringsArray[j]] = [stringsArray[j], stringsArray[i]];
-// }
+  // // Shuffle the array using the Fisher-Yates algorithm
+  // for (let i = stringsArray.length - 1; i > 0; i--) {
+  //   const j = Math.floor(Math.random() * (i + 1));
+  //   [stringsArray[i], stringsArray[j]] = [stringsArray[j], stringsArray[i]];
+  // }
 
-const [challenge, setChallenge] = useState([]);
-const AddAlert = () => {
-  Alert.alert(`Are you sure you want to take on this challenge?`, "WOOOOO", [
-    {
-      text: "YES, BRING IT ON",
-      onPress: () => setChallenge(challenge),
-      style: "cancel",
-    },
-    {
-      text: "No I want my mommy",
-      onPress: () => console.log("Cancel Pressed"),
-      style: "cancel",
-    },
-  ]);
-};
- var progress = stepCount/currentItem?.target
+  const [challenge, setChallenge] = useState([]);
+  const AddAlert = () => {
+    Alert.alert(`Are you sure you want to take on this challenge?`, "WOOOOO", [
+      {
+        text: "YES, BRING IT ON",
+        onPress: () => setChallenge(challenge),
+        style: "cancel",
+      },
+      {
+        text: "No I want my mommy",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel",
+      },
+    ]);
+  };
+
+  async function UpdatePoints() {
+    const user = await firebase
+      .firestore()
+      .collection("users")
+      .doc(auth.currentUser.uid);
+
+    const data = (await user.get()).data();
+
+    const newPoints = Math.floor((data.steps + 1) / 1000);
+    // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", currentItem.target);
+
+    await user.update({ steps: data.steps + 1, points: newPoints });
+    if (20000 >= currentItem.target) {
+      const house = await firebase
+        .firestore()
+        .collection("HousePoints")
+        .doc(data.house);
+
+      house.update({ points: (await house.get()).data().points + 1 });
+    }
+  }
+  useEffect(() => {
+    UpdatePoints();
+  }, [stepCount]);
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
-    <ScrollView style={{ flex: 1 }}>
       <View
         style={{
-          flex: 1,
           justifyContent: "center",
           padding: 10,
           marginTop: 5,
@@ -127,14 +151,12 @@ const AddAlert = () => {
         }}
       >
         <Text style={{ fontWeight: "bold", fontSize: 38 }}>Challenges</Text>
-        <Text style={{ color: "#C1CAD6" }}>
-          Whatever it is don't give up!
-        </Text>
+        <Text style={{ color: "#C1CAD6" }}>Whatever it is don't give up!</Text>
       </View>
       <View style={{ padding: 10, marginTop: 5 }}>
         <Text style={{ fontSize: 30, fontWeight: "bold" }}>In Progress</Text>
         {/* <ScrollView horizontal showsHorizontalScrollIndicator={false}> */}
-            {/* <View
+        {/* <View
               style={{
                 backgroundColor: "black",
                 height: 200,
@@ -179,49 +201,48 @@ const AddAlert = () => {
                 />
               </View>
             </View> */}
-            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-            <View
+        <View style={{ alignItems: "center", justifyContent: "center" }}>
+          <View
+            style={{
+              top: 10,
+              backgroundColor: "black",
+              height: 200,
+              borderRadius: 15,
+              width: windowWidth - 50,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text
               style={{
-                top: 10,
-                backgroundColor: "black",
-                height: 200,
-                borderRadius: 15,
-                width: windowWidth - 50,
-                justifyContent: "center",
-                alignItems: "center",
+                color: "white",
+                padding: 5,
+                fontWeight: "bold",
+                fontSize: 30,
+                marginBottom: -10,
               }}
             >
-              <Text
-                style={{
-                  color: "white",
-                  padding: 5,
-                  fontWeight: "bold",
-                  fontSize: 30,
-                  marginBottom: -10,
-                }}
-              >
-                Daily Challenge
-              </Text>
-              <Text
-                style={{
-                  color: "white",
-                  padding: 5,
-                  fontWeight: "bold",
-                  fontSize: 15,
-                  marginBottom: -30,
-                  marginTop: 10,
-                }}
-              >
-                {currentItem && <Text>{currentItem.text}</Text>}
-              </Text>
-              <Progress.Bar
-                progress={0}
-                width={200}
-                style={{ marginTop: 100 }}
-              />
-              <Text style={{color: 'white'}}>Current Step Count: {stepCount}</Text>
-            </View>
+              Daily Challenge
+            </Text>
+            <Text
+              style={{
+                color: "white",
+                padding: 5,
+                fontWeight: "bold",
+                fontSize: 15,
+                marginBottom: -30,
+                marginTop: 10,
+              }}
+            >
+              {currentItem && <Text>{currentItem.text}</Text>}
+            </Text>
+            <Progress.Bar progress={0} width={200} style={{ marginTop: 100 }} />
+            <Text style={{ color: "white" }}>
+              Progress: {stepCount} /{" "}
+              {currentItem && <Text>{currentItem.target}</Text>} {" steps "}
+            </Text>
           </View>
+        </View>
         {/* </ScrollView> */}
       </View>
       <View style={{ padding: 10, marginTop: 5 }}>
@@ -321,12 +342,11 @@ const AddAlert = () => {
           )}
         />
       </View>
-    </ScrollView>
-  </SafeAreaView>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default Challenges
+export default Challenges;
 
 const styles = StyleSheet.create({
   container: {
