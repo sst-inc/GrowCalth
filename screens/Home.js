@@ -31,6 +31,8 @@ const Homes = ({ route }) => {
   // const param = route.params.house;
   // const selectedHouse = param.house;
 
+  const [pedoMeterPermission, setPedoMeterPermission] = useState("undetermined")
+
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
   const getQuote = () => {
@@ -53,6 +55,15 @@ const Homes = ({ route }) => {
     const PedometerAvaiable = await Pedometer.isAvailableAsync()
     setPedometerAvailability(PedometerAvaiable)
     if (PedometerAvaiable) {
+      //check permission
+      const PedoPermit = await Pedometer.getPermissionsAsync()
+      if (PedoPermit.status === "undetermined")
+        return Pedometer.requestPermissionsAsync()
+      else if (PedoPermit.status === 'denied')
+        return Pedometer.requestPermissionsAsync()
+      else if (PedoPermit.status === 'granted')
+        setPedoMeterPermission("GRANTED")
+
       return Pedometer.watchStepCount((result) =>
         updateStepCount(result.steps)
       );
