@@ -49,21 +49,20 @@ const Homes = ({ route }) => {
   const calories = stepCount / 25;
   const caloriesB = calories.toFixed(1);
 
-  const subscribe = () => {
-    const subscription = Pedometer.watchStepCount((result) =>
-      updateStepCount(result.steps)
-    );
-    Pedometer.isAvailableAsync().then(
-      (result) => {
-        setPedometerAvailability(String(result));
-      },
-      (error) => {
-        setPedometerAvailability(error);
-      }
-    );
+  const subscribe = async () => {
+    const PedometerAvaiable = await Pedometer.isAvailableAsync()
+    setPedometerAvailability(PedometerAvaiable)
+    if (PedometerAvaiable) {
+      return Pedometer.watchStepCount((result) =>
+        updateStepCount(result.steps)
+      );
+    }
+    return { remove: () => null }
   };
+
   useEffect(() => {
-    subscribe();
+    const subscription = subscribe()
+    return () => !subscription || subscription?.remove?.()
   }, []);
 
   async function UpdatePoints() {

@@ -27,7 +27,7 @@ const LoginScreen = () => {
         if (user.email === "calebhan08js@gmail.com" | "admin@growcalthadmin.com") {
           navigation.replace("Admin");
         } else {
-          navigation.replace("Tab");
+          navigation.replace("Tabs");
         }
       }
     });
