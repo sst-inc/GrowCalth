@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, Image, StyleSheet } from "react-native";
+import { processColor } from "react-native-reanimated";
+import firebase from "firebase";
 // import { google } from 'googleapis';
 
 const points = [290, 200, 160, 190, 240];
@@ -25,7 +27,36 @@ const colorValues = [
 ];
 
 const ColorValuesList = () => {
-  const sortedColorValues = colorValues.sort((a, b) => b.value - a.value);
+  const [point, setPoint] = useState([]);
+  const pointsref = firebase.firestore().collection("HousePoints");
+  const pointthing = () => {
+    pointsref.onSnapshot((querySnapshot) => {
+      var house = [];
+      querySnapshot.forEach((doc) => {
+        const { color, points } = doc.data();
+
+        const color_to_jpg = {
+          black: require("./../assets/black.jpeg"),
+          green: require("./../assets/green.jpeg"),
+          blue: require("./../assets/blue.jpeg"),
+          yellow: require("./../assets/yellow.jpeg"),
+          red: require("./../assets/red.jpeg"),
+        };
+
+        house.push({
+          id: doc.id,
+          color: color,
+          points: points,
+          image: color_to_jpg[color],
+        });
+      });
+      house = house.sort((a, b) => b.points - a.points);
+      setPoint(house);
+    });
+  };
+  useEffect(() => {
+    pointthing();
+  }, []);
   const renderColorValue = ({ item }) => (
     <View
       style={{
@@ -42,7 +73,7 @@ const ColorValuesList = () => {
         </Text>
         <View style={{ flex: 1, justifyContent: "center" }}>
           <Text style={{ marginLeft: 50, fontSize: 25, fontWeight: "bold" }}>
-            {item.value}
+            {item.points}
           </Text>
         </View>
       </View>
@@ -52,7 +83,7 @@ const ColorValuesList = () => {
   return (
     <FlatList
       style={{ backgroundColor: "white" }}
-      data={sortedColorValues}
+      data={point}
       renderItem={renderColorValue}
       keyExtractor={(item) => item.color}
     />
