@@ -1,3 +1,4 @@
+// Correct One
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React, { useState, useEffect } from "react";

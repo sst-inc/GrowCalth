@@ -1,39 +1,13 @@
 {
   "expo": {
-    "name": "GrowCalth1",
-    "slug": "GrowCalth1",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.devfred.GrowCalth1"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
+    "icon": "./assets/growcalth.jpg",
     "extra": {
       "eas": {
-        "projectId": "bcbad7ba-cde7-4c45-b72a-04a2dfb24fe5"
+        "projectId": "5a8d8541-cceb-4f2a-9526-13453a9afb4a"
       }
+    },
+    "ios": {
+      "bundleIdentifier": "com.kidcodes.growcalth"
     }
   }
 }
