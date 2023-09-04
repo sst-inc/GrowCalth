@@ -177,79 +177,15 @@ const Register = () => {
             >
               -or-
             </Text>
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              {/* Google View */}
-              <TouchableOpacity
-                style={{
-                  backgroundColor: "#4267B2",
-                  borderRadius: 8,
-                  alignSelf: "center",
-                  width: windowWidth - 290,
-                  top: 10,
-                  left: -9,
-                }}
-              >
-                <FontAwesome
-                  name="facebook"
-                  style={{
-                    paddingVertical: 15,
-                    alignSelf: "center",
-                    color: "white",
-                  }}
-                  size={25}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: "#C1CAD6",
-                  borderRadius: 8,
-                  alignSelf: "center",
-                  width: windowWidth - 290,
-                  top: 10,
-                }}
-              >
-                <AntDesign
-                  name="google"
-                  style={{
-                    paddingVertical: 15,
-                    alignSelf: "center",
-                  }}
-                  size={25}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: "black",
-                  borderRadius: 8,
-                  alignSelf: "center",
-                  width: windowWidth - 290,
-                  top: 10,
-                  left: 10,
-                }}
-              >
-                <FontAwesome
-                  name="apple"
-                  style={{
-                    paddingVertical: 17,
-                    color: "white",
-                    alignSelf: "center",
-                  }}
-                  size={23}
-                />
-              </TouchableOpacity>
-            </View>
           </View>
           <View
             style={{
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "row",
-              top: 15,
             }}
           >
-            <Text style={{ top: 2 }}>Already have an account?</Text>
+            <Text>Already have an account?</Text>
             <TouchableOpacity
               onPress={() => navigation.replace("Login")}
               style={{ justifyContent: "center", alignItems: "center" }}
