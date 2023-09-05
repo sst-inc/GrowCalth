@@ -36,11 +36,11 @@ const ColorValuesList = () => {
         const { color, points } = doc.data();
 
         const color_to_jpg = {
-          black: require("./../assets/black.jpeg"),
-          green: require("./../assets/green.jpeg"),
-          blue: require("./../assets/blue.jpeg"),
-          yellow: require("./../assets/yellow.jpeg"),
-          red: require("./../assets/red.jpeg"),
+          Black: require("./../assets/black.jpeg"),
+          Green: require("./../assets/green.jpeg"),
+          Blue: require("./../assets/blue.jpeg"),
+          Yellow: require("./../assets/yellow.jpeg"),
+          Red: require("./../assets/red.jpeg"),
         };
 
         house.push({

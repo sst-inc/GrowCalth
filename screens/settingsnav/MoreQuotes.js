@@ -32,7 +32,7 @@ const MoreQuotes = () => {
         backgroundColor: 'white',
         borderRadius: 15,
         padding: 20,
-        width: width - 26, // Adjust the width based on the screen width
+        width: width - 26,
         margin: 13,
         marginTop: 10,
       },

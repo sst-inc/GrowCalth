@@ -120,22 +120,36 @@ const Homes = ({ route }) => {
   var distance = dist.toFixed(2);
 
   const [streak, setStreak] = useState(1);
-  useEffect(() => {
-    // Load the last opened date from AsyncStorage
-    AsyncStorage.getItem("lastOpenedDate").then((dateString) => {
-      const lastOpenedDate = dateString ? new Date(dateString) : null;
 
-      if (lastOpenedDate && isYesterday(lastOpenedDate)) {
-        // If the app was opened yesterday, increment the streak
-        setStreak((prevStreak) => prevStreak + 1);
-      } else if (!lastOpenedDate || isOlderThanYesterday(lastOpenedDate)) {
-        // If the app was not opened yesterday or there is no stored date, reset the streak
-        setStreak(1);
+  const isSameDay = (date1, date2) => {
+    return (
+      date1.getDate() === date2.getDate() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getFullYear() === date2.getFullYear()
+    );
+  };
+
+  useEffect(() => {
+    const checkStreak = async () => {
+      const lastOpenedDateString = await AsyncStorage.getItem('lastOpenedDate');
+      if (lastOpenedDateString) {
+        const lastOpenedDate = new Date(lastOpenedDateString);
+        const currentDate = new Date();
+
+        if (isSameDay(lastOpenedDate, currentDate)) {
+          // The app was opened today, increment the streak
+          setStreak((prevStreak) => prevStreak + 1);
+        } else {
+          // The app was not opened today, reset the streak
+          setStreak(1);
+        }
       }
 
       // Save the current date to AsyncStorage
-      AsyncStorage.setItem("lastOpenedDate", new Date().toISOString());
-    });
+      AsyncStorage.setItem('lastOpenedDate', new Date().toISOString());
+    };
+
+    checkStreak();
   }, []);
 
   function isYesterday(date) {
