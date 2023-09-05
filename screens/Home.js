@@ -27,6 +27,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import firebase from "firebase/app";
 import { auth } from "../firebase";
 
+
 const Homes = ({ route }) => {
   // const param = route.params.house;
   // const selectedHouse = param.house;
@@ -91,12 +92,22 @@ const Homes = ({ route }) => {
   // useEffect(() => {
   //   const interval = setInterval(
   //     () => updateStepCount((state) => state + 1),
-  //     10
+  //     100
   //   );
   //   return () => clearInterval(interval);
   // }, []);
   // to increase stepcount every 100 milliseconds
   useEffect(() => {
+    AsyncStorage.getItem("stepCount")
+    .then((value) => {
+      if (value !== null) {
+        // Parse the saved value and update the step count state
+        updateStepCount(parseInt(value, 10));
+      }
+    })
+    .catch((error) => {
+      console.error("Error retrieving step count: ", error);
+    });
     UpdatePoints();
   }, [stepCount]);
 
@@ -165,14 +176,18 @@ const Homes = ({ route }) => {
         0 // set seconds to 0
       );
       const timeUntilMidnight = midnight - now;
-
-      setTimeout(() => {
+  
+      setTimeout(async () => {
         resetVariable();
+  
+        // Save the step count in AsyncStorage
+        await AsyncStorage.setItem("stepCount", stepCount.toString());
       }, timeUntilMidnight);
     }, 86400000); // repeat every 24 hours
-
+  
     return () => clearInterval(interval);
-  }, []);
+  }, [stepCount]);
+  
 
   return (
     <SafeAreaView style={{ backgroundColor: "#FFFFF" }}>
