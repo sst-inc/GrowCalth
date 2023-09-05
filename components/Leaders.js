@@ -4,24 +4,24 @@ import { StyleSheet, Text, View, Dimensions } from "react-native";
 const Leaders = () => {
   const windowWidth = Dimensions.get("window").width;
   const blueHouse = [
-    "lim_en_xuan_shannon@s2020.ssts.edu.sg ",
-    "reeann_koh_rui_en@s2020.ssts.edu.sg",
+    "theshyan_thirun@s2021.ssts.edu.sg ",
+    "aravind_b_n@s2021.sst.edu.sgg",
   ];
   const blackHouse = [
-    "faith_goh_ren_ying@s2020.ssts.edu.sg  ",
-    "yap_su_hui_anastasia@s2020.ssts.edu.sg",
+    "song_jun_hao_jarell@s2021.ssts.edu.sg ",
+    "chng_wei_ian@s2021.ssts.edu.sg",
   ];
   const greenHouse = [
-    "tan_kai_yang_samuel@s2020.ssts.edu.sg  ",
-    "ang_shaal_josh@s2020.ssts.edu.sg",
+   "foo_g_ywinn@s2021.ssts.edu.sg ", 
+   "teng_rui_jie@s2021.ssts.edu.sg"
   ];
   const redHouse = [
-    "nathanael_aditya_wirawan@s2020.ssts.edu.sg  ",
-    " wong_xin_ern_corie@s2020.ssts.edu.sg",
+    "ng_kian_ping@s2021.ssts.edu.sg ",
+    "u_warisa@s2021.ssts.edu.sg",
   ];
   const yellowHouse = [
-    "ong_xuan_kai@s2020.ssts.edu.sg  ",
-    "ridha_fathima_nowshad@s2020.ssts.edu.sg",
+    "zac_gan_yu_chieh@s2021.ssts.edu.sg  ",
+    "jesse_chia_kah_sim@s2021.ssts.edu.sg",
   ];
 
   return (
