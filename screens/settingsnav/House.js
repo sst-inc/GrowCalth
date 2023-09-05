@@ -61,9 +61,9 @@ const House = ({ route }) => {
             </Text>
           </View>
           <View style={{ marginTop: 10 }}>
-            <TouchableOpacity style={{ alignSelf: "center" }}>
+            {/* <TouchableOpacity style={{ alignSelf: "center" }}> */}
               <Leaders />
-            </TouchableOpacity>
+            {/* </TouchableOpacity> */}
           </View>
         </View>
       </ScrollView>
