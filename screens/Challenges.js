@@ -248,100 +248,59 @@ const Challenges = () => {
       <View style={{ padding: 10, marginTop: 5 }}>
         <Text style={{ fontSize: 30, fontWeight: "bold" }}>For you</Text>
       </View>
-      <View>
         {/*
               backgroundColor: "#FFFF82",
               backgroundColor: "#B5D99C",
          */}
-        <FlatList
-          style={{ height: "100%" }}
-          data={users}
-          searchPhrase={searchPhrase}
-          setClicked={setClicked}
-          numColumns={1}
-          renderItem={({ item }) => (
-            <Pressable style={[styles.containers]}>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: "#E9ECF1",
-                  flexDirection: "row",
-                  marginBottom: 15,
-                  borderRadius: 17,
-                  marginHorizontal: 20,
-                }}
-                onPress={() => [setChallenge([...challenge, item])]}
+       <FlatList
+        style={{ flex: 1 }}
+        data={users}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#E9ECF1",
+              flexDirection: "row",
+              marginBottom: 15,
+              borderRadius: 17,
+              marginHorizontal: 20,
+            }}
+            onPress={AddAlert}
+          >
+            <View
+              style={{
+                backgroundColor: "#89B3DD",
+                width: 35,
+                height: 35,
+                borderRadius: 10,
+                alignSelf: "center",
+                marginHorizontal: 15,
+              }}
+            ></View>
+            <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
+              <View
+                style={[
+                  styles.innerContainer,
+                  {
+                    paddingHorizontal: 10,
+                    width: windowWidth - 130,
+                    height: 80,
+                    borderRadius: 15,
+                    marginLeft: 10,
+                    justifyContent: "center",
+                  },
+                ]}
               >
-                <View
-                  style={{
-                    backgroundColor: "#89B3DD",
-                    width: 35,
-                    height: 35,
-                    borderRadius: 10,
-                    alignSelf: "center",
-                    marginHorizontal: 15,
-                  }}
-                ></View>
-                <View
-                  style={{
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flex: 1,
-                  }}
-                >
-                  <View
-                    style={[
-                      styles.innerContainer,
-                      {
-                        paddingHorizontal: 10,
-                        width: windowWidth - 130,
-                        height: 80,
-                        borderRadius: 15,
-                        marginLeft: 10,
-                        justifyContent: "center",
-                      },
-                    ]}
-                  >
-                    <Text
-                      style={[
-                        styles.itemHeading,
-                        { padding: 5, color: "#252C45" },
-                      ]}
-                    >
-                      {item.heading}
-                    </Text>
-                    <Text
-                      style={[
-                        styles.itemText,
-                        { paddingHorizontal: 5, color: "#252C45" },
-                      ]}
-                    >
-                      ✨{item.text}✨
-                    </Text>
-                  </View>
-                </View>
-                <View
-                  style={{
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: 70,
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: 28,
-                      marginRight: 10,
-                      marginLeft: 10,
-                      fontWeight: "800",
-                    }}
-                  >
-                    {item.points}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </Pressable>
-          )}
-        />
-      </View>
+                <Text style={[styles.itemHeading, { padding: 5, color: "#252C45" }]}>{item.heading}</Text>
+                <Text style={[styles.itemText, { paddingHorizontal: 5, color: "#252C45" }]}>✨{item.text}✨</Text>
+              </View>
+            </View>
+            <View style={{ justifyContent: "center", alignItems: "center", width: 70 }}>
+              <Text style={{ fontSize: 28, marginRight: 10, marginLeft: 10, fontWeight: "800" }}>{item.points}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item) => item.id}
+      />
     </SafeAreaView>
   );
 };
@@ -385,24 +344,5 @@ const styles = StyleSheet.create({
   itemText: {
     fontWeight: "300",
     fontSize: 16,
-  },
-  bottomSheet: {
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: -4,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  progressBar: {
-    height: 15,
-    flexDirection: "row",
-    width: "100%",
-    backgroundColor: "white",
-    borderColor: "#000",
-    borderWidth: 2,
-    borderRadius: 5,
   },
 });

@@ -15,6 +15,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Register = () => {
   const allowedEmailDomains = [
@@ -42,13 +43,11 @@ const Register = () => {
     // Generate a unique key for the email
     const emailKey = database.child("emails").push().key;
 
-    // Create an object to store the email data
     const emailData = {
       email_address: email,
       timestamp: new Date().toISOString(),
     };
 
-    // Add the email data to the Realtime Database
     database
       .child(`emails/${emailKey}`)
       .set(emailData)
@@ -107,7 +106,7 @@ const Register = () => {
   ]);
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <Text
         style={{
           fontSize: 45,
