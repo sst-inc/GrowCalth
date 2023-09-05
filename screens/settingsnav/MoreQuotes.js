@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Dimensions } from 'react-native'
 
 const MoreQuotes = () => {
     const [quotes, setQuotes] = useState("")
@@ -16,13 +16,37 @@ const MoreQuotes = () => {
         getQuote();
     }, []);
     return (
-        <View style={{backgroundColor: 'white', borderRadius: 15, height: 160, width: 400, marginLeft: 13, top: 10}}>
-            <Text style={{paddingTop: 10, paddingHorizontal: 10, fontSize: 18, fontWeight: '900', color: '#100F0F'}}>{Quote}</Text>
-        <Text style={{paddingHorizontal: 205, paddingTop: 5, fontStyle: 'italic', fontWeight: '600', fontSize: 17, color: '#100F0F', justifyContent: 'center', alignItems: 'center', textDecorationLine: 'underline', top: 15, left: 20}}>{Author}</Text>
+        <View style={styles.container}>
+          <Text style={styles.quoteText}>{Quote}</Text>
+          <Text style={styles.authorText}>{Author}</Text>
         </View>
-    )
-}
-
-export default MoreQuotes;
-
-const styles = StyleSheet.create({})
+      );
+    };
+    
+    export default MoreQuotes;
+    
+    const { width } = Dimensions.get('window');
+    
+    const styles = StyleSheet.create({
+      container: {
+        backgroundColor: 'white',
+        borderRadius: 15,
+        padding: 20,
+        width: width - 26, // Adjust the width based on the screen width
+        margin: 13,
+        marginTop: 10,
+      },
+      quoteText: {
+        fontSize: 18,
+        fontWeight: '900',
+        color: '#100F0F',
+      },
+      authorText: {
+        fontStyle: 'italic',
+        fontWeight: '600',
+        fontSize: 17,
+        color: '#100F0F',
+        textDecorationLine: 'underline',
+        marginTop: 5,
+      },
+    });
