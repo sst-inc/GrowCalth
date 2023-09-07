@@ -8,10 +8,16 @@
     },
     "ios": {
       "bundleIdentifier": "com.kidcodes.growcalth",
-      "buildNumber": "2"
+      "buildNumber": "3"
     },
     "android": {
       "package": "com.kidcodes.growcalth.android"
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/5a8d8541-cceb-4f2a-9526-13453a9afb4a"
     }
   }
 }

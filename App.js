@@ -24,6 +24,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ChallengesStack from "./screens/Challenges";
 import MyTabs from "./screens/Announcements";
 import Admin from "./screens/AuthScreens/Admin";
+import Napfa from "./screens/Napfa";
+import NapfaTabs from "./screens/Napfa";
 
 // export default function App() {
 //   const handleInput = (event) => {
@@ -90,8 +92,8 @@ function Tabs({ route }) {
         }}
       />
       <Tab.Screen
-        name="Challenges"
-        component={Challenges}
+        name="NAPFA"
+        component={NapfaTabs}
         options={{
           headerShown: false,
           tabBarIcon: () => (
