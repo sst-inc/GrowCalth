@@ -92,8 +92,8 @@ function Tabs({ route }) {
         }}
       />
       <Tab.Screen
-        name="NAPFA"
-        component={NapfaTabs}
+        name="Challenges"
+        component={ChallengesStack}
         options={{
           headerShown: false,
           tabBarIcon: () => (
