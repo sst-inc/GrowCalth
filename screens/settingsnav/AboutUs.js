@@ -55,7 +55,7 @@ const AboutUs = () => {
             }}
           >
             <Image
-              source={require("../../assets/growcalth.jpg")}
+              source={require("../../assets/GrowCalthIcon.jpeg")}
               style={{
                 width: windowWidth - 100,
                 height: windowHeight - 600,

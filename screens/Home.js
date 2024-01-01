@@ -352,13 +352,13 @@ const Homes = ({ route }) => {
                     top: 32,
                   }}
                 >
-                  {streak}
+                  {stepCount / 1000 } 
                 </Text>
                 <Text
                   style={{ textAlign: "center", fontSize: 25, marginTop: 23 }}
                 >
-                  days in this app
-                </Text>
+                {(stepCount / 1000) > 1 ? "House Points" : "House Point"}
+                 </Text>
               </TouchableOpacity>
             </View>
             <StatusBar style="auto" />
