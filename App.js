@@ -92,7 +92,7 @@ function Tabs({ route }) {
         }}
       />
       <Tab.Screen
-        name="Challenges"
+        name="NAPFA"
         component={ChallengesStack}
         options={{
           headerShown: false,

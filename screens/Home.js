@@ -201,7 +201,8 @@ const Homes = ({ route }) => {
   
     return () => clearInterval(interval);
   }, [stepCount]);
-  
+  let points = stepCount / 1000
+  let finalPoints = Math.floor(points)
 
   return (
     <SafeAreaView style={{ backgroundColor: "#FFFFF" }}>
@@ -352,7 +353,7 @@ const Homes = ({ route }) => {
                     top: 32,
                   }}
                 >
-                  {stepCount / 1000 } 
+                  {finalPoints}
                 </Text>
                 <Text
                   style={{ textAlign: "center", fontSize: 25, marginTop: 23 }}
