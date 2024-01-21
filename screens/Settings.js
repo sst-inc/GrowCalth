@@ -176,7 +176,7 @@ const Settings = (props) => {
           </View>
           {/* Health */}
           <View>
-            <View
+            {/* <View
               style={{
                 backgroundColor: "#A0C4E2",
                 height: 30,
@@ -190,8 +190,8 @@ const Settings = (props) => {
               <Text style={{ fontSize: 15, textAlign: "center" }}>
                 H E A L T H
               </Text>
-            </View>
-            <View
+            </View> */}
+            {/* <View
               style={{
                 width: windowWidth - 40,
                 height: 65,
@@ -213,9 +213,9 @@ const Settings = (props) => {
                 }}
                 onPress={() => navigation.navigate("Health Info")}
               >
-                {/* First Piece of code */}
+                First Piece of code
                 <View>
-                  {/* <Icon name="heartbeat" size={30} color="red"/> */}
+                  <Icon name="heartbeat" size={30} color="red"/>
                 </View>
                 <View
                   style={{
@@ -241,7 +241,7 @@ const Settings = (props) => {
                   </Text>
                 </View>
               </TouchableOpacity>
-            </View>
+            </View> */}
           </View>
           {/* Preferences */}
           <View
