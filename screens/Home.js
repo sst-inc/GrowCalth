@@ -272,7 +272,7 @@ const Homes = ({ route }) => {
                 />
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.insightView}>
+            <View style={styles.insightView}>
               <Text style={[styles.insights]}>Steps</Text>
               <View style={{ justifyContent: "center", alignItems: "center" }}>
                 <View style={styles.circle}>
@@ -306,7 +306,7 @@ const Homes = ({ route }) => {
               titleColor={"black"}
               titleStyle={{ fontWeight: "bold" }}
             /> */}
-            </TouchableOpacity>
+            </View>
           </View>
           <View style={{ paddingTop: -10 }}>
             <View
@@ -323,7 +323,7 @@ const Homes = ({ route }) => {
                 marginLeft: 19,
               }}
             >
-              <TouchableOpacity
+              <View
                 style={{
                   width: (windowWidth - 52) / 2,
                   height: 235,
@@ -339,7 +339,7 @@ const Homes = ({ route }) => {
                   shadowRadius: 3,
                   backgroundColor: "#FFFFFF",
                 }}
-                onPress={() => navigation.navigate("Progress")}
+                // onPress={() => navigation.navigate("Progress")}
               >
                 {/* Progress */}
                 <Text style={{ fontSize: 19, fontWeight: "bold", top: 10 }}>
@@ -360,10 +360,10 @@ const Homes = ({ route }) => {
                 >
                 {(stepCount / 1000) > 1 ? "House Points" : "House Point"}
                  </Text>
-              </TouchableOpacity>
+              </View>
             </View>
             <StatusBar style="auto" />
-            <TouchableOpacity style={{ paddingHorizontal: 20, paddingTop: 75 }}>
+            <View style={{ paddingHorizontal: 20, paddingTop: 75 }}>
               <View style={styles.dailyQuotes}>
                 {/* Distance */}
                 <Text
@@ -401,7 +401,7 @@ const Homes = ({ route }) => {
                   </View>
                 </View>
               </View>
-            </TouchableOpacity>
+            </View>
             <TouchableOpacity
               style={{
                 height: 130,
