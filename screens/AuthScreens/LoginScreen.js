@@ -9,6 +9,7 @@ import {
   View,
   Button,
   Dimensions,
+  SafeAreaView,
 } from "react-native";
 import { auth } from "../../firebase";
 import Forgot from "./Forgot";

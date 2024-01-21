@@ -26,6 +26,7 @@ import MyTabs from "./screens/Announcements";
 import Admin from "./screens/AuthScreens/Admin";
 import Napfa from "./screens/Napfa";
 import NapfaTabs from "./screens/Napfa";
+import Ionicon from 'react-native-vector-icons/Ionicons';
 
 // export default function App() {
 //   const handleInput = (event) => {
@@ -71,10 +72,7 @@ function Tabs({ route }) {
         options={{
           headerShown: false,
           tabBarIcon: () => (
-            <Image
-              source={require("./assets/HomeIcon.png")}
-              style={{ width: 30, height: 30 }}
-            />
+           <Ionicon name="home-outline" size={30}/>
           ),
         }}
       />
