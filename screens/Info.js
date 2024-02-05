@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     itemText:{
         fontWeight:'400',
         padding: 10, 
-        fontSize: 30,
+        fontSize: 18,
         marginHorizontal: 5
     }
 })
