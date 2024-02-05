@@ -13,10 +13,8 @@ import firebase from "firebase";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Info from "./Info";
-import SearchBar from "../components/SearchBar";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Info1 from "./Info1";
-import { ScrollView } from "react-native-gesture-handler";
 
 function Events() {
   const navigation = useNavigation();
@@ -85,42 +83,16 @@ function Events() {
                 })
               }
             >
-              <Text style={[styles.itemHeading, { paddingBottom: 8 }]}>
-                {item.header}
-              </Text>
-              <View style={{ flexDirection: "row" }}>
-                <Text style={[styles.itemText, { fontWeight: "600" }]}>
-                  Venue:{" "}
-                </Text>
-                <Text
-                  style={[styles.itemText, { textDecorationLine: "underline" }]}
-                >
-                  {item.venue}
-                </Text>
-              </View>
+             <Text style={styles.itemHeading}>{item.header}</Text>
+  <View style={styles.itemDetailRow}>
+    <Text style={styles.itemLabel}>Venue: </Text>
+    <Text style={styles.itemText}>{item.venue}</Text>
+  </View>
 
-              <View style={{ flexDirection: "row" }}>
-                <Text
-                  style={[
-                    styles.itemText,
-                    { paddingTop: 7, fontWeight: "600" },
-                  ]}
-                >
-                  Date:
-                </Text>
-                <Text
-                  style={[
-                    styles.itemText,
-                    {
-                      paddingTop: 7,
-                      textDecorationLine: "underline",
-                      left: 4,
-                    },
-                  ]}
-                >
-                  {item.date}
-                </Text>
-              </View>
+  <View style={styles.itemDetailRow}>
+    <Text style={styles.itemLabel}>Date: </Text>
+    <Text style={styles.itemText}>{item.date}</Text>
+  </View>
             </TouchableOpacity>
           </Pressable>
         )}
@@ -205,48 +177,77 @@ function Announcements() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FFFFFF", // A clean, white background for each item for better readability
-    paddingVertical: 20, // Increased vertical padding for a more spacious look
-    paddingHorizontal: 15, // Adequate horizontal padding for content separation
-    marginHorizontal: 10, // Keep horizontal margin for spacing between items and screen edge
-    marginVertical: 5, // Reduced vertical margin to tighten the list without overcrowding
-    borderRadius: 12, // Increased border radius for a more modern, rounded look
-    borderWidth: 1, // Slightly thicker border for better definition
-    borderColor: "#E0E0E0", // Light grey border for subtlety
-    elevation: 2, // Android shadow
-    shadowColor: "#000", // Shadow color for iOS
-    shadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
-    shadowOpacity: 0.1, // Shadow opacity for iOS
-    shadowRadius: 4, // Shadow blur radius for iOS
+    backgroundColor: "#FFFFFF", 
+    paddingVertical: 20,
+    paddingHorizontal: 15, 
+    marginHorizontal: 10, 
+    marginVertical: 5, 
+    borderRadius: 12, 
+    borderWidth: 1, 
+    borderColor: "#E0E0E0", 
+    elevation: 2,
+    shadowColor: "#000", 
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.1,
+    shadowRadius: 4, 
   },
   innerContainer: {
     flexDirection: "column", 
   },
+  itemContainer: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 8,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
   itemHeading: {
-    fontWeight: "bold", // Bold for emphasis
-    fontSize: 18, // Slightly reduced font size for balance
-    color: "#333", // Darker text for better readability
-    paddingBottom: 8, // Adjusted padding for visual separation
+    fontWeight: "bold",
+    fontSize: 18,
+    color: "#333333",
+    paddingBottom: 4,
+  },
+  itemDetailRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 2,
+  },
+  itemLabel: {
+    fontWeight: "600",
+    fontSize: 16,
+    color: "#666666",
   },
   itemText: {
-    fontWeight: "400", // Normal weight for body text for better readability
-    fontSize: 16, // Adjusted font size for readability
-    color: "#666", // Soft black for text, less harsh than pure black
+    fontSize: 16,
+    color: "#666666",
+    textDecorationLine: "underline",
+  },
+  itemText: {
+    fontWeight: "400", 
+    fontSize: 16,
+    color: "#666",
   },
   textInputStyle: {
     height: 40,
     borderWidth: 1,
     paddingLeft: 20,
-    marginVertical: 10, // Adjusted for vertical spacing
-    marginHorizontal: 10, // Ensures consistent spacing around the input
-    borderColor: "#CCC", // Lighter border color for the input field
-    borderRadius: 20, // Rounded corners for the input field
+    marginVertical: 10, 
+    marginHorizontal: 10, 
+    borderColor: "#CCC", 
+    borderRadius: 20, 
   },
   subTitle: {
-    color: "#999", // Light grey for subtlety
-    fontSize: 14, // Adjusted font size for subtlety
-    marginVertical: 10, // More vertical spacing
-    marginHorizontal: 15, // Consistent horizontal spacing
+    color: "#999", 
+    fontSize: 14, 
+    marginVertical: 10, 
+    marginHorizontal: 15, 
   },
 });
 
