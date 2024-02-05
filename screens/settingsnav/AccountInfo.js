@@ -26,7 +26,6 @@ export default class AccountInfo extends React.Component {
     };
   }
 
-  // Reauthenticates the current user and returns a promise...
   reauthenticate = (currentPassword) => {
     var user = firebase.auth().currentUser;
     var cred = firebase.auth.EmailAuthProvider.credential(
@@ -36,7 +35,6 @@ export default class AccountInfo extends React.Component {
     return user.reauthenticateWithCredential(cred);
   };
 
-  // Changes user's password...
   onChangePasswordPress = () => {
     this.reauthenticate(this.state.currentPassword)
       .then(() => {

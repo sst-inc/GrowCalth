@@ -53,9 +53,12 @@ const Settings = (props) => {
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   const navigation = useNavigation();
+
+  const userEmail = auth.currentUser?.email
+
   return (
-    <SafeAreaView style={{ backgroundColor: "#FFFF" }}>
-      <View style={{ backgroundColor: "white" }}>
+    <SafeAreaView style={{ backgroundColor: "#f3f2f3" }}>
+      <View style={{ backgroundColor: "#f3f2f3" }}>
         <ScrollView>
           <Text
             style={{
@@ -80,13 +83,14 @@ const Settings = (props) => {
                   justifyContent: "center",
                   alignItems: "center",
                   marginHorizontal: -33,
+                  marginBottom: 10
                 }}
               >
                 <Text style={{ fontSize: 15, textAlign: "center" }}>
-                  G E N E R A L{" "}
+                  ACCOUNT{" "}
                 </Text>
               </View>
-              <View
+              {/* <View
                 style={{
                   width: windowWidth - 40,
                   height: 125,
@@ -96,152 +100,65 @@ const Settings = (props) => {
                   marginTop: 15,
                   marginLeft: -10,
                 }}
-              >
-                <TouchableOpacity
-                  style={{
-                    width: windowWidth - 43,
-                    backgroundColor: "#",
-                    height: 60,
-                    borderTopRightRadius: 10,
-                    borderTopLeftRadius: 10,
-                    borderColor: "black",
-                    borderBottomWidth: 1.23,
-                  }}
-                  onPress={() => navigation.navigate("AboutUs")}
-                >
-                  {/* First Piece of code */}
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: "row",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Icond
-                      name="questioncircleo"
-                      size={30}
-                      style={{ paddingHorizontal: 10 }}
-                    />
-                    <Text
-                      style={{
-                        paddingHorizontal: 5,
-                        fontSize: 16.6,
-                        fontWeight: "600",
-                      }}
-                    >
-                      About us
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={{
-                    width: windowWidth - 55,
-                    backgroundColor: "white",
-                    height: 60,
-                    borderRadius: 10,
-                  }}
-                  onPress={() => navigation.navigate("More Quotes")}
-                >
-                  {/* Second Piece of code */}
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: "row",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Icon
-                      name="quote-left"
-                      size={23}
-                      color="black"
-                      style={{ paddingHorizontal: 10 }}
-                    />
-                    <Text
-                      style={{
-                        paddingHorizontal: 5,
-                        fontSize: 16.6,
-                        fontWeight: "600",
-                      }}
-                    >
-                      More Quotes
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+              > */}
+             
+             <TouchableOpacity
+  style={{
+    width: windowWidth - 55,
+    backgroundColor: "white",
+    height: '80%',
+    borderRadius: 10,
+    justifyContent: 'center',
+  }}
+  onPress={() => navigation.navigate("Account Info")}
+>
+  {/* Second Piece of code */}
+  <View style={{
+    flexDirection: 'row',
+    alignItems: 'center', // Align children horizontally in the center
+  }}>
+    <View style={{
+      backgroundColor: '#4169E1',
+      height: '90%',
+      width: '20%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 50, 
+      marginLeft: 10,
+    }}>
+      <Text style={{
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 30,
+      }}>
+        {userEmail[0].toUpperCase()}
+      </Text>
+    </View>
+    <View style={{
+      width: '80%',
+      marginLeft: 10,
+    }}>
+      <Text style={{
+        fontWeight: '900',
+        fontSize: 18,
+        marginBottom: 4, // Add some space between the two Text components
+      }}>
+        {userEmail}
+      </Text>
+      <Text>Tap to view account information</Text>
+    </View>
+  </View>
+</TouchableOpacity>
+
                 {/* <TouchableOpacity style={{width: 377, backgroundColor: 'white', height: 62, borderColor: 'black', borderTopWidth: 1.23, borderBottomRightRadius: 10, borderBottomLeftRadius: 10}}>
               {/* Third Piece of code */}
 
                 {/* </TouchableOpacity> */}
               </View>
             </View>
-          </View>
+          {/* </View> */}
           {/* Health */}
           <View>
-            {/* <View
-              style={{
-                backgroundColor: "#A0C4E2",
-                height: 30,
-                marginTop: 20,
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                marginHorizontal: -33,
-              }}
-            >
-              <Text style={{ fontSize: 15, textAlign: "center" }}>
-                H E A L T H
-              </Text>
-            </View> */}
-            {/* <View
-              style={{
-                width: windowWidth - 40,
-                height: 65,
-                borderRadius: 10,
-                borderColor: "black",
-                borderWidth: 1.23,
-                marginTop: 15,
-                marginLeft: 23,
-              }}
-            >
-              <TouchableOpacity
-                style={{
-                  width: windowWidth - 55,
-                  backgroundColor: "white",
-                  height: 60,
-                  borderTopRightRadius: 10,
-                  borderTopLeftRadius: 10,
-                  borderRadius: 10,
-                }}
-                onPress={() => navigation.navigate("Health Info")}
-              >
-                First Piece of code
-                <View>
-                  <Icon name="heartbeat" size={30} color="red"/>
-                </View>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <Icon
-                    name="heartbeat"
-                    size={25}
-                    color="red"
-                    style={{ paddingHorizontal: 10 }}
-                  />
-                  <Text
-                    style={{
-                      paddingHorizontal: 5,
-                      fontSize: 16.6,
-                      fontWeight: "600",
-                    }}
-                  >
-                    Health Info
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </View> */}
           </View>
           {/* Preferences */}
           <View
@@ -253,6 +170,7 @@ const Settings = (props) => {
               justifyContent: "center",
               alignItems: "center",
               marginHorizontal: -33,
+              marginTop: 100
             }}
           >
             <Text style={{ fontSize: 15, textAlign: "center" }}>
@@ -260,104 +178,15 @@ const Settings = (props) => {
             </Text>
           </View>
 
-          <View
-            style={{
-              width: windowWidth - 41,
-              height: 130,
-              borderRadius: 10,
-              borderColor: "black",
-              borderWidth: 1.23,
-              marginTop: 15,
-              marginLeft: 23,
-            }}
-          >
-            <TouchableOpacity
-              style={{
-                width: windowWidth - 44,
-                backgroundColor: "white",
-                height: 60,
-                borderTopRightRadius: 10,
-                borderTopLeftRadius: 10,
-                borderColor: "black",
-                borderBottomWidth: 1.23,
-              }}
-              onPress={() => navigation.navigate("Account Info")}
-            >
-              {/* First Piece of code */}
-              <View>
-                {/* <Icon name="heartbeat" size={30} color="red"/> */}
-              </View>
-              <View
-                style={{ flex: 1, flexDirection: "row", alignItems: "center" }}
-              >
-                <Icons
-                  name="account-outline"
-                  size={31}
-                  style={{ paddingHorizontal: 10 }}
-                />
-                <Text
-                  style={{
-                    paddingHorizontal: 5,
-                    fontSize: 16.6,
-                    fontWeight: "600",
-                  }}
-                >
-                  Account Info
-                </Text>
-              </View>
+          
+          <TouchableOpacity 
+          onPress={() => navigation.navigate("AboutUs")}
+          style={styles.button}>
+              <Text style={styles.buttonText}>Acknowledgements</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                width: windowWidth - 50,
-                backgroundColor: "white",
-                height: 60,
-              }}
-              onPress={() => navigation.navigate("House Info")}
-            >
-              {/* Second Piece of code */}
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <Iconse
-                  name="moon-outline"
-                  size={30}
-                  style={{ paddingHorizontal: 10 }}
-                />
-                <Text
-                  style={{
-                    paddingHorizontal: 5,
-                    fontSize: 16.6,
-                    fontWeight: "600",
-                  }}
-                >
-                  House
-                </Text>
-                {/* <Switch style={{left: 140}}
-              trackColor={{ false: "black", true: "#81b0ff" }}
-              thumbColor={isEnabled ? "white" : "#f4f3f4"}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitch}
-              value={isEnabled}/> */}
-              </View>
+            <TouchableOpacity onPress={handleSignOut} style={[styles.button, {marginTop: 30}]}>
+              <Text style={[styles.buttonText, {color: 'red'}]}>Sign out</Text>
             </TouchableOpacity>
-          </View>
-          <View style={styles.containers}>
-            <View
-              style={{
-                backgroundColor: "black",
-                borderRadius: 10,
-                paddingVertical: 10,
-                top: 10,
-              }}
-            ></View>
-            <TouchableOpacity onPress={handleSignOut} style={styles.button}>
-              <Text style={styles.buttonText}>Sign out</Text>
-            </TouchableOpacity>
-          </View>
 
           {/* COPYRIGHTS */}
           <View
@@ -369,7 +198,7 @@ const Settings = (props) => {
             }}
           >
             <Text style={{ fontSize: 10, color: "#C1CAD6" }}>
-              Copyright GrowCalth © 2022 All rights Reserved{" "}
+              Copyright GrowCalth © 2024 All rights Reserved{" "}
             </Text>
             <Text style={{ fontSize: 10, color: "#C1CAD6" }}>
               Singapore, Singapore City{" "}
@@ -407,17 +236,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    backgroundColor: "#DB5461",
-    width: "60%",
+    backgroundColor: "white",
+    width: "90%",
     padding: 15,
     borderRadius: 10,
-    alignItems: "center",
-    marginTop: 5,
+    justifyContent: "center",
+    marginTop: 10,
+    height: '8%',
+    alignSelf: 'center'
   },
   buttonText: {
-    color: "white",
+    color: "black",
     fontWeight: "700",
-    fontSize: 22,
+    fontSize: 14,
   },
   subTitle: {
     color: "#C1CAD6",
