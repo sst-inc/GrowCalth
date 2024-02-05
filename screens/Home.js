@@ -204,6 +204,8 @@ const Homes = ({ route }) => {
   let points = stepCount / 1000
   let finalPoints = Math.floor(points)
 
+  let points_left = Math.round(stepCount / 1000) * 1000 - stepCount
+
   return (
     <SafeAreaView style={{ backgroundColor: "#FFFFF" }}>
       <ScrollView>
@@ -360,6 +362,7 @@ const Homes = ({ route }) => {
                 >
                 {(stepCount / 1000) > 1 ? "House Points" : "House Point"}
                  </Text>
+                 <Text>{points_left} more steps to get another point!</Text>
               </View>
             </View>
             <StatusBar style="auto" />
