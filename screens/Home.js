@@ -6,12 +6,7 @@ import {
   Text,
   View,
   Image,
-  AppState,
   Dimensions,
-  TouchableOpacityBase,
-  PermissionsAndroid,
-  Alert,
-  Platform,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect, useRef } from "react";
@@ -204,13 +199,6 @@ const Homes = ({ route }) => {
   let points = stepCount / 1000
   let finalPoints = Math.floor(points)
 
-  function stepslefttonextpoint(num) {
-    if (num == 0) {
-      return 1000;
-    } else {
-      return Math.round(num / 1000) * 1000 - num
-    }
-  }
 
   return (
     <SafeAreaView style={{ backgroundColor: "#FFFFF" }}>
@@ -299,21 +287,7 @@ const Homes = ({ route }) => {
                 </View>
               </View>
               <View style={{ justifyContent: "center", alignItems: "center" }}>
-                {/* <Progress.Circle size={140} progress={20} maxValue/>      */}
               </View>
-              {/* <CircularProgress 
-              value={stepCount}
-              maxValue={6500}
-              radius={80}
-              activeStrokeColor={"black"}
-              inActiveStrokeColor={"black"}
-              inActiveStrokeOpacity={0.5}
-              inActiveStrokeWidth={20}
-              activeStrokeWidth={20}
-              title={"steps"}
-              titleColor={"black"}
-              titleStyle={{ fontWeight: "bold" }}
-            /> */}
             </View>
           </View>
           <View style={{ paddingTop: -10 }}>
@@ -368,7 +342,6 @@ const Homes = ({ route }) => {
                 >
                 {(stepCount / 1000) > 1 ? "House Points" : "House Point"}
                  </Text>
-                 <Text>{stepslefttonextpoint(stepCount)} more steps to get another point!</Text>
               </View>
             </View>
             <StatusBar style="auto" />

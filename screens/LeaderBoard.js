@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, Image, StyleSheet } from "react-native";
-import { processColor } from "react-native-reanimated";
 import firebase from "firebase";
-// import { google } from 'googleapis';
 
 const points = [290, 200, 160, 190, 240];
 

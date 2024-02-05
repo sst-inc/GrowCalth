@@ -104,18 +104,19 @@ const Settings = (props) => {
              
              <TouchableOpacity
   style={{
-    width: windowWidth - 55,
+    width: windowWidth - 41,
     backgroundColor: "white",
     height: '80%',
     borderRadius: 10,
     justifyContent: 'center',
+    alignSelf: 'center'
   }}
   onPress={() => navigation.navigate("Account Info")}
 >
   {/* Second Piece of code */}
   <View style={{
     flexDirection: 'row',
-    alignItems: 'center', // Align children horizontally in the center
+    alignItems: 'center', 
   }}>
     <View style={{
       backgroundColor: '#4169E1',
