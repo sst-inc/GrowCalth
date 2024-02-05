@@ -109,7 +109,8 @@ const Settings = (props) => {
     height: '80%',
     borderRadius: 10,
     justifyContent: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    elevation: 3
   }}
   onPress={() => navigation.navigate("Account Info")}
 >
@@ -182,10 +183,12 @@ const Settings = (props) => {
           
           <TouchableOpacity 
           onPress={() => navigation.navigate("AboutUs")}
-          style={styles.button}>
+          style={[styles.button, {
+            elevation: 3
+          }]}>
               <Text style={styles.buttonText}>Acknowledgements</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleSignOut} style={[styles.button, {marginTop: 30}]}>
+            <TouchableOpacity onPress={handleSignOut} style={[styles.button, {marginTop: 30,elevation: 3}]}>
               <Text style={[styles.buttonText, {color: 'red'}]}>Sign out</Text>
             </TouchableOpacity>
 

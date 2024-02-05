@@ -268,7 +268,7 @@ const Homes = ({ route }) => {
                 />
               </View>
             </TouchableOpacity>
-            <View style={styles.insightView}>
+            <View style={[styles.insightView, { elevation: 3}]}>
               <Text style={[styles.insights]}>Steps</Text>
               <View style={{ justifyContent: "center", alignItems: "center" }}>
                 <View style={styles.circle}>
@@ -290,7 +290,7 @@ const Homes = ({ route }) => {
               </View>
             </View>
           </View>
-          <View style={{ paddingTop: -10 }}>
+          <View style={{ paddingTop: -10,  }}>
             <View
               style={{
                 marginTop: 38,
@@ -312,14 +312,9 @@ const Homes = ({ route }) => {
                   borderRadius: 15,
                   borderColor: "white",
                   paddingHorizontal: 10,
-                  shadowColor: "black",
-                  shadowColor: "#171717",
-                  backgroundColor: "white",
                   top: 4,
-                  shadowOffset: { width: -2, height: 4 },
-                  shadowOpacity: 0.9,
-                  shadowRadius: 3,
                   backgroundColor: "#FFFFFF",
+                  elevation: 2
                 }}
                 // onPress={() => navigation.navigate("Progress")}
               >
@@ -346,7 +341,7 @@ const Homes = ({ route }) => {
             </View>
             <StatusBar style="auto" />
             <View style={{ paddingHorizontal: 20, paddingTop: 75 }}>
-              <View style={styles.dailyQuotes}>
+              <View style={[styles.dailyQuotes, { elevation: 3}]}>
                 {/* Distance */}
                 <Text
                   style={{
@@ -392,12 +387,8 @@ const Homes = ({ route }) => {
                 borderWidth: 0,
                 marginLeft: 20,
                 bottom: 240,
-                shadowColor: "black",
-                shadowColor: "#171717",
                 backgroundColor: "#B7CADB",
-                shadowOffset: { width: -2, height: 4 },
-                shadowOpacity: 0.9,
-                shadowRadius: 3,
+                elevation: 3
               }}
               onPress={() => navigation.navigate("Quotes")}
             >
@@ -436,11 +427,7 @@ const Homes = ({ route }) => {
                 backgroundColor: "#754F5B",
                 marginHorizontal: 20,
                 marginTop: -220,
-                shadowColor: "black",
-                shadowColor: "#171717",
-                shadowOffset: { width: -2, height: 4 },
-                shadowOpacity: 0.9,
-                shadowRadius: 3,
+                elevation: 3
               }}
               onPress={() => navigation.navigate("Goals")}
             >
