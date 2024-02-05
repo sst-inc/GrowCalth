@@ -192,7 +192,9 @@ function Announcements() {
               <Text style={[styles.itemHeading, { paddingBottom: 7 }]}>
                 {item.header}
               </Text>
-              <Text style={styles.itemText}>{item.text}</Text>
+              <Text style={styles.itemText} numberOfLines={3} ellipsizeMode="tail">
+              {item.text}
+            </Text>
             </TouchableOpacity>
           </Pressable>
         )}
@@ -203,38 +205,51 @@ function Announcements() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FEFBF6",
-    padding: 15,
-    marginHorizontal: 10,
-    borderRadius: 10,
-    marginBottom: 10,
-    borderWidth: 0.5,
+    backgroundColor: "#FFFFFF", // A clean, white background for each item for better readability
+    paddingVertical: 20, // Increased vertical padding for a more spacious look
+    paddingHorizontal: 15, // Adequate horizontal padding for content separation
+    marginHorizontal: 10, // Keep horizontal margin for spacing between items and screen edge
+    marginVertical: 5, // Reduced vertical margin to tighten the list without overcrowding
+    borderRadius: 12, // Increased border radius for a more modern, rounded look
+    borderWidth: 1, // Slightly thicker border for better definition
+    borderColor: "#E0E0E0", // Light grey border for subtlety
+    elevation: 2, // Android shadow
+    shadowColor: "#000", // Shadow color for iOS
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset for iOS
+    shadowOpacity: 0.1, // Shadow opacity for iOS
+    shadowRadius: 4, // Shadow blur radius for iOS
   },
   innerContainer: {
-    flexDirection: "column",
-    borderRadius: 15,
+    flexDirection: "column", 
   },
   itemHeading: {
-    fontWeight: "700",
-    fontSize: 20,
+    fontWeight: "bold", // Bold for emphasis
+    fontSize: 18, // Slightly reduced font size for balance
+    color: "#333", // Darker text for better readability
+    paddingBottom: 8, // Adjusted padding for visual separation
   },
   itemText: {
-    fontWeight: "300",
-    fontSize: 17,
+    fontWeight: "400", // Normal weight for body text for better readability
+    fontSize: 16, // Adjusted font size for readability
+    color: "#666", // Soft black for text, less harsh than pure black
   },
   textInputStyle: {
     height: 40,
     borderWidth: 1,
     paddingLeft: 20,
-    margin: 5,
-    borderColor: "black",
+    marginVertical: 10, // Adjusted for vertical spacing
+    marginHorizontal: 10, // Ensures consistent spacing around the input
+    borderColor: "#CCC", // Lighter border color for the input field
+    borderRadius: 20, // Rounded corners for the input field
   },
   subTitle: {
-    color: "#C1CAD6",
-    marginTop: -5,
-    marginHorizontal: 14,
+    color: "#999", // Light grey for subtlety
+    fontSize: 14, // Adjusted font size for subtlety
+    marginVertical: 10, // More vertical spacing
+    marginHorizontal: 15, // Consistent horizontal spacing
   },
 });
+
 const Stack = createNativeStackNavigator();
 
 function AnnouncementStack() {
