@@ -204,7 +204,13 @@ const Homes = ({ route }) => {
   let points = stepCount / 1000
   let finalPoints = Math.floor(points)
 
-  let points_left = Math.round(stepCount / 1000) * 1000 - stepCount
+  function stepslefttonextpoint(num) {
+    if (num == 0) {
+      return 1000;
+    } else {
+      return Math.round(num / 1000) * 1000 - num
+    }
+  }
 
   return (
     <SafeAreaView style={{ backgroundColor: "#FFFFF" }}>
@@ -362,7 +368,7 @@ const Homes = ({ route }) => {
                 >
                 {(stepCount / 1000) > 1 ? "House Points" : "House Point"}
                  </Text>
-                 <Text>{points_left} more steps to get another point!</Text>
+                 <Text>{stepslefttonextpoint(stepCount)} more steps to get another point!</Text>
               </View>
             </View>
             <StatusBar style="auto" />
