@@ -1,0 +1,4 @@
+<resources>
+  <string name="app_name">GrowCalth</string>
+  <string name="expo_runtime_version">exposdk:47.0.0</string>
+</resources>
