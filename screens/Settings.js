@@ -176,7 +176,7 @@ const Settings = (props) => {
             }}
           >
             <Text style={{ fontSize: 15, textAlign: "center" }}>
-              P R E F E R E N C E S
+              A D M I N
             </Text>
           </View>
 
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     justifyContent: "center",
-    marginTop: 10,
+    marginTop: 20,
     height: '8%',
     alignSelf: 'center'
   },

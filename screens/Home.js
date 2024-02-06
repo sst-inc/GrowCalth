@@ -21,11 +21,17 @@ import LeaderBoard from "./LeaderBoard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import firebase from "firebase/app";
 import { auth } from "../firebase";
+import GoogleFit, { Scopes } from 'react-native-google-fit';
+
+
+// 190081350637-v1de0hn4v1qieaqvd7l6eptgr8cm38q8.apps.googleusercontent.com
+// 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
 
 
 const Homes = ({ route }) => {
   // const param = route.params.house;
   // const selectedHouse = param.house;
+
 
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
@@ -45,21 +51,52 @@ const Homes = ({ route }) => {
   const calories = stepCount / 25;
   const caloriesB = calories.toFixed(1);
 
-  const subscribe = () => {
-    const subscription = Pedometer.watchStepCount((result) =>
-      updateStepCount(result.steps)
-    );
-    Pedometer.isAvailableAsync().then(
-      (result) => {
-        setPedometerAvailability(String(result));
-      },
-      (error) => {
-        setPedometerAvailability(error);
-      }
-    );
+
+  const options = {
+    scopes: [
+      Scopes.FITNESS_ACTIVITY_READ,
+      Scopes.FITNESS_ACTIVITY_WRITE,
+      Scopes.FITNESS_BODY_READ_WRITE,
+    ],
   };
+  GoogleFit.authorize(options)
+  .then((authResult) => {
+    if (authResult.success) {
+      console.log('AUTH_SUCCESS');
+    } else {
+      console.log('AUTH_DENIED', authResult.message);
+    }
+  })
+  .catch((err) => {
+    console.log('AUTH_ERROR', err);
+  });
+
+  const fetchTodayStepsData = async () => {
+    const today = new Date();
+    const startDate = new Date(today.setHours(0, 0, 0, 0)); // Set to start of today
+    const endDate = new Date(today.setHours(23, 59, 59, 999)); // Set to end of today
+  
+    GoogleFit.getDailyStepCountSamples({
+      startDate: startDate.toISOString(), // Start of today in ISO format
+      endDate: endDate.toISOString(), // End of today in ISO format
+    }, (err, results) => {
+      if (err) {
+        throw new Error("Failed to fetch steps data: " + err);
+      }
+  
+  
+      if (results.length > 0 && results[0].steps) {
+        results[0].steps.forEach(source => {
+          stepCount += source.steps;
+        });
+      }
+  
+      console.log(stepCount); 
+    });
+  };
+  
   useEffect(() => {
-    subscribe();
+    fetchTodayStepsData();
   }, []);
 
   async function UpdatePoints() {

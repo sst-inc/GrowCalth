@@ -26,7 +26,7 @@ const AboutUs = () => {
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
       title: 'Han Jeong Seu, Caleb',
-      role: "CEO of GrowCalth",
+      role: "Lead Developer of GrowCalth",
       icon: "sitemap"
     },
     {
@@ -38,7 +38,7 @@ const AboutUs = () => {
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d72',
       title: 'Felix Forbes Dimjati',
-      role: "Developer of GrowCalth (Android)",
+      role: "User Experience (UX) Specialist of GrowCalth",
       icon: "android"
     },
     {

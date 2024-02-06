@@ -13,7 +13,7 @@
         ]
       ]
     },
-    "icon": "./assets/growcalth.jpg",
+    "icon": "./assets/growcalth.png",
     "extra": {
       "eas": {
         "projectId": "5a8d8541-cceb-4f2a-9526-13453a9afb4a"
